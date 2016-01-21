@@ -17,6 +17,14 @@ void setup()
   Board board = new Board();
   
   board.render();
+  
+  Templar templar = new Templar();
+  Assassin assassin = new Assassin();
+  Tank tank = new Tank();
+  
+  println(tank.stats.hp);
+  templar.attack(tank);
+  println(tank.stats.hp);
 }
 
 void draw()

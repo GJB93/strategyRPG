@@ -110,6 +110,11 @@ class Unit
     return 0;
   }
   
+  void ability(Unit unit)
+  {
+    
+  }
+  
   void loadFemaleNames()
   {
     String filename = "femalenames.txt";
