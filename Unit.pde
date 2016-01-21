@@ -44,6 +44,14 @@ class Unit
     this.stats = new Stats();
   }
   
+  Unit(String fname, String sname, char gender, int str, int dex, int mag)
+  {
+    this.fname = fname;
+    this.sname = sname;
+    this.gender = gender;
+    this.stats = new Stats(str, dex, mag);
+  }
+  
   void loadMaleNames()
   {
     String filename = "malenames.txt";
