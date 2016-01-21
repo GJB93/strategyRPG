@@ -3,6 +3,14 @@ class Stats
   int str;
   int dex;
   int mag;
+  int hp;
+  int sp;
+  int att;
+  int def;
+  int eva;
+  float spd;
+  int crit;
+  int abl;
   
   Stats()
   {
@@ -47,6 +55,8 @@ class Stats
           break;
         }
       }//end switch
+      
+      calculateImplicitStats();  
     }//end while
   }//end Stats()
   
@@ -55,5 +65,18 @@ class Stats
     this.str = str;
     this.dex = dex;
     this.mag = mag;
+    calculateImplicitStats();
+  }
+  
+  void calculateImplicitStats()
+  {
+    this.hp = this.str * 10;
+    this.sp = int(this.mag * 1.8f);
+    this.att = int(this.str * 1.4f);
+    this.def = int(this.str * 1.2f);
+    this.eva = int(this.dex * 1.6f);
+    this.spd = this.dex * 0.1f;
+    this.abl = int(this.mag * 1.5f);
+    this.crit = int(this.mag * 0.5f);
   }
 }//end class
