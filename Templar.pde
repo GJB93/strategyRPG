@@ -36,4 +36,16 @@ class Templar extends Unit
       return ratio;
     }
   }
+  
+  void ability(Unit unit)
+  {
+    if((unit.stats.hp+10)>unit.stats.maxHp)
+    {
+      unit.stats.hp = unit.stats.maxHp;
+    }
+    else
+    {
+      unit.stats.hp += 10;
+    }
+  }
 }

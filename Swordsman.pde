@@ -36,4 +36,9 @@ class Swordsman extends Unit
       return ratio;
     }
   }
+  
+  void ability(Unit unit)
+  {
+    this.goAgain = true;
+  }
 }

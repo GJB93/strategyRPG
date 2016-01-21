@@ -36,4 +36,9 @@ class Tank extends Unit
       return ratio;
     }
   }
+  
+  void ability(Unit unit)
+  {
+    unit.stats.def += 10;
+  }
 }

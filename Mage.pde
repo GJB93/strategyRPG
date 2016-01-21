@@ -36,4 +36,9 @@ class Mage extends Unit
       return ratio;
     }
   }
+  
+  void ability(Unit unit)
+  {
+    unit.stats.hp -= (this.stats.abl*2);
+  }
 }

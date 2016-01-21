@@ -7,6 +7,8 @@ class Unit
   String sname;
   char gender;
   int range;
+  boolean alive;
+  boolean goAgain;
   Stats stats;
   
   Unit()
@@ -14,6 +16,7 @@ class Unit
     loadMaleNames();
     loadFemaleNames();
     loadSurnames();
+    this.goAgain = false;
     
     int genderChoice = int(random(2));
     
@@ -50,6 +53,7 @@ class Unit
     loadMaleNames();
     loadFemaleNames();
     loadSurnames();
+    this.goAgain = false;
     
     int genderChoice = int(random(2));
     
@@ -86,6 +90,7 @@ class Unit
     this.fname = fname;
     this.sname = sname;
     this.gender = gender;
+    this.goAgain = false;
     this.stats = new Stats(str, dex, mag);
   }
   

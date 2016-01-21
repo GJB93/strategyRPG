@@ -25,6 +25,8 @@ void setup()
   println(tank.stats.hp);
   templar.attack(tank);
   println(tank.stats.hp);
+  templar.ability(tank);
+  println(tank.stats.hp);
 }
 
 void draw()

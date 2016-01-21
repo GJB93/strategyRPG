@@ -36,4 +36,9 @@ class Ranger extends Unit
       return ratio;
     }
   }
+  
+  void ability(Unit unit)
+  {
+    this.range = 5;
+  }
 }

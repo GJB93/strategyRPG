@@ -36,4 +36,9 @@ class Assassin extends Unit
       return ratio;
     }
   }
+  
+  void ability(Unit unit)
+  {
+    this.stats.crit += 10;
+  }
 }
