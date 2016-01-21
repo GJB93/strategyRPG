@@ -105,6 +105,11 @@ class Unit
     
   }
   
+  float defend()
+  {
+    return 0;
+  }
+  
   void loadFemaleNames()
   {
     String filename = "femalenames.txt";
