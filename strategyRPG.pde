@@ -13,6 +13,10 @@ void setup()
     println(unit.stats.dex);
     println(unit.stats.mag);
   }
+  
+  Board board = new Board();
+  
+  board.render();
 }
 
 void draw()
