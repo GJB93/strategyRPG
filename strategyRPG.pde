@@ -32,6 +32,11 @@ void setup()
   
   player = new Player();
   
+  for(int i=0; i<player.units.size(); i++)
+  {
+    println(player.units.get(i).fname + " " + player.units.get(i).sname);
+  }
+  
   println("Pass");
 }
 
@@ -39,5 +44,5 @@ Player player;
 
 void draw()
 {
-  player.showChoices();
+  
 }
