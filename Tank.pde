@@ -6,6 +6,7 @@ class Tank extends Unit
   {
     super();
     this.range = 1;
+    this.moveRange = 2;
     this.type = "Tank";
   }
   
@@ -13,6 +14,7 @@ class Tank extends Unit
   {
     super(stats);
     this.range = 1;
+    this.moveRange = 2;
     this.type = "Tank";
   }
   

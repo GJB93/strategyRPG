@@ -8,6 +8,7 @@ class Unit
   String type;
   char gender;
   int range;
+  int moveRange;
   boolean alive;
   boolean goAgain;
   Stats stats;

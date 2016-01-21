@@ -6,6 +6,7 @@ class Swordsman extends Unit
   {
     super();
     this.range = 1;
+    this.moveRange = 3;
     this.type = "Swordsman";
   }
   
@@ -13,6 +14,7 @@ class Swordsman extends Unit
   {
     super(stats);
     this.range = 1;
+    this.moveRange = 3;
     this.type = "Swordsman";
   }
   

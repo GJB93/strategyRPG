@@ -6,6 +6,7 @@ class Ranger extends Unit
   {
     super();
     this.range = 3;
+    this.moveRange = 3;
     this.type = "Ranger";
   }
   
@@ -13,6 +14,7 @@ class Ranger extends Unit
   {
     super(stats);
     this.range = 3;
+    this.moveRange = 3;
     this.type = "Ranger";
   }
   
