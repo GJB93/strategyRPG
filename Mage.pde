@@ -21,4 +21,19 @@ class Mage extends Unit
       unit.stats.hp -= this.stats.abl - ((this.stats.abl)*unit.defend());
     }
   }
+  
+  float defend()
+  {
+    int dice = int(random(1,100));
+    
+    if(dice <= this.stats.eva)
+    {
+      return 1.0f;
+    }
+    else
+    {
+      float ratio = map(this.stats.def, 0, 100, 0, 1);
+      return ratio;
+    }
+  }
 }
