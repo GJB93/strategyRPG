@@ -2,6 +2,7 @@ void setup()
 {
   size(500, 500);
   
+  /*
   for(int i=0; i<10; i++)
   {
     Unit unit = new Unit();
@@ -16,7 +17,7 @@ void setup()
   
   Board board = new Board();
   
-  board.render();
+  //board.render();
   
   Templar templar = new Templar();
   Assassin assassin = new Assassin();
@@ -27,9 +28,16 @@ void setup()
   println(tank.stats.hp);
   templar.ability(tank);
   println(tank.stats.hp);
+  */
+  
+  player = new Player();
+  
+  println("Pass");
 }
+
+Player player;
 
 void draw()
 {
-  
+  player.showChoices();
 }

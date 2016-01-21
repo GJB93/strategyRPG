@@ -6,12 +6,14 @@ class Mage extends Unit
   {
     super();
     this.range = 2;
+    this.type = "Mage";
   }
   
   Mage(Stats stats)
   {
     super(stats);
     this.range = 2;
+    this.type = "Mage";
   }
   
   void attack(Unit unit)

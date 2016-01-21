@@ -6,12 +6,14 @@ class Ranger extends Unit
   {
     super();
     this.range = 3;
+    this.type = "Ranger";
   }
   
   Ranger(Stats stats)
   {
     super(stats);
     this.range = 3;
+    this.type = "Ranger";
   }
   
   void attack(Unit unit)

@@ -5,6 +5,7 @@ class Unit
   ArrayList<String> surnames;
   String fname;
   String sname;
+  String type;
   char gender;
   int range;
   boolean alive;

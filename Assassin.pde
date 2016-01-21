@@ -6,12 +6,14 @@ class Assassin extends Unit
   {
     super();
     this.range = 1;
+    this.type = "Assassin";
   }
   
   Assassin(Stats stats)
   {
     super(stats);
     this.range = 1;
+    this.type = "Assassin";
   }
   
   void attack(Unit unit)

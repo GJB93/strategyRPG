@@ -6,12 +6,14 @@ class Swordsman extends Unit
   {
     super();
     this.range = 1;
+    this.type = "Swordsman";
   }
   
   Swordsman(Stats stats)
   {
     super(stats);
     this.range = 1;
+    this.type = "Swordsman";
   }
   
   void attack(Unit unit)

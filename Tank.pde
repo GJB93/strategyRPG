@@ -6,12 +6,14 @@ class Tank extends Unit
   {
     super();
     this.range = 1;
+    this.type = "Tank";
   }
   
   Tank(Stats stats)
   {
     super(stats);
     this.range = 1;
+    this.type = "Tank";
   }
   
   void attack(Unit unit)

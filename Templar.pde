@@ -6,12 +6,14 @@ class Templar extends Unit
   {
     super();
     this.range = 1;
+    this.type = "Templar";
   }
   
   Templar(Stats stats)
   {
     super(stats);
     this.range = 1;
+    this.type = "Templar";
   }
   
   void attack(Unit unit)
