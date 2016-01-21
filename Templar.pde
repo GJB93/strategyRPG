@@ -8,6 +8,12 @@ class Templar extends Unit
     this.range = 1;
   }
   
+  Templar(Stats stats)
+  {
+    super(stats);
+    this.range = 1;
+  }
+  
   void attack(Unit unit)
   {
     int dice = int(random(1, 100));

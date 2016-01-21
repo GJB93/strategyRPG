@@ -8,6 +8,12 @@ class Swordsman extends Unit
     this.range = 1;
   }
   
+  Swordsman(Stats stats)
+  {
+    super(stats);
+    this.range = 1;
+  }
+  
   void attack(Unit unit)
   {
     int dice = int(random(1, 100));

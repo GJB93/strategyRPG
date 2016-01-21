@@ -8,6 +8,12 @@ class Tank extends Unit
     this.range = 1;
   }
   
+  Tank(Stats stats)
+  {
+    super(stats);
+    this.range = 1;
+  }
+  
   void attack(Unit unit)
   {
     int dice = int(random(1, 100));

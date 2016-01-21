@@ -8,6 +8,12 @@ class Ranger extends Unit
     this.range = 3;
   }
   
+  Ranger(Stats stats)
+  {
+    super(stats);
+    this.range = 3;
+  }
+  
   void attack(Unit unit)
   {
     int dice = int(random(1, 100));

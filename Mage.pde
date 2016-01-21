@@ -8,6 +8,12 @@ class Mage extends Unit
     this.range = 2;
   }
   
+  Mage(Stats stats)
+  {
+    super(stats);
+    this.range = 2;
+  }
+  
   void attack(Unit unit)
   {
     int dice = int(random(1, 100));
