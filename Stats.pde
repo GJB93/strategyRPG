@@ -7,9 +7,9 @@ class Stats
   Stats()
   {
     int statSplit = 20;
-    this.str = 0;
-    this.dex = 0;
-    this.mag = 0;
+    this.str = 10;
+    this.dex = 10;
+    this.mag = 10;
     
     while(statSplit > 0)
     {
@@ -38,6 +38,12 @@ class Stats
           int temp = int(random(statSplit+1));
           this.mag += temp;
           statSplit -= temp;
+          break;
+        }
+        
+        default:
+        {
+          println("Error in stat calculation");
           break;
         }
       }//end switch
