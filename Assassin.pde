@@ -8,6 +8,7 @@ class Assassin extends Unit
     this.range = 1;
     this.moveRange = 3;
     this.type = "Assassin";
+    sprite = new PImage();
   }
   
   Assassin(Stats stats)
@@ -16,6 +17,7 @@ class Assassin extends Unit
     this.range = 1;
     this.moveRange = 3;
     this.type = "Assassin";
+    sprite = new PImage();
   }
   
   void attack(Unit unit)

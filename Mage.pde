@@ -8,6 +8,7 @@ class Mage extends Unit
     this.range = 2;
     this.moveRange = 2;
     this.type = "Mage";
+    sprite = new PImage();
   }
   
   Mage(Stats stats)
@@ -16,6 +17,7 @@ class Mage extends Unit
     this.range = 2;
     this.moveRange = 2;
     this.type = "Mage";
+    sprite = new PImage();
   }
   
   void attack(Unit unit)

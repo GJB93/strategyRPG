@@ -1,6 +1,7 @@
 class Unit
 {
   final int uniqueId;
+  PImage sprite;
   ArrayList<String> maleNames;
   ArrayList<String> femaleNames;
   ArrayList<String> surnames;
