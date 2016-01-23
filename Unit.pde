@@ -1,5 +1,6 @@
 class Unit
 {
+  final int uniqueId;
   ArrayList<String> maleNames;
   ArrayList<String> femaleNames;
   ArrayList<String> surnames;
@@ -12,9 +13,11 @@ class Unit
   boolean alive;
   boolean goAgain;
   Stats stats;
+  PVector currentPos;
   
   Unit()
   {
+    uniqueId = int(random(Integer.MAX_VALUE));
     loadMaleNames();
     loadFemaleNames();
     loadSurnames();
@@ -48,10 +51,12 @@ class Unit
     }//end switch
     
     this.stats = new Stats();
+    this.currentPos = new PVector();
   }
   
   Unit(Stats stats)
   {
+    uniqueId = int(random(Integer.MAX_VALUE));
     loadMaleNames();
     loadFemaleNames();
     loadSurnames();
@@ -89,6 +94,7 @@ class Unit
   
   Unit(String fname, String sname, char gender, int str, int dex, int mag)
   {
+    uniqueId = int(random(Integer.MAX_VALUE));
     this.fname = fname;
     this.sname = sname;
     this.gender = gender;
@@ -120,6 +126,11 @@ class Unit
   void ability(Unit unit)
   {
     
+  }
+  
+  void move(int x, int y)
+  {
+    currentPos.set(x, y);
   }
   
   void loadFemaleNames()

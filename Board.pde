@@ -34,6 +34,11 @@ class Board
     }
   }
   
+  void showPossibleMoves()
+  {
+    
+  }
+  
   void set(int row, int col, boolean value)
   {
     if(row >= 0 && row < rows && col >= 0 && col < cols)
