@@ -1,5 +1,6 @@
 class Board
 {
+  ArrayList<PImage> sprites;
   int rows;
   int cols;
   boolean[][] positionState;
@@ -10,6 +11,7 @@ class Board
   
   Board()
   {
+    sprites = new ArrayList<PImage>();
     this.rows = 10;
     this.cols = 10;
     border = width*0.1f;

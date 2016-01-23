@@ -8,7 +8,7 @@ class Swordsman extends Unit
     this.range = 1;
     this.moveRange = 3;
     this.type = "Swordsman";
-    sprite = new PImage();
+    sprite = loadImage("swordsman.png");
   }
   
   Swordsman(Stats stats)
@@ -17,7 +17,7 @@ class Swordsman extends Unit
     this.range = 1;
     this.moveRange = 3;
     this.type = "Swordsman";
-    sprite = new PImage();
+    sprite = loadImage("swordsman.png");
   }
   
   void attack(Unit unit)

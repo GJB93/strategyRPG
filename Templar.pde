@@ -8,7 +8,7 @@ class Templar extends Unit
     this.range = 1;
     this.moveRange = 2;
     this.type = "Templar";
-    sprite = new PImage();
+    sprite = loadImage("templar.png");
   }
   
   Templar(Stats stats)
@@ -17,7 +17,7 @@ class Templar extends Unit
     this.range = 1;
     this.moveRange = 2;
     this.type = "Templar";
-    sprite = new PImage();
+    sprite = loadImage("templar.png");
   }
   
   void attack(Unit unit)

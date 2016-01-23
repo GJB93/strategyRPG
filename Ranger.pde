@@ -8,7 +8,7 @@ class Ranger extends Unit
     this.range = 3;
     this.moveRange = 3;
     this.type = "Ranger";
-    sprite = new PImage();
+    sprite = loadImage("ranger.png");
   }
   
   Ranger(Stats stats)
@@ -17,7 +17,7 @@ class Ranger extends Unit
     this.range = 3;
     this.moveRange = 3;
     this.type = "Ranger";
-    sprite = new PImage();
+    sprite = loadImage("ranger.png");
   }
   
   void attack(Unit unit)

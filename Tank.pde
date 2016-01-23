@@ -8,7 +8,7 @@ class Tank extends Unit
     this.range = 1;
     this.moveRange = 2;
     this.type = "Tank";
-    sprite = new PImage();
+    sprite = loadImage("tank.png");
   }
   
   Tank(Stats stats)
@@ -17,7 +17,7 @@ class Tank extends Unit
     this.range = 1;
     this.moveRange = 2;
     this.type = "Tank";
-    sprite = new PImage();
+    sprite = loadImage("tank.png");
   }
   
   void attack(Unit unit)

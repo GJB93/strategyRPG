@@ -32,7 +32,10 @@ class Game
   
   void initialBoard()
   {
-    
+    if(playerTurn)
+    {
+      
+    }
   }
   
   void takeTurn()
