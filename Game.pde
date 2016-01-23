@@ -30,11 +30,85 @@ class Game
     }
   }
   
+  
+  
   void initialBoard()
   {
     if(playerTurn)
     {
-      
+      for(Unit unit: player.units)
+      {
+        board.loadSprite(unit.sprite);
+        boolean assignedSpace = false;
+        
+        while(!assignedSpace)
+        {
+          int row = int(random(10));
+          int col = int(random(2));
+          boolean isSet = board.get(row, col);
+          if(!isSet)
+          {
+            board.set(row, col, true);
+            assignedSpace = true;
+          }//end if
+        }//end while
+      }//end for
+        
+      for(Unit unit: ai.units)
+      {
+        board.loadSprite(unit.sprite);
+        boolean assignedSpace = false;
+        
+        while(!assignedSpace)
+        {
+          int row = int(random(10));
+          int col = int(random(8, 9));
+          boolean isSet = board.get(row, col);
+          if(!isSet)
+          {
+            board.set(row, col, true);
+            assignedSpace = true;
+          }//end if
+        }//end while
+      }//end for
+    }
+    else
+    {
+      for(Unit unit: ai.units)
+      {
+        board.loadSprite(unit.sprite);
+        boolean assignedSpace = false;
+        
+        while(!assignedSpace)
+        {
+          int row = int(random(10));
+          int col = int(random(2));
+          boolean isSet = board.get(row, col);
+          if(!isSet)
+          {
+            board.set(row, col, true);
+            assignedSpace = true;
+          }//end if
+        }//end while
+      }//end for
+        
+      for(Unit unit: player.units)
+      {
+        board.loadSprite(unit.sprite);
+        boolean assignedSpace = false;
+        
+        while(!assignedSpace)
+        {
+          int row = int(random(10));
+          int col = int(random(8, 10));
+          boolean isSet = board.get(row, col);
+          if(!isSet)
+          {
+            board.set(row, col, true);
+            assignedSpace = true;
+          }//end if
+        }//end while
+      }//end for
     }
   }
   

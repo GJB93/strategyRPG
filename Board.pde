@@ -8,6 +8,7 @@ class Board
   float border;
   float cellWidth;
   float cellHeight;
+  float cellMiddle;
   
   Board()
   {
@@ -19,21 +20,43 @@ class Board
     nextState = new boolean[rows][cols];
     cellWidth = (width-(border*2))/cols;
     cellHeight = (height-(border*2))/rows;
+    cellMiddle = cellWidth*0.5f;
   }
   
   void render()
   {
+    int spriteCount = 0;
     for(int row=0; row<rows; row++)
     {
       for(int col=0;col<cols; col++)
       {
         float x = col*cellHeight;
         float y = row*cellWidth;
-        noFill();
         stroke(255);
-        rect(border+x, border+y, cellWidth, cellHeight);
+        if(positionState[row][col])
+        {
+          noFill();
+          rect(border+x, border+y, cellWidth, cellHeight);
+          image(sprites.get(spriteCount), border+x+cellMiddle, border+y+cellMiddle);
+          spriteCount++;
+        }
+        else
+        {
+          noFill();
+          rect(border+x, border+y, cellWidth, cellHeight);
+        }
       }
     }
+  }
+  
+  void update()
+  {
+    
+  }
+  
+  void loadSprite(PImage sprite)
+  {
+    sprites.add(sprite);
   }
   
   void showPossibleMoves()

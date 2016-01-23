@@ -30,19 +30,13 @@ void setup()
   println(tank.stats.hp);
   */
   
-  player = new Player();
-  
-  for(int i=0; i<player.units.size(); i++)
-  {
-    println(player.units.get(i).fname + " " + player.units.get(i).sname);
-  }
-  
-  println("Pass");
+  game = new Game();
+  game.initialBoard();
 }
 
-Player player;
+Game game;
 
 void draw()
 {
-  
+  game.board.render();
 }
