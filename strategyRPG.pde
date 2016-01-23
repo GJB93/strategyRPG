@@ -39,4 +39,5 @@ Game game;
 void draw()
 {
   game.board.render();
+  game.board.highlightCells(5, 5, 1);
 }

@@ -4,7 +4,7 @@ class Board
   int rows;
   int cols;
   boolean[][] positionState;
-  boolean[][] nextState;
+  boolean[][] highlightedCells;
   float border;
   float cellWidth;
   float cellHeight;
@@ -17,7 +17,6 @@ class Board
     this.cols = 10;
     border = width*0.1f;
     positionState = new boolean[rows][cols];
-    nextState = new boolean[rows][cols];
     cellWidth = (width-(border*2))/cols;
     cellHeight = (height-(border*2))/rows;
     cellMiddle = cellWidth*0.5f;
@@ -37,6 +36,7 @@ class Board
         {
           noFill();
           rect(border+x, border+y, cellWidth, cellHeight);
+          imageMode(CENTER);
           image(sprites.get(spriteCount), border+x+cellMiddle, border+y+cellMiddle);
           spriteCount++;
         }
@@ -49,9 +49,22 @@ class Board
     }
   }
   
-  void update()
+  void highlightCells(int posX, int posY, int range)
   {
-    
+    for(int row=0; row<rows; row++)
+    {
+      for(int col=0; col<cols; col++)
+      {
+        if(row >= (posX-range))
+        {
+          float x = col*cellHeight;
+          float y = row*cellWidth;
+          noStroke();
+          fill(0, 255, 255, 50);
+          rect(border+x, border+y, cellWidth, cellHeight);
+        }
+      }
+    }
   }
   
   void loadSprite(PImage sprite)
