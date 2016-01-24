@@ -28,8 +28,8 @@ class Cell
   
   void drawCell()
   {
-    float x = cellNumber.x * cellW;
-    float y = cellNumber.y * cellH;
+    float y = cellNumber.x * cellW;
+    float x = cellNumber.y * cellH;
     float cellM = cellW * 0.5f;
     
     stroke(255);
@@ -47,11 +47,11 @@ class Cell
     }
   }
   
-  void set(Unit unit, PImage sprite)
+  void set(Unit unit)
   {
     isOccupied = true;
     occupiedBy = unit;
-    this.sprite = sprite;
+    this.sprite = unit.sprite;
   }
   
   void unset()

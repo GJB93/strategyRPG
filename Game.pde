@@ -38,7 +38,6 @@ class Game
     {
       for(Unit unit: player.units)
       {
-        board.loadSprite(unit.sprite);
         boolean assignedSpace = false;
         
         while(!assignedSpace)
@@ -48,7 +47,7 @@ class Game
           boolean isSet = board.get(row, col);
           if(!isSet)
           {
-            board.set(row, col, true);
+            board.set(row, col, unit);
             assignedSpace = true;
           }//end if
         }//end while
@@ -56,7 +55,6 @@ class Game
         
       for(Unit unit: ai.units)
       {
-        board.loadSprite(unit.sprite);
         boolean assignedSpace = false;
         
         while(!assignedSpace)
@@ -66,7 +64,7 @@ class Game
           boolean isSet = board.get(row, col);
           if(!isSet)
           {
-            board.set(row, col, true);
+            board.set(row, col, unit);
             assignedSpace = true;
           }//end if
         }//end while
@@ -76,7 +74,6 @@ class Game
     {
       for(Unit unit: ai.units)
       {
-        board.loadSprite(unit.sprite);
         boolean assignedSpace = false;
         
         while(!assignedSpace)
@@ -86,7 +83,7 @@ class Game
           boolean isSet = board.get(row, col);
           if(!isSet)
           {
-            board.set(row, col, true);
+            board.set(row, col, unit);
             assignedSpace = true;
           }//end if
         }//end while
@@ -94,7 +91,6 @@ class Game
         
       for(Unit unit: player.units)
       {
-        board.loadSprite(unit.sprite);
         boolean assignedSpace = false;
         
         while(!assignedSpace)
@@ -104,7 +100,7 @@ class Game
           boolean isSet = board.get(row, col);
           if(!isSet)
           {
-            board.set(row, col, true);
+            board.set(row, col, unit);
             assignedSpace = true;
           }//end if
         }//end while

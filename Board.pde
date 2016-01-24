@@ -5,6 +5,7 @@ class Board
   int cols;
   boolean[][] positionState;
   boolean[][] highlightedCells;
+  ArrayList<ArrayList<Cell>> cells;
   float border;
   float cellWidth;
   float cellHeight;
@@ -16,35 +17,28 @@ class Board
     this.rows = 10;
     this.cols = 10;
     border = width*0.1f;
-    positionState = new boolean[rows][cols];
     cellWidth = (width-(border*2))/cols;
     cellHeight = (height-(border*2))/rows;
-    cellMiddle = cellWidth*0.5f;
+    cells = new ArrayList<ArrayList<Cell>>();
+    for(int row=0; row<rows; row++)
+    {
+      ArrayList<Cell> temp = new ArrayList<Cell>();
+      for(int col=0; col<cols; col++)
+      {
+        Cell cell = new Cell(row, col, cellWidth, cellHeight, border);
+        temp.add(cell);
+      }
+      cells.add(temp);
+    }
   }
   
   void render()
   {
-    int spriteCount = 0;
-    for(int row=0; row<rows; row++)
+    for(ArrayList<Cell> listCells: cells)
     {
-      for(int col=0;col<cols; col++)
+      for(Cell cell: listCells)
       {
-        float x = col*cellWidth;
-        float y = row*cellHeight;
-        stroke(255);
-        if(positionState[row][col])
-        {
-          noFill();
-          rect(border+x, border+y, cellWidth, cellHeight);
-          imageMode(CENTER);
-          image(sprites.get(spriteCount), border+x+cellMiddle, border+y+cellMiddle);
-          spriteCount++;
-        }
-        else
-        {
-          noFill();
-          rect(border+x, border+y, cellWidth, cellHeight);
-        }
+        cell.drawCell();
       }
     }
   }
@@ -77,11 +71,11 @@ class Board
     
   }
   
-  void set(int row, int col, boolean value)
+  void set(int row, int col, Unit unit)
   {
     if(row >= 0 && row < rows && col >= 0 && col < cols)
     {
-      positionState[row][col] = value;
+      cells.get(row).get(col).set(unit);
     }
   }
   
@@ -89,7 +83,7 @@ class Board
   {
     if (row >= 0 && row < rows && col >= 0 && col < cols)
     {
-      return positionState[row][col];
+      return cells.get(row).get(col).isOccupied;
     }
     else
     {
