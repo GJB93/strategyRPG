@@ -7,6 +7,8 @@ class Cell
   float cellH;
   float border;
   boolean isOccupied;
+  boolean isHighlighted;
+  boolean playerUnit;
   Unit occupiedBy;
   
   Cell()
@@ -36,6 +38,10 @@ class Cell
     if(isOccupied)
     {
       noFill();
+      if(isHighlighted)
+      {
+        fill(0, 255, 255, 50);
+      }
       rect(border+x, border+y, cellW, cellH);
       imageMode(CENTER);
       image(sprite, border+x+cellM, border+y+cellM);
@@ -43,15 +49,25 @@ class Cell
     else
     {
       noFill();
+      if(isHighlighted)
+      {
+        fill(0, 255, 255, 50);
+      }
       rect(border+x, border+y, cellW, cellH);
     }
   }
   
-  void set(Unit unit)
+  void highlightCell()
+  {
+    isHighlighted = true;
+  }
+  
+  void set(Unit unit, boolean playerUnit)
   {
     isOccupied = true;
     occupiedBy = unit;
     this.sprite = unit.sprite;
+    this.playerUnit = playerUnit;
   }
   
   void unset()

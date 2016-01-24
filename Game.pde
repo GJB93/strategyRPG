@@ -47,7 +47,7 @@ class Game
           boolean isSet = board.get(row, col);
           if(!isSet)
           {
-            board.set(row, col, unit);
+            board.set(row, col, unit, true);
             assignedSpace = true;
           }//end if
         }//end while
@@ -64,7 +64,7 @@ class Game
           boolean isSet = board.get(row, col);
           if(!isSet)
           {
-            board.set(row, col, unit);
+            board.set(row, col, unit, false);
             assignedSpace = true;
           }//end if
         }//end while
@@ -83,7 +83,7 @@ class Game
           boolean isSet = board.get(row, col);
           if(!isSet)
           {
-            board.set(row, col, unit);
+            board.set(row, col, unit, false);
             assignedSpace = true;
           }//end if
         }//end while
@@ -100,7 +100,7 @@ class Game
           boolean isSet = board.get(row, col);
           if(!isSet)
           {
-            board.set(row, col, unit);
+            board.set(row, col, unit, true);
             assignedSpace = true;
           }//end if
         }//end while

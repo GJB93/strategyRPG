@@ -43,11 +43,28 @@ class Board
     }
   }
   
-  void set(int row, int col, Unit unit)
+  void offerMove()
+  {
+    for(ArrayList<Cell> listCells: cells)
+    {
+      for(Cell cell: listCells)
+      {
+        if(cell.isOccupied)
+        {
+          if(cell.playerUnit)
+          {
+            cell.highlightCell();
+          }
+        }
+      }
+    }
+  }
+  
+  void set(int row, int col, Unit unit, boolean playerUnit)
   {
     if(row >= 0 && row < rows && col >= 0 && col < cols)
     {
-      cells.get(row).get(col).set(unit);
+      cells.get(row).get(col).set(unit, playerUnit);
     }
   }
   
