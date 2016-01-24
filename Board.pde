@@ -42,6 +42,7 @@ class Board
       }
     }
     checkMouse();
+    //showValidMoves();
   }
   
   void checkMouse()
@@ -95,6 +96,52 @@ class Board
       }
     }
   }
+  
+  /*
+  void showValidMoves()
+  {
+    Cell selectedCell = null;
+    for(ArrayList<Cell> listCells: cells)
+    {
+      for(Cell cell: listCells)
+      {
+        if(cell.isSelected)
+        {
+          selectedCell = cell;
+        }
+      }
+    }
+    
+    if(selectedCell != null)
+    {
+      for(int row=0; row<rows; row++)
+      {
+        for(int col=0; col<cols; col++)
+        {
+          if(row >= (selectedCell.cellNumber.x-selectedCell.occupiedBy.moveRange) && row <= (selectedCell.cellNumber.x+selectedCell.occupiedBy.moveRange))
+          {
+            println(row);
+            if(cells.get(row).get(col).isOccupied)
+            {
+              if(cells.get(row).get(col).playerUnit)
+              {
+                cells.get(row).get(col).allyHighlight();
+              }
+              else
+              {
+                cells.get(row).get(col).enemyHighlight();
+              }
+            }
+            else
+            {
+              cells.get(row).get(col).moveHighlight();
+            }
+          }
+        }
+      }
+    }
+  }
+  */
   
   void set(int row, int col, Unit unit, boolean playerUnit)
   {

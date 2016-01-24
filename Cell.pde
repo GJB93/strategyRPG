@@ -9,6 +9,9 @@ class Cell
   boolean isOccupied;
   boolean playerUnit;
   boolean isSelected;
+  boolean moveHighlight;
+  boolean allyHighlight;
+  boolean enemyHighlight;
   Unit occupiedBy;
   
   Cell()
@@ -75,6 +78,21 @@ class Cell
   void unitUnselected()
   {
     this.isSelected = false;
+  }
+  
+  void moveHighlight()
+  {
+    moveHighlight = true;
+  }
+  
+  void allyHighlight()
+  {
+    allyHighlight = true;
+  }
+  
+  void enemyHighlight()
+  {
+    enemyHighlight = true;
   }
   
   void set(Unit unit, boolean playerUnit)
