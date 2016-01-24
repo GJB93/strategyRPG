@@ -43,36 +43,6 @@ class Board
     }
   }
   
-  
-  void offerMove()
-  {
-    for(ArrayList<Cell> listCells: cells)
-    {
-      for(Cell cell: listCells)
-      {
-        if(cell.isOccupied)
-        {
-          cell.offerMove();
-        }
-      }
-    }
-  }
-  
-  void moveTaken()
-  {
-    for(ArrayList<Cell> listCells: cells)
-    {
-      for(Cell cell: listCells)
-      {
-        if(cell.isOccupied)
-        {
-          cell.moveTaken();
-        }
-      }
-    }
-  }
-  
-  
   void set(int row, int col, Unit unit, boolean playerUnit)
   {
     if(row >= 0 && row < rows && col >= 0 && col < cols)

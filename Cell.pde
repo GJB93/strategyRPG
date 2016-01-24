@@ -38,10 +38,6 @@ class Cell
     if(isOccupied)
     {
       noFill();
-      if(offerMove)
-      {
-        fill(0, 255, 255, 50);
-      }
       rect(border+x, border+y, cellW, cellH);
       imageMode(CENTER);
       image(sprite, border+x+cellM, border+y+cellM);
@@ -49,29 +45,8 @@ class Cell
     else
     {
       noFill();
-      if(offerMove)
-      {
-        fill(0, 255, 255, 50);
-      }
       rect(border+x, border+y, cellW, cellH);
     }
-  }
-  
-  void offerMove()
-  {
-    if(playerUnit)
-    {
-      offerMove = true;
-    }
-    else
-    {
-      offerMove = false;
-    }
-  }
-  
-  void moveTaken()
-  {
-    offerMove = false;
   }
   
   void set(Unit unit, boolean playerUnit)

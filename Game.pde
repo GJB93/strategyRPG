@@ -116,6 +116,10 @@ class Game
       {
         boolean hasMoved = false;
         board.offerMove();
+        while(!hasMoved)
+        {
+          board.render();
+        }
       }
     }
     else
@@ -124,6 +128,10 @@ class Game
       {
         boolean hasMoved = false;
         board.offerMove();
+        while(!hasMoved)
+        {
+          board.render();
+        }
       }
     }
   }
