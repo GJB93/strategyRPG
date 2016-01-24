@@ -10,5 +10,4 @@ Game game;
 void draw()
 {
   game.board.render();
-  game.board.offerMove();
 }

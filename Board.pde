@@ -14,8 +14,8 @@ class Board
   Board()
   {
     sprites = new ArrayList<PImage>();
-    this.rows = 10;
-    this.cols = 10;
+    this.rows = 20;
+    this.cols = 20;
     border = width*0.1f;
     cellWidth = (width-(border*2))/cols;
     cellHeight = (height-(border*2))/rows;
@@ -43,6 +43,7 @@ class Board
     }
   }
   
+  /*
   void offerMove()
   {
     for(ArrayList<Cell> listCells: cells)
@@ -59,6 +60,7 @@ class Board
       }
     }
   }
+  */
   
   void set(int row, int col, Unit unit, boolean playerUnit)
   {

@@ -42,7 +42,7 @@ class Game
         
         while(!assignedSpace)
         {
-          int row = int(random(10));
+          int row = int(random(board.rows));
           int col = int(random(2));
           boolean isSet = board.get(row, col);
           if(!isSet)
@@ -59,8 +59,8 @@ class Game
         
         while(!assignedSpace)
         {
-          int row = int(random(10));
-          int col = int(random(8, 9));
+          int row = int(random(board.rows));
+          int col = int(random(board.cols-2, board.cols));
           boolean isSet = board.get(row, col);
           if(!isSet)
           {
@@ -78,7 +78,7 @@ class Game
         
         while(!assignedSpace)
         {
-          int row = int(random(10));
+          int row = int(random(board.rows));
           int col = int(random(2));
           boolean isSet = board.get(row, col);
           if(!isSet)
@@ -95,8 +95,8 @@ class Game
         
         while(!assignedSpace)
         {
-          int row = int(random(10));
-          int col = int(random(8, 10));
+          int row = int(random(board.rows));
+          int col = int(random(board.cols-2, board.cols));
           boolean isSet = board.get(row, col);
           if(!isSet)
           {

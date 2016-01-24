@@ -7,7 +7,6 @@ class Cell
   float cellH;
   float border;
   boolean isOccupied;
-  boolean isHighlighted;
   boolean playerUnit;
   Unit occupiedBy;
   
@@ -38,7 +37,7 @@ class Cell
     if(isOccupied)
     {
       noFill();
-      if(isHighlighted)
+      if(playerUnit)
       {
         fill(0, 255, 255, 50);
       }
@@ -49,17 +48,12 @@ class Cell
     else
     {
       noFill();
-      if(isHighlighted)
+      if(playerUnit)
       {
         fill(0, 255, 255, 50);
       }
       rect(border+x, border+y, cellW, cellH);
     }
-  }
-  
-  void highlightCell()
-  {
-    isHighlighted = true;
   }
   
   void set(Unit unit, boolean playerUnit)
