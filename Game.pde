@@ -115,11 +115,6 @@ class Game
       for(Unit unit: player.units)
       {
         boolean hasMoved = false;
-        board.offerMove();
-        while(!hasMoved)
-        {
-          board.render();
-        }
       }
     }
     else
@@ -127,11 +122,6 @@ class Game
       for(Unit unit: player.units)
       {
         boolean hasMoved = false;
-        board.offerMove();
-        while(!hasMoved)
-        {
-          board.render();
-        }
       }
     }
   }

@@ -41,6 +41,27 @@ class Board
         cell.drawCell();
       }
     }
+    checkMouse();
+  }
+  
+  void checkMouse()
+  {
+    if(mousePressed)
+    {
+      if(pmouseX > border && pmouseX < width-border && pmouseY > border && pmouseY < height-border)
+      {
+        int i = int(map(mouseX, border, width-border, 0, cols));
+        int j = int(map(mouseY, border, height-border, 0, rows));
+        
+        if(cells.get(j).get(i).isOccupied)
+        {
+          if(cells.get(j).get(i).playerUnit)
+          {
+            cells.get(j).get(i).offerMove();
+          }
+        }
+      }
+    }
   }
   
   void set(int row, int col, Unit unit, boolean playerUnit)
