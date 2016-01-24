@@ -8,6 +8,7 @@ class Cell
   float border;
   boolean isOccupied;
   boolean playerUnit;
+  boolean offerMove;
   Unit occupiedBy;
   
   Cell()
@@ -37,7 +38,7 @@ class Cell
     if(isOccupied)
     {
       noFill();
-      if(playerUnit)
+      if(offerMove)
       {
         fill(0, 255, 255, 50);
       }
@@ -48,12 +49,29 @@ class Cell
     else
     {
       noFill();
-      if(playerUnit)
+      if(offerMove)
       {
         fill(0, 255, 255, 50);
       }
       rect(border+x, border+y, cellW, cellH);
     }
+  }
+  
+  void offerMove()
+  {
+    if(playerUnit)
+    {
+      offerMove = true;
+    }
+    else
+    {
+      offerMove = false;
+    }
+  }
+  
+  void moveTaken()
+  {
+    offerMove = false;
   }
   
   void set(Unit unit, boolean playerUnit)

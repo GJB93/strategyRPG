@@ -114,12 +114,17 @@ class Game
     {
       for(Unit unit: player.units)
       {
-        
+        boolean hasMoved = false;
+        board.offerMove();
       }
     }
     else
     {
-      
+      for(Unit unit: player.units)
+      {
+        boolean hasMoved = false;
+        board.offerMove();
+      }
     }
   }
 }
