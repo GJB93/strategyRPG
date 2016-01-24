@@ -48,35 +48,47 @@ class Board
   {
     if(mousePressed)
     {
-      if(mouseButton == LEFT)
+      if(pmouseX > border && pmouseX < width-border && pmouseY > border && pmouseY < height-border)
       {
-        if(pmouseX > border && pmouseX < width-border && pmouseY > border && pmouseY < height-border)
+        int i = int(map(mouseX, border, width-border, 0, cols));
+        int j = int(map(mouseY, border, height-border, 0, rows));
+        
+        boolean isValid = true;
+        for(ArrayList<Cell> listCells: cells)
         {
-          int i = int(map(mouseX, border, width-border, 0, cols));
-          int j = int(map(mouseY, border, height-border, 0, rows));
-          
-          if(cells.get(j).get(i).isOccupied)
+          for(Cell cell: listCells)
           {
-            if(cells.get(j).get(i).playerUnit)
+            if(cell.cellNumber.x != j && cell.cellNumber.y != i)
             {
-              cells.get(j).get(i).unitSelected();
+              if(cell.isSelected)
+              {
+                isValid = false;
+              }
             }
           }
         }
-      }
-      
-      if(mouseButton == RIGHT)
-      {
-        if(pmouseX > border && pmouseX < width-border && pmouseY > border && pmouseY < height-border)
+        
+        if(isValid)
         {
-          int i = int(map(mouseX, border, width-border, 0, cols));
-          int j = int(map(mouseY, border, height-border, 0, rows));
-          
-          if(cells.get(j).get(i).isOccupied)
+          if(mouseButton == LEFT)
           {
-            if(cells.get(j).get(i).playerUnit)
+            if(cells.get(j).get(i).isOccupied)
             {
-              cells.get(j).get(i).unitUnselected();
+              if(cells.get(j).get(i).playerUnit)
+              {
+                cells.get(j).get(i).unitSelected();
+              }
+            }
+          }
+          
+          if(mouseButton == RIGHT)
+          {
+            if(cells.get(j).get(i).isOccupied)
+            {
+              if(cells.get(j).get(i).playerUnit)
+              {
+                cells.get(j).get(i).unitUnselected();
+              }
             }
           }
         }
