@@ -43,34 +43,6 @@ class Board
     }
   }
   
-  void highlightCells(int posX, int posY, int range)
-  {
-    for(int row=0; row<rows; row++)
-    {
-      for(int col=0; col<cols; col++)
-      {
-        if(row >= (posX-range))
-        {
-          float x = col*cellWidth;
-          float y = row*cellHeight;
-          noStroke();
-          fill(0, 255, 255, 50);
-          rect(border+x, border+y, cellWidth, cellHeight);
-        }
-      }
-    }
-  }
-  
-  void loadSprite(PImage sprite)
-  {
-    sprites.add(sprite);
-  }
-  
-  void showPossibleMoves()
-  {
-    
-  }
-  
   void set(int row, int col, Unit unit)
   {
     if(row >= 0 && row < rows && col >= 0 && col < cols)
