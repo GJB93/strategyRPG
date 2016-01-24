@@ -29,8 +29,8 @@ class Board
     {
       for(int col=0;col<cols; col++)
       {
-        float x = col*cellHeight;
-        float y = row*cellWidth;
+        float x = col*cellWidth;
+        float y = row*cellHeight;
         stroke(255);
         if(positionState[row][col])
         {
@@ -57,8 +57,8 @@ class Board
       {
         if(row >= (posX-range))
         {
-          float x = col*cellHeight;
-          float y = row*cellWidth;
+          float x = col*cellWidth;
+          float y = row*cellHeight;
           noStroke();
           fill(0, 255, 255, 50);
           rect(border+x, border+y, cellWidth, cellHeight);
