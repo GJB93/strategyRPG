@@ -8,7 +8,7 @@ class Cell
   float border;
   boolean isOccupied;
   boolean playerUnit;
-  boolean offerMove;
+  boolean isSelected;
   Unit occupiedBy;
   
   Cell()
@@ -37,10 +37,14 @@ class Cell
     stroke(255);
     if(isOccupied)
     {
-      noFill();
-      if(offerMove)
+      if(isSelected)
       {
+        displayUnitDetails();
         fill(0, 255, 255, 20);
+      }
+      else
+      {
+        fill(200);
       }
       rect(border+x, border+y, cellW, cellH);
       imageMode(CENTER);
@@ -48,14 +52,29 @@ class Cell
     }
     else
     {
-      noFill();
+      fill(200);
       rect(border+x, border+y, cellW, cellH);
     }
   }
   
-  void offerMove()
+  void displayUnitDetails()
   {
-    offerMove = true;
+    fill(0);
+    text(occupiedBy.fname + " " + occupiedBy.sname, 10, 10);
+    text(occupiedBy.type, 10, 20);
+    text("STR: " + occupiedBy.stats.str, 10, 30);
+    text("DEX: " + occupiedBy.stats.dex, 10, 40);
+    text("MAG: " + occupiedBy.stats.mag, 10, 50);
+  }
+  
+  void unitSelected()
+  {
+    this.isSelected = true;
+  }
+  
+  void unitUnselected()
+  {
+    this.isSelected = false;
   }
   
   void set(Unit unit, boolean playerUnit)

@@ -30,7 +30,10 @@ class Game
     }
   }
   
-  
+  void render()
+  {
+    board.render();
+  }
   
   void initialBoard()
   {
@@ -115,6 +118,10 @@ class Game
       for(Unit unit: player.units)
       {
         boolean hasMoved = false;
+        while(!hasMoved)
+        {
+          board.render();
+        }
       }
     }
     else
@@ -122,6 +129,10 @@ class Game
       for(Unit unit: player.units)
       {
         boolean hasMoved = false;
+        while(!hasMoved)
+        {
+          board.render();
+        }
       }
     }
   }

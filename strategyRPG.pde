@@ -9,5 +9,7 @@ Game game;
 
 void draw()
 {
-  game.board.render();
+  background(200);
+  game.render();
+  //game.takeTurn();
 }

@@ -48,16 +48,36 @@ class Board
   {
     if(mousePressed)
     {
-      if(pmouseX > border && pmouseX < width-border && pmouseY > border && pmouseY < height-border)
+      if(mouseButton == LEFT)
       {
-        int i = int(map(mouseX, border, width-border, 0, cols));
-        int j = int(map(mouseY, border, height-border, 0, rows));
-        
-        if(cells.get(j).get(i).isOccupied)
+        if(pmouseX > border && pmouseX < width-border && pmouseY > border && pmouseY < height-border)
         {
-          if(cells.get(j).get(i).playerUnit)
+          int i = int(map(mouseX, border, width-border, 0, cols));
+          int j = int(map(mouseY, border, height-border, 0, rows));
+          
+          if(cells.get(j).get(i).isOccupied)
           {
-            cells.get(j).get(i).offerMove();
+            if(cells.get(j).get(i).playerUnit)
+            {
+              cells.get(j).get(i).unitSelected();
+            }
+          }
+        }
+      }
+      
+      if(mouseButton == RIGHT)
+      {
+        if(pmouseX > border && pmouseX < width-border && pmouseY > border && pmouseY < height-border)
+        {
+          int i = int(map(mouseX, border, width-border, 0, cols));
+          int j = int(map(mouseY, border, height-border, 0, rows));
+          
+          if(cells.get(j).get(i).isOccupied)
+          {
+            if(cells.get(j).get(i).playerUnit)
+            {
+              cells.get(j).get(i).unitUnselected();
+            }
           }
         }
       }
