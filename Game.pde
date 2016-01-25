@@ -30,11 +30,7 @@ class Game
   void render()
   {
     board.render();
-  }
-  
-  void validClick()
-  {
-    
+    playerTurn = board.checkPlayerUnits();
   }
   
   void initialBoard()

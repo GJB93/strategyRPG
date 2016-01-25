@@ -16,5 +16,5 @@ void draw()
 
 void mouseClicked()
 {
-  game.board.checkMouse();
+  game.takeTurn();
 }

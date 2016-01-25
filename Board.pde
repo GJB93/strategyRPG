@@ -105,6 +105,31 @@ class Board
     }
   }
   
+  boolean checkPlayerUnits()
+  {
+    int numberOfUnitsMoved = 0;
+    for(ArrayList<Cell> listCells: cells)
+    {
+      for(Cell cell: listCells)
+      {
+        if(cell.playerUnit && cell.unit.hasMoved)
+        {
+          numberOfUnitsMoved++;
+        }
+      }
+    }
+    
+    if(numberOfUnitsMoved == 6)
+    {
+      println("All player units have moved, AI's turn");
+      return false;
+    }
+    else
+    {
+      return true;
+    }
+  }
+  
   void moveUnit(Cell cell, int row, int col)
   {
     cells.get(row).get(col).set(cell.unit, true);
