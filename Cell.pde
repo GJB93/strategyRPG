@@ -31,6 +31,11 @@ class Cell
     occupiedBy = null;
   }
   
+  Cell(Cell cell)
+  {
+    this.occupiedBy = cell.occupiedBy;
+  }
+  
   void drawCell()
   {
     float y = cellNumber.x * cellW;
@@ -99,6 +104,7 @@ class Cell
   {
     isOccupied = true;
     occupiedBy = unit;
+    this.isSelected = false;
     this.sprite = unit.sprite;
     this.playerUnit = playerUnit;
   }

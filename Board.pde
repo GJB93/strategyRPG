@@ -42,6 +42,7 @@ class Board
       }
     }
     checkMouse();
+    moveUnit();
     //showValidMoves();
   }
   
@@ -53,6 +54,7 @@ class Board
       {
         int i = int(map(mouseX, border, width-border, 0, cols));
         int j = int(map(mouseY, border, height-border, 0, rows));
+        
         
         boolean isValid = true;
         for(ArrayList<Cell> listCells: cells)
@@ -91,6 +93,40 @@ class Board
                 cells.get(j).get(i).unitUnselected();
               }
             }
+          }
+        }
+      }
+    }
+  }
+  
+  void moveUnit()
+  {
+    if(mousePressed)
+    {
+      if(pmouseX > border && pmouseX < width-border && pmouseY > border && pmouseY < height-border)
+      {
+        int i = int(map(mouseX, border, width-border, 0, cols));
+        int j = int(map(mouseY, border, height-border, 0, rows));
+        Cell selectedCell = null;
+        
+        for(ArrayList<Cell> listCells: cells)
+        {
+          for(Cell cell: listCells)
+          {
+            if(cell.isSelected)
+            {
+              selectedCell = new Cell(cell);
+            }
+          }
+        }
+        
+        if(selectedCell != null)
+        {
+          if(!cells.get(j).get(i).isOccupied)
+          {
+            println(selectedCell.occupiedBy.fname + " " + selectedCell.occupiedBy.sname);
+            cells.get(j).get(i).set(selectedCell.occupiedBy, true);
+            selectedCell.unset();
           }
         }
       }
