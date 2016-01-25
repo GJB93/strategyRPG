@@ -12,13 +12,13 @@ class Cell
   boolean moveHighlight;
   boolean allyHighlight;
   boolean enemyHighlight;
-  Unit occupiedBy;
+  Unit unit;
   
   Cell()
   {
     cellNumber = new PVector();
     isOccupied = false;
-    occupiedBy = null;
+    unit = null;
   }
   
   Cell(int row, int col, float w, float h, float b)
@@ -28,12 +28,12 @@ class Cell
     cellH = h;
     border = b;
     isOccupied = false;
-    occupiedBy = null;
+    unit = null;
   }
   
   Cell(Cell cell)
   {
-    this.occupiedBy = cell.occupiedBy;
+    this.unit = cell.unit;
   }
   
   void drawCell()
@@ -68,11 +68,11 @@ class Cell
   void displayUnitDetails()
   {
     fill(0);
-    text(occupiedBy.fname + " " + occupiedBy.sname, 10, 10);
-    text(occupiedBy.type, 10, 20);
-    text("STR: " + occupiedBy.stats.str, 10, 30);
-    text("DEX: " + occupiedBy.stats.dex, 10, 40);
-    text("MAG: " + occupiedBy.stats.mag, 10, 50);
+    text(unit.fname + " " + unit.sname, 10, 10);
+    text(unit.type, 10, 20);
+    text("STR: " + unit.stats.str, 10, 30);
+    text("DEX: " + unit.stats.dex, 10, 40);
+    text("MAG: " + unit.stats.mag, 10, 50);
   }
   
   void unitSelected()
@@ -103,7 +103,7 @@ class Cell
   void set(Unit unit, boolean playerUnit)
   {
     isOccupied = true;
-    occupiedBy = unit;
+    this.unit = unit;
     this.isSelected = false;
     this.sprite = unit.sprite;
     this.playerUnit = playerUnit;
@@ -112,6 +112,6 @@ class Cell
   void unset()
   {
     isOccupied = false;
-    occupiedBy = null;
+    unit = null;
   }
 }

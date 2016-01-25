@@ -1,19 +1,17 @@
 class Board
 {
-  ArrayList<PImage> sprites;
   int rows;
   int cols;
-  boolean[][] positionState;
-  boolean[][] highlightedCells;
   ArrayList<ArrayList<Cell>> cells;
+  Cell selectedCell;
   float border;
   float cellWidth;
   float cellHeight;
   float cellMiddle;
+  boolean hasSelected;
   
   Board()
   {
-    sprites = new ArrayList<PImage>();
     this.rows = 10;
     this.cols = 10;
     border = width*0.1f;
@@ -30,6 +28,7 @@ class Board
       }
       cells.add(temp);
     }
+    hasSelected = false;
   }
   
   void render()
@@ -41,143 +40,53 @@ class Board
         cell.drawCell();
       }
     }
-    checkMouse();
-    moveUnit();
-    //showValidMoves();
   }
   
   void checkMouse()
   {
-    if(mousePressed)
+    if(pmouseX > border && pmouseX < width-border && pmouseY > border && pmouseY < height-border)
     {
-      if(pmouseX > border && pmouseX < width-border && pmouseY > border && pmouseY < height-border)
+      int row = int(map(mouseY, border, height-border, 0, rows));
+      int col = int(map(mouseX, border, width-border, 0, cols));
+      
+      if(mouseButton == LEFT)
       {
-        int i = int(map(mouseX, border, width-border, 0, cols));
-        int j = int(map(mouseY, border, height-border, 0, rows));
-        
-        
-        boolean isValid = true;
-        for(ArrayList<Cell> listCells: cells)
+        if(cells.get(row).get(col).isOccupied && !hasSelected)
         {
-          for(Cell cell: listCells)
+          if(cells.get(row).get(col).playerUnit)
           {
-            if(cell.cellNumber.x != j && cell.cellNumber.y != i)
-            {
-              if(cell.isSelected)
-              {
-                isValid = false;
-              }
-            }
+            cells.get(row).get(col).unitSelected();
+            selectedCell = cells.get(row).get(col);
+            hasSelected = true;
           }
         }
-        
-        if(isValid)
+        else if(!cells.get(row).get(col).isOccupied && hasSelected)
         {
-          if(mouseButton == LEFT)
+          moveUnit(selectedCell, row, col);
+          hasSelected = false;
+        }
+      }
+      
+      if(mouseButton == RIGHT)
+      {
+        if(cells.get(row).get(col).isOccupied)
+        {
+          if(cells.get(row).get(col).playerUnit && hasSelected)
           {
-            if(cells.get(j).get(i).isOccupied)
-            {
-              if(cells.get(j).get(i).playerUnit)
-              {
-                cells.get(j).get(i).unitSelected();
-              }
-            }
-          }
-          
-          if(mouseButton == RIGHT)
-          {
-            if(cells.get(j).get(i).isOccupied)
-            {
-              if(cells.get(j).get(i).playerUnit)
-              {
-                cells.get(j).get(i).unitUnselected();
-              }
-            }
+            cells.get(row).get(col).unitUnselected();
+            hasSelected = false;
           }
         }
       }
     }
   }
   
-  void moveUnit()
+  void moveUnit(Cell cell, int row, int col)
   {
-    if(mousePressed)
-    {
-      if(pmouseX > border && pmouseX < width-border && pmouseY > border && pmouseY < height-border)
-      {
-        int i = int(map(mouseX, border, width-border, 0, cols));
-        int j = int(map(mouseY, border, height-border, 0, rows));
-        Cell selectedCell = null;
-        
-        for(ArrayList<Cell> listCells: cells)
-        {
-          for(Cell cell: listCells)
-          {
-            if(cell.isSelected)
-            {
-              selectedCell = new Cell(cell);
-            }
-          }
-        }
-        
-        if(selectedCell != null)
-        {
-          if(!cells.get(j).get(i).isOccupied)
-          {
-            println(selectedCell.occupiedBy.fname + " " + selectedCell.occupiedBy.sname);
-            cells.get(j).get(i).set(selectedCell.occupiedBy, true);
-            selectedCell.unset();
-          }
-        }
-      }
-    }
+    cells.get(row).get(col).set(cell.unit, true);
+    cells.get(int(cell.cellNumber.x)).get(int(cell.cellNumber.y)).unset();
+    cell.unset();
   }
-  
-  /*
-  void showValidMoves()
-  {
-    Cell selectedCell = null;
-    for(ArrayList<Cell> listCells: cells)
-    {
-      for(Cell cell: listCells)
-      {
-        if(cell.isSelected)
-        {
-          selectedCell = cell;
-        }
-      }
-    }
-    
-    if(selectedCell != null)
-    {
-      for(int row=0; row<rows; row++)
-      {
-        for(int col=0; col<cols; col++)
-        {
-          if(row >= (selectedCell.cellNumber.x-selectedCell.occupiedBy.moveRange) && row <= (selectedCell.cellNumber.x+selectedCell.occupiedBy.moveRange))
-          {
-            println(row);
-            if(cells.get(row).get(col).isOccupied)
-            {
-              if(cells.get(row).get(col).playerUnit)
-              {
-                cells.get(row).get(col).allyHighlight();
-              }
-              else
-              {
-                cells.get(row).get(col).enemyHighlight();
-              }
-            }
-            else
-            {
-              cells.get(row).get(col).moveHighlight();
-            }
-          }
-        }
-      }
-    }
-  }
-  */
   
   void set(int row, int col, Unit unit, boolean playerUnit)
   {

@@ -13,3 +13,8 @@ void draw()
   game.render();
   //game.takeTurn();
 }
+
+void mouseClicked()
+{
+  game.board.checkMouse();
+}
