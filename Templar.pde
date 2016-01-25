@@ -27,10 +27,12 @@ class Templar extends Unit
     if(dice <= this.stats.crit)
     {
       unit.stats.hp -= (this.stats.abl*1.3) - ((this.stats.abl*1.3)*unit.defend());
+      println("Unit dealt " + ((this.stats.abl*1.3) - ((this.stats.abl*1.3)*unit.defend())) + " damage");
     }
     else
     {
       unit.stats.hp -= this.stats.abl - ((this.stats.abl)*unit.defend());
+      println("Unit dealt " + (this.stats.abl - ((this.stats.abl)*unit.defend())) + " damage");
     }
   }
   
@@ -53,10 +55,12 @@ class Templar extends Unit
   {
     if((unit.stats.hp+10)>unit.stats.maxHp)
     {
+      println("Unit healed for " + (unit.stats.maxHp - unit.stats.hp));
       unit.stats.hp = unit.stats.maxHp;
     }
     else
     {
+      println("Unit healed for 10");
       unit.stats.hp += 10;
     }
   }

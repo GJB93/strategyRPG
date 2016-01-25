@@ -65,6 +65,20 @@ class Board
           moveUnit(selectedCell, row, col);
           hasSelected = false;
         }
+        else if(cells.get(row).get(col).isOccupied && hasSelected)
+        {
+          if((selectedCell.unit instanceof Templar) && cells.get(row).get(col).playerUnit)
+          {
+            selectedCell.unit.ability(cells.get(row).get(col).unit);
+            hasSelected = false;
+          }
+          
+          if(!cells.get(row).get(col).playerUnit)
+          {
+            selectedCell.unit.attack(cells.get(row).get(col).unit);
+            hasSelected = false;
+          }
+        }
       }
       
       if(mouseButton == RIGHT)

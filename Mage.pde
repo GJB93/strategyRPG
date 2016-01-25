@@ -27,10 +27,12 @@ class Mage extends Unit
     if(dice <= this.stats.crit)
     {
       unit.stats.hp -= (this.stats.abl*1.3) - ((this.stats.abl*1.3)*unit.defend());
+      println("Unit dealt " + ((this.stats.abl*1.3) - ((this.stats.abl*1.3)*unit.defend())) + " damage");
     }
     else
     {
       unit.stats.hp -= this.stats.abl - ((this.stats.abl)*unit.defend());
+      println("Unit dealt " + (this.stats.abl - ((this.stats.abl)*unit.defend())) + " damage");
     }
   }
   
