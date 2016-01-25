@@ -72,7 +72,7 @@ class Stats
   
   void calculateImplicitStats()
   {
-    this.hp = this.str * 10;
+    this.hp = this.str * 3;
     this.maxHp = this.hp;
     this.sp = int(this.mag * 1.8f);
     this.maxSp = this.sp;

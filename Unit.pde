@@ -13,6 +13,7 @@ class Unit
   int moveRange;
   boolean alive;
   boolean goAgain;
+  boolean hasMoved;
   Stats stats;
   PVector currentPos;
   
@@ -23,6 +24,7 @@ class Unit
     loadFemaleNames();
     loadSurnames();
     this.goAgain = false;
+    this.hasMoved = false;
     
     int genderChoice = int(random(2));
     
@@ -62,6 +64,7 @@ class Unit
     loadFemaleNames();
     loadSurnames();
     this.goAgain = false;
+    this.hasMoved = false;
     
     int genderChoice = int(random(2));
     
@@ -100,6 +103,7 @@ class Unit
     this.sname = sname;
     this.gender = gender;
     this.goAgain = false;
+    this.hasMoved = false;
     this.stats = new Stats(str, dex, mag);
   }
   
@@ -132,6 +136,16 @@ class Unit
   void move(int x, int y)
   {
     currentPos.set(x, y);
+  }
+  
+  void unitMoved()
+  {
+    hasMoved = true;
+  }
+  
+  void resetMoveState()
+  {
+    hasMoved = false;
   }
   
   void loadFemaleNames()

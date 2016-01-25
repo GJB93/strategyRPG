@@ -51,7 +51,7 @@ class Board
       
       if(mouseButton == LEFT)
       {
-        if(cells.get(row).get(col).isOccupied && !hasSelected)
+        if(cells.get(row).get(col).isOccupied && !hasSelected && !cells.get(row).get(col).unit.hasMoved)
         {
           if(cells.get(row).get(col).playerUnit)
           {
@@ -63,6 +63,7 @@ class Board
         else if(!cells.get(row).get(col).isOccupied && hasSelected)
         {
           moveUnit(selectedCell, row, col);
+          selectedCell.unit.unitMoved();
           selectedCell.unitUnselected();
           hasSelected = false;
         }
@@ -71,6 +72,7 @@ class Board
           if((selectedCell.unit instanceof Templar) && cells.get(row).get(col).playerUnit)
           {
             selectedCell.unit.ability(cells.get(row).get(col).unit);
+            selectedCell.unit.unitMoved();
             selectedCell.unitUnselected();
             hasSelected = false;
           }
@@ -78,10 +80,11 @@ class Board
           if(!cells.get(row).get(col).playerUnit)
           {
             selectedCell.unit.attack(cells.get(row).get(col).unit);
-            if(cells.get(row).get(col).unit.stats.hp < 0)
+            if(cells.get(row).get(col).unit.stats.hp < 1)
             {
               cells.get(row).get(col).unset();
             }
+            selectedCell.unit.unitMoved();
             selectedCell.unitUnselected();
             hasSelected = false;
           }
