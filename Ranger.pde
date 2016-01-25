@@ -23,16 +23,35 @@ class Ranger extends Unit
   void attack(Unit unit)
   {
     int dice = int(random(1, 100));
+    int damage;
     
     if(dice <= this.stats.crit)
     {
-      unit.stats.hp -= (this.stats.att*1.5) - ((this.stats.att*1.5)*unit.defend());
-      println("Unit dealt " + ((this.stats.att*1.5) - ((this.stats.att*1.5)*unit.defend())) + " damage");
+      damage = round((this.stats.att*1.5) - ((this.stats.att*1.5)*unit.defend()));
+      unit.stats.hp -= damage;
+      
+      if(damage > 0)
+      {
+        println("Unit dealt " + damage + " damage");
+      }
+      else
+      {
+        println("Unit dodged the attack!");
+      }
     }
     else
     {
-      unit.stats.hp -= this.stats.att - ((this.stats.att)*unit.defend());
-      println("Unit dealt " + (this.stats.att - ((this.stats.att)*unit.defend())) + " damage");
+      damage = round(this.stats.att - ((this.stats.att)*unit.defend()));
+      unit.stats.hp -= damage;
+      
+      if(damage > 0)
+      {
+        println("Unit dealt " + damage + " damage");
+      }
+      else
+      {
+        println("Unit dodged the attack!");
+      }
     }
   }
   

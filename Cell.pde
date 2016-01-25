@@ -57,6 +57,10 @@ class Cell
       rect(border+x, border+y, cellW, cellH);
       imageMode(CENTER);
       image(sprite, border+x+cellM, border+y+cellM);
+      textSize(7);
+      fill(0);
+      textAlign(CENTER);
+      text(unit.stats.hp, border+x+cellM, border+y+cellM+15);
     }
     else
     {
@@ -68,6 +72,8 @@ class Cell
   void displayUnitDetails()
   {
     fill(0);
+    textSize(11);
+    textAlign(LEFT);
     text(unit.fname + " " + unit.sname, 10, 10);
     text(unit.type, 10, 20);
     text("STR: " + unit.stats.str, 10, 30);

@@ -63,6 +63,7 @@ class Board
         else if(!cells.get(row).get(col).isOccupied && hasSelected)
         {
           moveUnit(selectedCell, row, col);
+          selectedCell.unitUnselected();
           hasSelected = false;
         }
         else if(cells.get(row).get(col).isOccupied && hasSelected)
@@ -70,12 +71,14 @@ class Board
           if((selectedCell.unit instanceof Templar) && cells.get(row).get(col).playerUnit)
           {
             selectedCell.unit.ability(cells.get(row).get(col).unit);
+            selectedCell.unitUnselected();
             hasSelected = false;
           }
           
           if(!cells.get(row).get(col).playerUnit)
           {
             selectedCell.unit.attack(cells.get(row).get(col).unit);
+            selectedCell.unitUnselected();
             hasSelected = false;
           }
         }

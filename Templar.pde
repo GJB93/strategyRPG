@@ -23,16 +23,33 @@ class Templar extends Unit
   void attack(Unit unit)
   {
     int dice = int(random(1, 100));
+    int damage;
     
     if(dice <= this.stats.crit)
     {
-      unit.stats.hp -= (this.stats.abl*1.3) - ((this.stats.abl*1.3)*unit.defend());
-      println("Unit dealt " + ((this.stats.abl*1.3) - ((this.stats.abl*1.3)*unit.defend())) + " damage");
+      damage = round((this.stats.abl*1.3) - ((this.stats.abl*1.3)*unit.defend()));
+      unit.stats.hp -= damage;
+      if(damage > 0)
+      {
+        println("Unit dealt " + damage + " damage");
+      }
+      else
+      {
+        println("Unit dodged the attack!");
+      }
     }
     else
     {
-      unit.stats.hp -= this.stats.abl - ((this.stats.abl)*unit.defend());
-      println("Unit dealt " + (this.stats.abl - ((this.stats.abl)*unit.defend())) + " damage");
+      damage = round(this.stats.abl - ((this.stats.abl)*unit.defend()));
+      unit.stats.hp -= damage;
+      if(damage > 0)
+      {
+        println("Unit dealt " + damage + " damage");
+      }
+      else
+      {
+        println("Unit dodged the attack!");
+      }
     }
   }
   

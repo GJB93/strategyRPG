@@ -3,8 +3,7 @@ class Game
   Board board;
   Side player;
   Side ai;
-  boolean playerTurn;
-  boolean aiTurn;
+  boolean playerFirst;
   
   Game()
   {
@@ -16,15 +15,13 @@ class Game
     {
       case 0:
       {
-        playerTurn = true;
-        aiTurn = false;
+        playerFirst = true;
         break;
       }
         
       case 1:
       {
-        playerTurn = false;
-        aiTurn = true;
+        playerFirst = false;
         break;
       }
     }
@@ -37,7 +34,7 @@ class Game
   
   void initialBoard()
   {
-    if(playerTurn)
+    if(playerFirst)
     {
       for(Unit unit: player.units)
       {
@@ -113,7 +110,7 @@ class Game
   
   void takeTurn()
   {
-    if(playerTurn)
+    if(playerFirst)
     {
       for(Unit unit: player.units)
       {
