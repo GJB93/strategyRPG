@@ -122,12 +122,72 @@ class Board
     if(numberOfUnitsMoved == 6)
     {
       println("All player units have moved, AI's turn");
+      resetAiUnits();
       return false;
     }
     else
     {
       return true;
     }
+  }
+  
+  boolean checkAiUnits()
+  {
+    int numberOfUnitsMoved = 0;
+    for(ArrayList<Cell> listCells: cells)
+    {
+      for(Cell cell: listCells)
+      {
+        if(!cell.playerUnit && cell.unit.hasMoved)
+        {
+          numberOfUnitsMoved++;
+        }
+      }
+    }
+    
+    if(numberOfUnitsMoved == 6)
+    {
+      println("All AI units have moved, Player's turn");
+      resetPlayerUnits();
+      return false;
+    }
+    else
+    {
+      return true;
+    }
+  }
+  
+  void resetPlayerUnits()
+  {
+    for(ArrayList<Cell> listCells: cells)
+    {
+      for(Cell cell: listCells)
+      {
+        if(cell.playerUnit && cell.unit.hasMoved)
+        {
+          cell.unit.resetMoveState();
+        }
+      }
+    }
+  }
+  
+  void resetAiUnits()
+  {
+    for(ArrayList<Cell> listCells: cells)
+    {
+      for(Cell cell: listCells)
+      {
+        if(!cell.playerUnit && cell.unit.hasMoved)
+        {
+          cell.unit.resetMoveState();
+        }
+      }
+    }
+  }
+  
+  void aiChoices()
+  {
+    
   }
   
   void moveUnit(Cell cell, int row, int col)
