@@ -81,6 +81,6 @@ class Stats
     this.eva = int(this.dex * 1.1f);
     this.spd = this.dex * 0.1f;
     this.abl = int(this.mag * 1.5f);
-    this.crit = int(this.mag * 0.5f);
+    this.crit = int(this.mag * 1.5f);
   }
 }//end class

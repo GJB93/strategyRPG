@@ -32,7 +32,7 @@ class Tank extends Unit
       
       if(damage > 0)
       {
-        println("Unit dealt " + damage + " damage");
+        println("Critical hit! Unit dealt " + damage + " damage");
       }
       else
       {

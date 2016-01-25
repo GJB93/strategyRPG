@@ -31,7 +31,7 @@ class Mage extends Unit
       unit.stats.hp -= damage;
       if(damage > 0)
       {
-        println("Unit dealt " + damage + " damage");
+        println("Critical hit! Unit dealt " + damage + " damage");
       }
       else
       {

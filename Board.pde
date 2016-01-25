@@ -78,6 +78,10 @@ class Board
           if(!cells.get(row).get(col).playerUnit)
           {
             selectedCell.unit.attack(cells.get(row).get(col).unit);
+            if(cells.get(row).get(col).unit.stats.hp < 0)
+            {
+              cells.get(row).get(col).unset();
+            }
             selectedCell.unitUnselected();
             hasSelected = false;
           }

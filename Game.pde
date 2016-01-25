@@ -3,7 +3,7 @@ class Game
   Board board;
   Side player;
   Side ai;
-  boolean playerFirst;
+  boolean playerTurn;
   
   Game()
   {
@@ -15,13 +15,13 @@ class Game
     {
       case 0:
       {
-        playerFirst = true;
+        playerTurn = true;
         break;
       }
         
       case 1:
       {
-        playerFirst = false;
+        playerTurn = false;
         break;
       }
     }
@@ -32,9 +32,14 @@ class Game
     board.render();
   }
   
+  void validClick()
+  {
+    
+  }
+  
   void initialBoard()
   {
-    if(playerFirst)
+    if(playerTurn)
     {
       for(Unit unit: player.units)
       {
@@ -110,27 +115,13 @@ class Game
   
   void takeTurn()
   {
-    if(playerFirst)
+    if(playerTurn)
     {
-      for(Unit unit: player.units)
-      {
-        boolean hasMoved = false;
-        while(!hasMoved)
-        {
-          board.render();
-        }
-      }
+      board.checkMouse();
     }
     else
     {
-      for(Unit unit: player.units)
-      {
-        boolean hasMoved = false;
-        while(!hasMoved)
-        {
-          board.render();
-        }
-      }
+      playerTurn = true;
     }
   }
 }
