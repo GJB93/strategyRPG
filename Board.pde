@@ -65,7 +65,6 @@ class Board
         else if(!cells.get(row).get(col).isOccupied && hasSelected)
         {
           moveUnit(selectedCell, row, col);
-          selectedCell.unset();
           //selectedCell.unit.unitMoved();
           //selectedCell.unitUnselected();
           hasSelected = false;
@@ -100,7 +99,7 @@ class Board
         {
           if(cells.get(row).get(col).playerUnit && hasSelected)
           {
-            cells.get(row).get(col).unitUnselected();
+            //cells.get(row).get(col).unitUnselected();
             selectedCell.unitUnselected();
             hasSelected = false;
           }
@@ -138,6 +137,18 @@ class Board
   boolean inAttackRange()
   {
     return false;
+  }
+  
+  boolean checkMove(Cell target, Cell source)
+  {
+    if(target.cellNumber.y > source.cellNumber.y-source.unit.moveRange && target.cellNumber.y < source.cellNumber.y+source.unit.moveRange && target.cellNumber.x > source.cellNumber.x-source.unit.moveRange && target.cellNumber.x < source.cellNumber.x+source.unit.moveRange)
+    {
+      return true;
+    }
+    else
+    {
+      return false;
+    }
   }
   
   void highlightCells()
@@ -293,11 +304,20 @@ class Board
   
   void moveUnit(Cell cell, int row, int col)
   {
-    cells.get(row).get(col).set(cell.unit, true);
-    cells.get(row).get(col).unit.unitMoved();
-    cells.get(row).get(col).unitUnselected();
-    //cells.get(int(cell.cellNumber.x)).get(int(cell.cellNumber.y)).unset();
-    cell.unset();
+    if(checkMove(cells.get(row).get(col), cell))
+    {
+      println("Valid move");
+      cells.get(row).get(col).set(cell.unit, true);
+      cells.get(row).get(col).unit.unitMoved();
+      cells.get(row).get(col).unitUnselected();
+      //cells.get(int(cell.cellNumber.x)).get(int(cell.cellNumber.y)).unset();
+      cell.unset();
+    }
+    else
+    {
+      println("Invalid move");
+      cell.unitUnselected();
+    }
   }
   
   void set(int row, int col, Unit unit, boolean playerUnit)
