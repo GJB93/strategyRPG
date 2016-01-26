@@ -24,7 +24,7 @@ class Unit
     loadFemaleNames();
     loadSurnames();
     this.goAgain = false;
-    this.hasMoved = false;
+    this.hasMoved = true;
     
     int genderChoice = int(random(2));
     
@@ -64,7 +64,7 @@ class Unit
     loadFemaleNames();
     loadSurnames();
     this.goAgain = false;
-    this.hasMoved = false;
+    this.hasMoved = true;
     
     int genderChoice = int(random(2));
     
@@ -103,7 +103,7 @@ class Unit
     this.sname = sname;
     this.gender = gender;
     this.goAgain = false;
-    this.hasMoved = false;
+    this.hasMoved = true;
     this.stats = new Stats(str, dex, mag);
   }
   

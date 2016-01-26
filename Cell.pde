@@ -43,6 +43,7 @@ class Cell
     float cellM = cellW * 0.5f;
     
     stroke(255);
+    rectMode(CORNER);
     if(isOccupied)
     {
       if(isSelected)
@@ -66,6 +67,12 @@ class Cell
         }
       }
       rect(border+x, border+y, cellW, cellH);
+      if(!unit.hasMoved)
+      {
+        rectMode(CENTER);
+        fill(255);
+        rect(border+x+cellM, border+y+cellM, 15, 15);
+      }
       imageMode(CENTER);
       image(sprite, border+x+cellM, border+y+cellM);
       textSize(7);

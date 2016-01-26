@@ -1,27 +1,27 @@
 class Game
 {
   Board board;
-  Side player;
-  Side ai;
-  boolean playerTurn;
+  Side playerOne;
+  Side playerTwo;
+  boolean playerOneFirst;
   
   Game()
   {
     board = new Board();
-    player = new Player();
-    ai = new AI();
+    playerOne = new Player();
+    playerTwo = new Player();
     int coin = int(random(2));
     switch(coin)
     {
       case 0:
       {
-        playerTurn = true;
+        playerOneFirst = true;
         break;
       }
         
       case 1:
       {
-        playerTurn = false;
+        playerOneFirst = false;
         break;
       }
     }
@@ -30,17 +30,16 @@ class Game
   void render()
   {
     board.render();
-    playerTurn = board.checkPlayerUnits();
   }
   
   void initialBoard()
   {
-    if(playerTurn)
+    if(playerOneFirst)
     {
-      for(Unit unit: player.units)
+      for(Unit unit: playerOne.units)
       {
         boolean assignedSpace = false;
-        
+        board.setPlayerTurn();
         while(!assignedSpace)
         {
           int row = int(random(board.rows));
@@ -54,7 +53,7 @@ class Game
         }//end while
       }//end for
         
-      for(Unit unit: ai.units)
+      for(Unit unit: playerTwo.units)
       {
         boolean assignedSpace = false;
         
@@ -73,7 +72,7 @@ class Game
     }
     else
     {
-      for(Unit unit: ai.units)
+      for(Unit unit: playerTwo.units)
       {
         boolean assignedSpace = false;
         
@@ -90,7 +89,7 @@ class Game
         }//end while
       }//end for
         
-      for(Unit unit: player.units)
+      for(Unit unit: playerOne.units)
       {
         boolean assignedSpace = false;
         
@@ -107,17 +106,11 @@ class Game
         }//end while
       }//end for
     }
+    board.checkPlayerUnits(!playerOneFirst);
   }
   
   void takeTurn()
   {
-    if(playerTurn)
-    {
-      board.checkMouse();
-    }
-    else
-    {
-      playerTurn = true;
-    }
+    board.checkMouse();
   }
 }
