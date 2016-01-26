@@ -24,16 +24,13 @@ class Cell
   Cell(int row, int col, float w, float h, float b)
   {
     cellNumber = new PVector(row, col);
+    //cellImage = loadImage("grass.png");
     cellW = w;
     cellH = h;
+    //cellImage.resize(ceil(w), ceil(h));
     border = b;
     isOccupied = false;
     unit = null;
-  }
-  
-  Cell(Cell cell)
-  {
-    this.unit = cell.unit;
   }
   
   void drawCell()
@@ -44,6 +41,7 @@ class Cell
     
     stroke(255);
     rectMode(CORNER);
+    imageMode(CENTER);
     if(isOccupied)
     {
       if(isSelected)
@@ -63,9 +61,10 @@ class Cell
         }
         else
         {
-          fill(200);
+          fill(200, 200, 200, 50);
         }
       }
+      //image(cellImage, border+x+cellM, border+y+cellM);
       rect(border+x, border+y, cellW, cellH);
       if(!unit.hasMoved)
       {
@@ -73,7 +72,8 @@ class Cell
         fill(255);
         rect(border+x+cellM, border+y+cellM, 15, 15);
       }
-      imageMode(CENTER);
+      
+      
       image(sprite, border+x+cellM, border+y+cellM);
       textSize(7);
       fill(0);
@@ -91,6 +91,7 @@ class Cell
         fill(200);
       }
       rect(border+x, border+y, cellW, cellH);
+      //image(cellImage, border+x+cellM, border+y+cellM);
     }
   }
   
