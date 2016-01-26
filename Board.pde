@@ -150,7 +150,7 @@ class Board
   
   boolean inAttackRange(Cell target, Cell source)
   {
-    if(target.cellNumber.y > source.cellNumber.y-source.unit.range && target.cellNumber.y < source.cellNumber.y+source.unit.range && target.cellNumber.x > source.cellNumber.x-source.unit.range && target.cellNumber.x < source.cellNumber.x+source.unit.range)
+    if(target.cellNumber.y >= source.cellNumber.y-source.unit.range && target.cellNumber.y <= source.cellNumber.y+source.unit.range && target.cellNumber.x >= source.cellNumber.x-source.unit.range && target.cellNumber.x <= source.cellNumber.x+source.unit.range)
     {
       return true;
     }
@@ -162,7 +162,7 @@ class Board
   
   boolean checkMove(Cell target, Cell source)
   {
-    if(target.cellNumber.y > source.cellNumber.y-source.unit.moveRange && target.cellNumber.y < source.cellNumber.y+source.unit.moveRange && target.cellNumber.x > source.cellNumber.x-source.unit.moveRange && target.cellNumber.x < source.cellNumber.x+source.unit.moveRange)
+    if(target.cellNumber.y >= source.cellNumber.y-source.unit.moveRange && target.cellNumber.y <= source.cellNumber.y+source.unit.moveRange && target.cellNumber.x >= source.cellNumber.x-source.unit.moveRange && target.cellNumber.x <= source.cellNumber.x+source.unit.moveRange)
     {
       return true;
     }
@@ -176,7 +176,7 @@ class Board
   {
     if (selectedCell != null && selectedCell.isSelected)
     {
-      for(int i=0; i<selectedCell.unit.moveRange; i++)
+      for(int i=0; i<=selectedCell.unit.moveRange; i++)
       {
         if(int(selectedCell.cellNumber.x)-i >= 0)
         {
