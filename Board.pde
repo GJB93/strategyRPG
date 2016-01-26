@@ -73,20 +73,34 @@ class Board
         {
           if((selectedCell.unit instanceof Templar) && cells.get(row).get(col).playerUnit)
           {
-            selectedCell.unit.ability(cells.get(row).get(col).unit);
-            selectedCell.unit.unitMoved();
+            if(inAttackRange(cells.get(row).get(col), selectedCell))
+            {
+              selectedCell.unit.ability(cells.get(row).get(col).unit);
+              selectedCell.unit.unitMoved();
+            }
+            else
+            {
+              println("Unit not in range");
+            }
             selectedCell.unitUnselected();
             hasSelected = false;
           }
           
           if(!cells.get(row).get(col).playerUnit)
           {
-            selectedCell.unit.attack(cells.get(row).get(col).unit);
-            if(cells.get(row).get(col).unit.stats.hp < 1)
+            if(inAttackRange(cells.get(row).get(col), selectedCell))
             {
-              cells.get(row).get(col).unset();
+              selectedCell.unit.attack(cells.get(row).get(col).unit);
+              if(cells.get(row).get(col).unit.stats.hp < 1)
+              {
+                cells.get(row).get(col).unset();
+              }
+              selectedCell.unit.unitMoved();
             }
-            selectedCell.unit.unitMoved();
+            else
+            {
+              println("Unit not in range");
+            }
             selectedCell.unitUnselected();
             hasSelected = false;
           }
@@ -134,9 +148,16 @@ class Board
     }
   }
   
-  boolean inAttackRange()
+  boolean inAttackRange(Cell target, Cell source)
   {
-    return false;
+    if(target.cellNumber.y > source.cellNumber.y-source.unit.range && target.cellNumber.y < source.cellNumber.y+source.unit.range && target.cellNumber.x > source.cellNumber.x-source.unit.range && target.cellNumber.x < source.cellNumber.x+source.unit.range)
+    {
+      return true;
+    }
+    else
+    {
+      return false;
+    }
   }
   
   boolean checkMove(Cell target, Cell source)
