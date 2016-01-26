@@ -16,7 +16,7 @@ class Cell
   
   Cell()
   {
-    cellNumber = new PVector();
+    cellNumber = null;
     isOccupied = false;
     unit = null;
   }
@@ -126,9 +126,9 @@ class Cell
   
   void undoAllHighlights()
   {
-    moveHighlight = true;
-    allyHighlight = true;
-    enemyHighlight = true;
+    moveHighlight = false;
+    allyHighlight = false;
+    enemyHighlight = false;
   }
   
   void set(Unit unit, boolean playerUnit)
@@ -140,10 +140,16 @@ class Cell
     this.playerUnit = playerUnit;
   }
   
+  Cell get()
+  {
+    return this;
+  }
+  
   void unset()
   {
     isOccupied = false;
     unit = null;
     playerUnit = false;
+    this.isSelected = false;
   }
 }

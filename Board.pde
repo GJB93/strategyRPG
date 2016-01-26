@@ -34,6 +34,7 @@ class Board
   
   void render()
   {
+    highlightCells();
     for(ArrayList<Cell> listCells: cells)
     {
       for(Cell cell: listCells)
@@ -100,6 +101,7 @@ class Board
           if(cells.get(row).get(col).playerUnit && hasSelected)
           {
             cells.get(row).get(col).unitUnselected();
+            selectedCell.unitUnselected();
             hasSelected = false;
           }
         }
@@ -140,9 +142,90 @@ class Board
   
   void highlightCells()
   {
-    if (selectedCell.isSelected)
+    if (selectedCell != null && selectedCell.isSelected)
     {
-      
+      for(int i=0; i<selectedCell.unit.moveRange; i++)
+      {
+        if(int(selectedCell.cellNumber.x)-i >= 0)
+        {
+          Cell cellAbove = cells.get(int(selectedCell.cellNumber.x)-i).get(int(selectedCell.cellNumber.y)).get();
+          if(cellAbove.isOccupied && cellAbove.playerUnit)
+          {
+            cellAbove.allyHighlight();
+          }
+          else if(cellAbove.isOccupied && !cellAbove.playerUnit)
+          {
+            cellAbove.enemyHighlight();
+          }
+          else
+          {
+            cellAbove.moveHighlight();
+          }
+        }
+        
+        if(int(selectedCell.cellNumber.x)+i<rows)
+        {
+          Cell cellBelow = cells.get(int(selectedCell.cellNumber.x)+i).get(int(selectedCell.cellNumber.y)).get();
+          
+          if(cellBelow.isOccupied && cellBelow.playerUnit)
+          {
+            cellBelow.allyHighlight();
+          }
+          else if(cellBelow.isOccupied && !cellBelow.playerUnit)
+          {
+            cellBelow.enemyHighlight();
+          }
+          else
+          {
+            cellBelow.moveHighlight();
+          }
+        }
+        
+        if(int(selectedCell.cellNumber.y)-i >= 0)
+        {
+          Cell cellLeft = cells.get(int(selectedCell.cellNumber.x)).get(int(selectedCell.cellNumber.y)-i).get();
+          if(cellLeft.isOccupied && cellLeft.playerUnit)
+          {
+            cellLeft.allyHighlight();
+          }
+          else if(cellLeft.isOccupied && !cellLeft.playerUnit)
+          {
+            cellLeft.enemyHighlight();
+          }
+          else
+          {
+            cellLeft.moveHighlight();
+          }
+        }
+        
+        if(int(selectedCell.cellNumber.y)+i < cols)
+        {
+          Cell cellRight = cells.get(int(selectedCell.cellNumber.x)).get(int(selectedCell.cellNumber.y)+i).get();
+          
+          if(cellRight.isOccupied && cellRight.playerUnit)
+          {
+            cellRight.allyHighlight();
+          }
+          else if(cellRight.isOccupied && !cellRight.playerUnit)
+          {
+            cellRight.enemyHighlight();
+          }
+          else
+          {
+            cellRight.moveHighlight();
+          }
+        }
+      }
+    }
+    else
+    {
+      for(ArrayList<Cell> listCells: cells)
+      {
+        for(Cell cell: listCells)
+        {
+          cell.undoAllHighlights();
+        }
+      }
     }
   }
   

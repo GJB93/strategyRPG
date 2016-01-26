@@ -11,7 +11,6 @@ void draw()
 {
   background(200);
   game.render();
-  //game.takeTurn();
 }
 
 void mouseClicked()
