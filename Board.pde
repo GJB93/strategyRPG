@@ -63,8 +63,9 @@ class Board
         else if(!cells.get(row).get(col).isOccupied && hasSelected)
         {
           moveUnit(selectedCell, row, col);
-          selectedCell.unit.unitMoved();
-          selectedCell.unitUnselected();
+          selectedCell.unset();
+          //selectedCell.unit.unitMoved();
+          //selectedCell.unitUnselected();
           hasSelected = false;
         }
         else if(cells.get(row).get(col).isOccupied && hasSelected)
@@ -177,9 +178,12 @@ class Board
     {
       for(Cell cell: listCells)
       {
-        if(!cell.playerUnit && cell.unit.hasMoved)
+        if(cell.isOccupied)
         {
-          cell.unit.resetMoveState();
+          if(!cell.playerUnit && cell.unit.hasMoved)
+          {
+            cell.unit.resetMoveState();
+          }
         }
       }
     }
@@ -193,7 +197,9 @@ class Board
   void moveUnit(Cell cell, int row, int col)
   {
     cells.get(row).get(col).set(cell.unit, true);
-    cells.get(int(cell.cellNumber.x)).get(int(cell.cellNumber.y)).unset();
+    cells.get(row).get(col).unit.unitMoved();
+    cells.get(row).get(col).unitUnselected();
+    //cells.get(int(cell.cellNumber.x)).get(int(cell.cellNumber.y)).unset();
     cell.unset();
   }
   

@@ -119,5 +119,6 @@ class Cell
   {
     isOccupied = false;
     unit = null;
+    playerUnit = false;
   }
 }
