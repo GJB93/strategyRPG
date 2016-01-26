@@ -52,7 +52,18 @@ class Cell
       }
       else
       {
-        fill(200);
+        if(allyHighlight)
+        {
+          fill(0, 255, 0, 50);
+        }
+        else if(enemyHighlight)
+        {
+          fill(255, 0, 0, 50);
+        }
+        else
+        {
+          fill(200);
+        }
       }
       rect(border+x, border+y, cellW, cellH);
       imageMode(CENTER);
@@ -64,7 +75,14 @@ class Cell
     }
     else
     {
-      fill(200);
+      if(moveHighlight)
+      {
+        fill(0, 0, 255, 50);
+      }
+      else
+      {
+        fill(200);
+      }
       rect(border+x, border+y, cellW, cellH);
     }
   }
@@ -103,6 +121,13 @@ class Cell
   
   void enemyHighlight()
   {
+    enemyHighlight = true;
+  }
+  
+  void undoAllHighlights()
+  {
+    moveHighlight = true;
+    allyHighlight = true;
     enemyHighlight = true;
   }
   

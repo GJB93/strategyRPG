@@ -29,6 +29,7 @@ class Board
       cells.add(temp);
     }
     hasSelected = false;
+    selectedCell = null;
   }
   
   void render()
@@ -129,6 +130,19 @@ class Board
     else
     {
       return true;
+    }
+  }
+  
+  boolean inAttackRange()
+  {
+    return false;
+  }
+  
+  void highlightCells()
+  {
+    if (selectedCell.isSelected)
+    {
+      
     }
   }
   
