@@ -2,7 +2,6 @@ class Cell
 {
   PVector cellNumber;
   PImage cellImage;
-  PImage sprite;
   float cellW;
   float cellH;
   float border;
@@ -74,7 +73,7 @@ class Cell
       }
       
       
-      image(sprite, border+x+cellM, border+y+cellM);
+      image(unit.sprite, border+x+cellM, border+y+cellM);
       textSize(7);
       fill(0);
       textAlign(CENTER);
@@ -144,7 +143,6 @@ class Cell
     isOccupied = true;
     this.unit = unit;
     this.isSelected = false;
-    this.sprite = unit.sprite;
     this.playerUnit = playerUnit;
   }
   
