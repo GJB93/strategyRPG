@@ -225,7 +225,7 @@ class Board
                 cell.cellNumber.x >= selectedCell.cellNumber.x-selectedCell.unit.moveRange && 
                   cell.cellNumber.x <= selectedCell.cellNumber.x+selectedCell.unit.moveRange)
           {
-            if(cell.isOccupied)
+            if(cell.isOccupied && inAttackRange(cell, selectedCell))
             {
               if(cell.playerUnit == playerTurn)
               {

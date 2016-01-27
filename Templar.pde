@@ -20,6 +20,23 @@ class Templar extends Unit
     sprite = loadImage("templar.png");
   }
   
+  void drawUnit(float x, float y, boolean playerSide)
+  {
+    color c = color(255, 0, 255);
+    fill(c);
+    noStroke();
+    if(playerSide)
+    {
+      rectMode(CENTER);
+      rect(x, y, 10, 10);
+    }
+    else
+    {
+      ellipseMode(CENTER);
+      ellipse(x, y, 10, 10);
+    }
+  }
+  
   void attack(Unit unit)
   {
     int dice = int(random(1, 100));

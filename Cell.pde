@@ -45,7 +45,7 @@ class Cell
     {
       if(isSelected)
       {
-        displayUnitDetails();
+        unit.statCard(0, 0, 70, 70);
         fill(0, 255, 255, 20);
       }
       else
@@ -67,13 +67,23 @@ class Cell
       rect(border+x, border+y, cellW, cellH);
       if(!unit.hasMoved)
       {
-        rectMode(CENTER);
         fill(255);
-        rect(border+x+cellM, border+y+cellM, 15, 15);
+        if(playerUnit)
+        {
+          rectMode(CENTER);
+          rect(border+x+cellM, border+y+cellM, 15, 15);
+        }
+        else
+        {
+          ellipseMode(CENTER);
+          ellipse(border+x+cellM, border+y+cellM, 15, 15);
+        }
+        
       }
       
       
-      image(unit.sprite, border+x+cellM, border+y+cellM);
+      unit.drawUnit(border+x+cellM, border+y+cellM, playerUnit);
+      //image(unit.sprite, border+x+cellM, border+y+cellM);
       textSize(7);
       fill(0);
       textAlign(CENTER);

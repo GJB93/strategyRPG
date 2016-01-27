@@ -68,6 +68,10 @@ abstract class Unit
     this.stats = new Stats(str, dex, mag);
   }
   
+  void drawUnit(float x, float y, boolean side)
+  {
+  }
+  
   void loadMaleNames()
   {
     String filename = "malenames.txt";
@@ -126,5 +130,20 @@ abstract class Unit
     {
       this.surnames.add(s);
     }
+  }
+  
+  void statCard(float x, float y, float w, float h)
+  {
+    rectMode(CORNER);
+    textAlign(LEFT);
+    noStroke();
+    fill(255);
+    rect(x, y, w, h);
+    fill(0);
+    text(fname + " " + sname, x+10, y+10);
+    text(gender, x+10, y+20);
+    text("STR: " + stats.str, x+10, y+30);
+    text("DEX: " + stats.dex, x+10, y+40);
+    text("MAG: " + stats.dex, x+10, y+50);
   }
 }

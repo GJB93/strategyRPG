@@ -20,6 +20,23 @@ class Ranger extends Unit
     sprite = loadImage("ranger.png");
   }
   
+  void drawUnit(float x, float y, boolean playerSide)
+  {
+    color c = color(0, 255, 0);
+    fill(c);
+    noStroke();
+    if(playerSide)
+    {
+      rectMode(CENTER);
+      rect(x, y, 10, 10);
+    }
+    else
+    {
+      ellipseMode(CENTER);
+      ellipse(x, y, 10, 10);
+    }
+  }
+  
   void attack(Unit unit)
   {
     int dice = int(random(1, 100));
