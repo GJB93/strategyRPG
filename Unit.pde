@@ -144,6 +144,6 @@ abstract class Unit
     text(gender, x+10, y+20);
     text("STR: " + stats.str, x+10, y+30);
     text("DEX: " + stats.dex, x+10, y+40);
-    text("MAG: " + stats.dex, x+10, y+50);
+    text("MAG: " + stats.mag, x+10, y+50);
   }
 }

@@ -1,15 +1,20 @@
 class Game
 {
   Board board;
-  Side playerOne;
-  Side playerTwo;
+  ArrayList<Unit> playerOneUnits;
+  ArrayList<Unit> playerTwoUnits;
+  ArrayList<Unit> playerChoices;
   boolean playerOneFirst;
+  boolean gameStart;
+  boolean teamSetup;
   
   Game()
   {
+    gameStart = false;
+    teamSetup = false;
     board = new Board();
-    playerOne = new Player();
-    playerTwo = new Player();
+    playerOneUnits = new ArrayList<Unit>();
+    playerTwoUnits = new ArrayList<Unit>();
     int coin = int(random(2));
     switch(coin)
     {
@@ -53,11 +58,46 @@ class Game
     text("GAME OVER", width*0.5f, height*0.5f);
   }
   
+  void createRandomTeam(ArrayList<Unit> units)
+  {
+    for(int i=0; i<6; i++)
+    {
+      units.add(createUnit());
+    }
+  }
+  
+  void createListOfChoices(int numberOfChoices)
+  {
+    playerChoices = new ArrayList<Unit>();
+    for(int i=0; i<numberOfChoices; i++)
+    {
+      playerChoices.add(createUnit());
+    }
+  }
+  
+  void offerChoices()
+  {
+    float w = width/ (float)playerChoices.size();
+    float h = height *0.8f;
+    float topBorder = height*0.1f;
+    for(int choice=0; choice<playerChoices.size(); choice++)
+    {
+      playerChoices.get(choice).statCard(w*choice, topBorder, w, h);
+    }
+  }
+  
+  void randomTeams()
+  {
+    createRandomTeam(playerOneUnits);
+    createRandomTeam(playerTwoUnits);
+    teamSetup = true;
+  }
+  
   void initialBoard()
   {
     if(playerOneFirst)
     {
-      for(Unit unit: playerOne.units)
+      for(Unit unit: playerOneUnits)
       {
         boolean assignedSpace = false;
         board.setPlayerTurn();
@@ -74,7 +114,7 @@ class Game
         }//end while
       }//end for
         
-      for(Unit unit: playerTwo.units)
+      for(Unit unit: playerTwoUnits)
       {
         boolean assignedSpace = false;
         
@@ -93,7 +133,7 @@ class Game
     }
     else
     {
-      for(Unit unit: playerTwo.units)
+      for(Unit unit: playerTwoUnits)
       {
         boolean assignedSpace = false;
         
@@ -110,7 +150,7 @@ class Game
         }//end while
       }//end for
         
-      for(Unit unit: playerOne.units)
+      for(Unit unit: playerOneUnits)
       {
         boolean assignedSpace = false;
         
@@ -128,10 +168,71 @@ class Game
       }//end for
     }
     board.checkPlayerUnits(!playerOneFirst);
+    gameStart = true;
   }
   
   void takeTurn()
   {
     board.checkMouse();
+  }
+  
+  void teamsSet()
+  {
+    teamSetup = true;
+  }
+  
+  Unit createUnit()
+  {
+    Stats stats = new Stats();
+    int strDexDiff = abs(stats.str - stats.dex);
+    int strMagDiff = abs(stats.str - stats.mag);
+    int dexMagDiff = abs(stats.dex - stats.mag);
+    
+    
+    if(stats.str > stats.dex && stats.str > stats.mag)
+    {
+      if(strDexDiff < 5 && strDexDiff < strMagDiff)
+      {
+        return new Swordsman(stats);
+      }
+      else if(strMagDiff < 5)
+      {
+        return new Templar(stats);
+      }
+      else
+      {
+        return new Tank(stats);
+      }
+    }
+    else if(stats.dex > stats.mag)
+    {
+      if(dexMagDiff < 5 && dexMagDiff < strDexDiff)
+      {
+        return new Assassin(stats);
+      }
+      else if(strDexDiff < 5)
+      {
+        return new Swordsman(stats);
+      }
+      else
+      {
+        return new Ranger(stats);
+      }
+    }
+    else
+    {
+      if(dexMagDiff < 5 && dexMagDiff < strMagDiff)
+      {
+        return new Assassin(stats);
+      }
+      else if(strMagDiff < 5)
+      {
+        return new Templar(stats);
+      }
+      else
+      {
+        return new Mage(stats);
+      }
+    }
   }
 }
