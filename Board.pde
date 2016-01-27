@@ -10,6 +10,7 @@ class Board
   float cellMiddle;
   boolean hasSelected;
   boolean playerOneTurn;
+  boolean gameOver;
   
   Board()
   {
@@ -20,6 +21,7 @@ class Board
     cellHeight = (height-(border*2))/rows;
     cells = new ArrayList<ArrayList<Cell>>();
     playerOneTurn = true;
+    gameOver = false;
     for(int row=0; row<rows; row++)
     {
       ArrayList<Cell> temp = new ArrayList<Cell>();
@@ -256,6 +258,7 @@ class Board
   
   void resetUnits(boolean playerTurn)
   {
+    int unitsLeft = 0;
     for(ArrayList<Cell> listCells: cells)
     {
       for(Cell cell: listCells)
@@ -265,9 +268,16 @@ class Board
           if(cell.playerUnit == playerTurn && cell.unit.hasMoved)
           {
             cell.unit.resetMoveState();
+            unitsLeft++;
           }
         }
       }
+    }
+    
+    if(unitsLeft < 1)
+    {
+      gameOver = gameOver();
+      
     }
   }
   
@@ -287,6 +297,11 @@ class Board
       println("Invalid move");
       cell.unitUnselected();
     }
+  }
+  
+  boolean gameOver()
+  {
+    return true;
   }
   
   void set(int row, int col, Unit unit, boolean playerUnit)

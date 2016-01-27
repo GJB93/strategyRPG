@@ -29,7 +29,22 @@ class Game
   
   void render()
   {
-    board.render();
+    if(!board.gameOver)
+    {
+      board.render();
+    }
+    else
+    {
+      gameOverScreen();
+    }
+  }
+  
+  void gameOverScreen()
+  {
+    background(0);
+    textAlign(CENTER, CENTER);
+    fill(255);
+    text("GAME OVER", width*0.5f, height*0.5f);
   }
   
   void initialBoard()
