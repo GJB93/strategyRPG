@@ -89,4 +89,10 @@ class Mage extends Unit
   {
     unit.stats.hp -= (this.stats.abl*2);
   }
+  
+  void statCard(float x, float y, float w, float h)
+  {
+    super.statCard(x, y, w, h);
+    text("Type: " + type, x+10, y+60);
+  }
 }

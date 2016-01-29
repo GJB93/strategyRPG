@@ -98,4 +98,10 @@ class Templar extends Unit
       unit.stats.hp += 10;
     }
   }
+  
+  void statCard(float x, float y, float w, float h)
+  {
+    super.statCard(x, y, w, h);
+    text("Type: " + type, x+10, y+60);
+  }
 }
