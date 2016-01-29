@@ -41,10 +41,12 @@ class Ranger extends Unit
   {
     int dice = int(random(1, 100));
     int damage;
+    float critMultiplier = 2;
+    float dmgMultiplier = 1.2;
     
     if(dice <= this.stats.crit)
     {
-      damage = round((this.stats.att*1.5) - ((this.stats.att*1.5)*unit.defend()));
+      damage = round((this.stats.att*critMultiplier) - ((this.stats.att*critMultiplier)*unit.defend()));
       unit.stats.hp -= damage;
       
       if(damage > 0)
@@ -58,7 +60,7 @@ class Ranger extends Unit
     }
     else
     {
-      damage = round(this.stats.att - ((this.stats.att)*unit.defend()));
+      damage = round(this.stats.att*dmgMultiplier - ((this.stats.att*dmgMultiplier)*unit.defend()));
       unit.stats.hp -= damage;
       
       if(damage > 0)

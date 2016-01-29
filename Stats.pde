@@ -76,7 +76,7 @@ class Stats
     this.maxHp = this.hp;
     this.sp = int(this.mag * 1.8f);
     this.maxSp = this.sp;
-    this.att = int(this.str * 1.4f);
+    this.att = int(this.str);
     this.def = int(this.str * 1.2f);
     this.eva = int(this.dex * 1.1f);
     this.spd = this.dex * 0.1f;

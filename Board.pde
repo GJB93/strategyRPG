@@ -229,7 +229,10 @@ class Board
             {
               if(cell.playerUnit == playerTurn)
               {
-                cell.allyHighlight();
+                if(selectedCell.unit instanceof Templar)
+                {
+                  cell.allyHighlight();
+                }
               }
               else
               {

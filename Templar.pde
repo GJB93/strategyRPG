@@ -41,10 +41,12 @@ class Templar extends Unit
   {
     int dice = int(random(1, 100));
     int damage;
+    float critMultiplier = 2;
+    float dmgMultiplier = 1.5;
     
     if(dice <= this.stats.crit)
     {
-      damage = round((this.stats.abl*1.3) - ((this.stats.abl*1.3)*unit.defend()));
+      damage = round((this.stats.abl*critMultiplier) - ((this.stats.abl*critMultiplier)*unit.defend()));
       unit.stats.hp -= damage;
       if(damage > 0)
       {
@@ -57,7 +59,7 @@ class Templar extends Unit
     }
     else
     {
-      damage = round(this.stats.abl - ((this.stats.abl)*unit.defend()));
+      damage = round(this.stats.abl*dmgMultiplier - ((this.stats.abl*dmgMultiplier)*unit.defend()));
       unit.stats.hp -= damage;
       if(damage > 0)
       {
