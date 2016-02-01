@@ -20,3 +20,13 @@ void mouseClicked()
 {
   game.takeTurn();
 }
+
+void keyPressed()
+{
+  if(game.gameOver)
+  {
+    game = new Game();
+    game.randomTeams();
+    game.initialBoard();
+  }
+}

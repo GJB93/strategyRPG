@@ -7,11 +7,13 @@ class Game
   boolean playerOneFirst;
   boolean gameStart;
   boolean teamSetup;
+  boolean gameOver;
   
   Game()
   {
     gameStart = false;
     teamSetup = false;
+    gameOver = false;
     board = new Board();
     playerOneUnits = new ArrayList<Unit>();
     playerTwoUnits = new ArrayList<Unit>();
@@ -46,6 +48,7 @@ class Game
     }
     else
     {
+      gameOver = true;
       gameOverScreen();
     }
   }
@@ -55,7 +58,7 @@ class Game
     background(0);
     textAlign(CENTER, CENTER);
     fill(255);
-    text("GAME OVER", width*0.5f, height*0.5f);
+    text("GAME OVER \n Press any key to start again", width*0.5f, height*0.5f);
   }
   
   void createRandomTeam(ArrayList<Unit> units)

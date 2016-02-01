@@ -41,8 +41,8 @@ class Ranger extends Unit
   {
     int dice = int(random(1, 100));
     int damage;
-    float critMultiplier = 2;
-    float dmgMultiplier = 1.2;
+    float critMultiplier = 3;
+    float dmgMultiplier = 2;
     
     if(dice <= this.stats.crit)
     {

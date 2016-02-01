@@ -12,7 +12,7 @@ class Board
   boolean hasSelected;
   boolean playerOneTurn;
   boolean gameOver;
-  String attackMessage;
+  String statusMessage;
   
   Board()
   {
@@ -49,7 +49,7 @@ class Board
         cell.drawCell();
       }
     }
-    displayAttackMessage();
+    displayStatusMessage();
     if(hasSelected)
     {
       if(selectedCell.cellNumber.y*cellWidth+100+120 < width)
@@ -84,6 +84,7 @@ class Board
   
   void playerMoves(int row, int col, boolean leftMouse, boolean playerTurn)
   {
+    
     if(leftMouse)
     {
       if(cells.get(row).get(col).isOccupied)
@@ -99,19 +100,36 @@ class Board
         }
         else if(hasSelected)
         {
-          if((selectedCell.unit instanceof Templar) && cells.get(row).get(col).playerUnit == playerTurn)
+          elapsed = 0;
+          if(cells.get(row).get(col).playerUnit == playerTurn)
           {
-            if(inAttackRange(cells.get(row).get(col), selectedCell))
+            if(selectedCell.unit instanceof Templar)
             {
-              selectedCell.unit.ability(cells.get(row).get(col).unit);
-              selectedCell.unit.unitMoved();
+              if(inAttackRange(cells.get(row).get(col), selectedCell))
+              {
+                if(cells.get(row).get(col).unit.stats.hp < cells.get(row).get(col).unit.stats.maxHp)
+                {
+                  selectedCell.unit.ability(cells.get(row).get(col).unit);
+                  selectedCell.unit.unitMoved();
+                }
+                else
+                {
+                  statusMessage = "Unit is already fully healed";
+                }
+              }
+              else
+              {
+                statusMessage = "Unit is not in range";
+              }
+              selectedCell.unitUnselected();
+              hasSelected = false;
             }
             else
             {
-              println("Unit not in range");
+              statusMessage = "Space already occupied by a friendly unit";
+              selectedCell.unitUnselected();
+              hasSelected = false;
             }
-            selectedCell.unitUnselected();
-            hasSelected = false;
           }
           
           if(cells.get(row).get(col).playerUnit == !playerTurn)
@@ -123,32 +141,33 @@ class Board
               {
                 if(selectedCell.unit.criticallyHit)
                 {
-                  attackMessage = selectedCell.unit.fname + " " + selectedCell.unit.sname + " critically hit " + 
+                  statusMessage = selectedCell.unit.fname + " " + selectedCell.unit.sname + " critically hit " + 
                                   cells.get(row).get(col).unit.fname + " " + cells.get(row).get(col).unit.sname + 
                                     " for " + selectedCell.unit.lastDamageValue + " damage!";
                 }
                 else
                 {
-                  attackMessage = selectedCell.unit.fname + " " + selectedCell.unit.sname + " attacked " + 
+                  statusMessage = selectedCell.unit.fname + " " + selectedCell.unit.sname + " attacked " + 
                                   cells.get(row).get(col).unit.fname + " " + cells.get(row).get(col).unit.sname + 
                                     " for " + selectedCell.unit.lastDamageValue + " damage";
                 }
               }
               else
               {
-                attackMessage = cells.get(row).get(col).unit.fname + " " + cells.get(row).get(col).unit.sname + " dodged the attack!";
+                statusMessage = cells.get(row).get(col).unit.fname + " " + cells.get(row).get(col).unit.sname + " dodged the attack!";
               }
               
-              elapsed = 0;
+              
               if(cells.get(row).get(col).unit.stats.hp < 1)
               {
                 cells.get(row).get(col).unset();
+                checkUnitsRemaining(!playerTurn);
               }
               selectedCell.unit.unitMoved();
             }
             else
             {
-              println("Unit not in range");
+               statusMessage = "Unit is not in range";
             }
             selectedCell.unitUnselected();
             hasSelected = false;
@@ -178,14 +197,14 @@ class Board
     checkPlayerUnits(playerOneTurn);
   }
   
-  void displayAttackMessage()
+  void displayStatusMessage()
   {
     if(elapsed != 120)
     {
       fill(255);
       textAlign(LEFT, CENTER);
       textSize(11);
-      text(attackMessage, width*0.20, height-(height*0.05));
+      text(statusMessage, width*0.20, height-(height*0.05));
       elapsed++;
     }
   }
@@ -309,6 +328,25 @@ class Board
   
   void resetUnits(boolean playerTurn)
   {
+    for(ArrayList<Cell> listCells: cells)
+    {
+      for(Cell cell: listCells)
+      {
+        if(cell.isOccupied)
+        {
+          if(cell.playerUnit == playerTurn)
+          {
+            cell.unit.resetMoveState();
+          }
+        }
+      }
+    }
+    
+    
+  }
+  
+  void checkUnitsRemaining(boolean playerTurn)
+  {
     int unitsLeft = 0;
     for(ArrayList<Cell> listCells: cells)
     {
@@ -316,9 +354,8 @@ class Board
       {
         if(cell.isOccupied)
         {
-          if(cell.playerUnit == playerTurn && cell.unit.hasMoved)
+          if(cell.playerUnit == playerTurn)
           {
-            cell.unit.resetMoveState();
             unitsLeft++;
           }
         }
@@ -328,7 +365,6 @@ class Board
     if(unitsLeft < 1)
     {
       gameOver = gameOver();
-      
     }
   }
   
@@ -346,6 +382,8 @@ class Board
     else
     {
       println("Invalid move");
+      elapsed = 0;
+      statusMessage = "You cannot move there!";
       cell.unitUnselected();
     }
   }
