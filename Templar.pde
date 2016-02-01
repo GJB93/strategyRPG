@@ -49,6 +49,7 @@ class Templar extends Unit
       damage = round((this.stats.abl*critMultiplier) - ((this.stats.abl*critMultiplier)*unit.defend()));
       lastDamageValue = damage;
       unit.stats.hp -= damage;
+      criticallyHit = true;
       if(damage > 0)
       {
         println("Critical hit! Unit dealt " + damage + " damage");
@@ -61,7 +62,9 @@ class Templar extends Unit
     else
     {
       damage = round(this.stats.abl*dmgMultiplier - ((this.stats.abl*dmgMultiplier)*unit.defend()));
+      lastDamageValue = damage;
       unit.stats.hp -= damage;
+      criticallyHit = false;
       if(damage > 0)
       {
         println("Unit dealt " + damage + " damage");
@@ -102,9 +105,9 @@ class Templar extends Unit
     }
   }
   
-  void statCard(float x, float y, float w, float h)
+  void statCard(float x, float y)
   {
-    super.statCard(x, y, w, h);
+    super.statCard(x, y);
     text("Type: " + type, x+10, y+60);
   }
 }

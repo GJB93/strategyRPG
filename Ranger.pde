@@ -49,7 +49,7 @@ class Ranger extends Unit
       damage = round((this.stats.att*critMultiplier) - ((this.stats.att*critMultiplier)*unit.defend()));
       lastDamageValue = damage;
       unit.stats.hp -= damage;
-      
+      criticallyHit = true;
       if(damage > 0)
       {
         println("Critical hit! Unit dealt " + damage + " damage");
@@ -62,8 +62,9 @@ class Ranger extends Unit
     else
     {
       damage = round(this.stats.att*dmgMultiplier - ((this.stats.att*dmgMultiplier)*unit.defend()));
+      lastDamageValue = damage;
       unit.stats.hp -= damage;
-      
+      criticallyHit = false;
       if(damage > 0)
       {
         println("Unit dealt " + damage + " damage");
@@ -95,9 +96,9 @@ class Ranger extends Unit
     this.range = 5;
   }
   
-  void statCard(float x, float y, float w, float h)
+  void statCard(float x, float y)
   {
-    super.statCard(x, y, w, h);
+    super.statCard(x, y);
     text("Type: " + type, x+10, y+60);
   }
 }

@@ -82,7 +82,7 @@ class Game
     float topBorder = height*0.1f;
     for(int choice=0; choice<playerChoices.size(); choice++)
     {
-      playerChoices.get(choice).statCard(w*choice, topBorder, w, h);
+      playerChoices.get(choice).statCard(w*choice, topBorder);
     }
   }
   
@@ -130,6 +130,7 @@ class Game
           }//end if
         }//end while
       }//end for
+      board.checkPlayerUnits(playerOneFirst);
     }
     else
     {
@@ -166,8 +167,9 @@ class Game
           }//end if
         }//end while
       }//end for
+      board.setPlayerTurn();
     }
-    board.checkPlayerUnits(!playerOneFirst);
+    
     gameStart = true;
   }
   

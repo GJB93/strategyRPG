@@ -12,8 +12,11 @@ abstract class Unit
   int range;
   int moveRange;
   int lastDamageValue;
+  float statcardWidth;
+  float statcardHeight;
   boolean goAgain;
   boolean hasMoved;
+  boolean criticallyHit;
   Stats stats;
   
   Unit()
@@ -57,6 +60,8 @@ abstract class Unit
     }//end switch
     
     this.stats = stats;
+    statcardWidth = 120;
+    statcardHeight = 100;
   }
   
   Unit(String fname, String sname, char gender, int str, int dex, int mag)
@@ -133,13 +138,14 @@ abstract class Unit
     }
   }
   
-  void statCard(float x, float y, float w, float h)
+  void statCard(float x, float y)
   {
     rectMode(CORNER);
-    textAlign(LEFT);
+    textAlign(LEFT, CENTER);
+    textSize(11);
     noStroke();
-    fill(255);
-    rect(x, y, w, h);
+    fill(255, 100);
+    rect(x, y, statcardWidth, statcardHeight);
     fill(0);
     text(fname + " " + sname, x+10, y+10);
     text(gender, x+10, y+20);

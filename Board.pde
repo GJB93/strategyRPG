@@ -50,6 +50,17 @@ class Board
       }
     }
     displayAttackMessage();
+    if(hasSelected)
+    {
+      if(selectedCell.cellNumber.y*cellWidth+100+120 < width)
+      {
+        selectedCell.unit.statCard(selectedCell.cellNumber.y*cellWidth+100,selectedCell.cellNumber.x*cellHeight);
+      }
+      else
+      {
+        selectedCell.unit.statCard(selectedCell.cellNumber.y*cellWidth-100,selectedCell.cellNumber.x*cellHeight);
+      }
+    }
   }
   
   void checkMouse()
@@ -108,9 +119,26 @@ class Board
             if(inAttackRange(cells.get(row).get(col), selectedCell))
             {
               selectedCell.unit.attack(cells.get(row).get(col).unit);
-              attackMessage = selectedCell.unit.fname + " " + selectedCell.unit.sname + " attacked " + 
-                                cells.get(row).get(col).unit.fname + " " + cells.get(row).get(col).unit.sname + 
-                                  " for " + selectedCell.unit.lastDamageValue + " damage";
+              if(selectedCell.unit.lastDamageValue > 0)
+              {
+                if(selectedCell.unit.criticallyHit)
+                {
+                  attackMessage = selectedCell.unit.fname + " " + selectedCell.unit.sname + " critically hit " + 
+                                  cells.get(row).get(col).unit.fname + " " + cells.get(row).get(col).unit.sname + 
+                                    " for " + selectedCell.unit.lastDamageValue + " damage!";
+                }
+                else
+                {
+                  attackMessage = selectedCell.unit.fname + " " + selectedCell.unit.sname + " attacked " + 
+                                  cells.get(row).get(col).unit.fname + " " + cells.get(row).get(col).unit.sname + 
+                                    " for " + selectedCell.unit.lastDamageValue + " damage";
+                }
+              }
+              else
+              {
+                attackMessage = cells.get(row).get(col).unit.fname + " " + cells.get(row).get(col).unit.sname + " dodged the attack!";
+              }
+              
               elapsed = 0;
               if(cells.get(row).get(col).unit.stats.hp < 1)
               {
@@ -154,7 +182,10 @@ class Board
   {
     if(elapsed != 120)
     {
-      text(attackMessage, width*0.25, height-(height*0.05));
+      fill(255);
+      textAlign(LEFT, CENTER);
+      textSize(11);
+      text(attackMessage, width*0.20, height-(height*0.05));
       elapsed++;
     }
   }

@@ -45,7 +45,6 @@ class Cell
     {
       if(isSelected)
       {
-        unit.statCard(0, 0, 70, 70);
         fill(0, 255, 255, 20);
       }
       else

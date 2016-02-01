@@ -47,8 +47,9 @@ class Tank extends Unit
     if(dice <= this.stats.crit)
     {
       damage = round((this.stats.att*critMultiplier) - ((this.stats.att*1.5)*unit.defend()));
+      lastDamageValue = damage;
       unit.stats.hp -= damage;
-      
+      criticallyHit = true;
       if(damage > 0)
       {
         println("Critical hit! Unit dealt " + damage + " damage");
@@ -63,7 +64,7 @@ class Tank extends Unit
       damage = round(this.stats.att*dmgMultiplier - ((this.stats.att*dmgMultiplier)*unit.defend()));
       lastDamageValue = damage;
       unit.stats.hp -= damage;
-      
+      criticallyHit = false;
       if(damage > 0)
       {
         println("Unit dealt " + damage + " damage");
@@ -95,9 +96,9 @@ class Tank extends Unit
     unit.stats.def += 10;
   }
   
-  void statCard(float x, float y, float w, float h)
+  void statCard(float x, float y)
   {
-    super.statCard(x, y, w, h);
+    super.statCard(x, y);
     text("Type: " + type, x+10, y+60);
   }
 }
