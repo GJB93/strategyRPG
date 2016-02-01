@@ -47,6 +47,7 @@ class Mage extends Unit
     if(dice <= this.stats.crit)
     {
       damage = round((this.stats.abl*critMultiplier) - ((this.stats.abl*critMultiplier)*unit.defend()));
+      lastDamageValue = damage;
       unit.stats.hp -= damage;
       if(damage > 0)
       {

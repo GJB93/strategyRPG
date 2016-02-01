@@ -11,6 +11,7 @@ abstract class Unit
   char gender;
   int range;
   int moveRange;
+  int lastDamageValue;
   boolean goAgain;
   boolean hasMoved;
   Stats stats;

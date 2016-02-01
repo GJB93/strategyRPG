@@ -2,6 +2,7 @@ class Board
 {
   int rows;
   int cols;
+  int elapsed;
   ArrayList<ArrayList<Cell>> cells;
   Cell selectedCell;
   float border;
@@ -11,12 +12,14 @@ class Board
   boolean hasSelected;
   boolean playerOneTurn;
   boolean gameOver;
+  String attackMessage;
   
   Board()
   {
     this.rows = 10;
     this.cols = 10;
     border = width*0.1f;
+    elapsed = 120;
     cellWidth = (width-(border*2))/cols;
     cellHeight = (height-(border*2))/rows;
     cells = new ArrayList<ArrayList<Cell>>();
@@ -46,6 +49,7 @@ class Board
         cell.drawCell();
       }
     }
+    displayAttackMessage();
   }
   
   void checkMouse()
@@ -104,6 +108,10 @@ class Board
             if(inAttackRange(cells.get(row).get(col), selectedCell))
             {
               selectedCell.unit.attack(cells.get(row).get(col).unit);
+              attackMessage = selectedCell.unit.fname + " " + selectedCell.unit.sname + " attacked " + 
+                                cells.get(row).get(col).unit.fname + " " + cells.get(row).get(col).unit.sname + 
+                                  " for " + selectedCell.unit.lastDamageValue + " damage";
+              elapsed = 0;
               if(cells.get(row).get(col).unit.stats.hp < 1)
               {
                 cells.get(row).get(col).unset();
@@ -140,6 +148,15 @@ class Board
       }
     }
     checkPlayerUnits(playerOneTurn);
+  }
+  
+  void displayAttackMessage()
+  {
+    if(elapsed != 120)
+    {
+      text(attackMessage, width*0.25, height-(height*0.05));
+      elapsed++;
+    }
   }
   
   boolean checkPlayerUnits(boolean playerTurn)

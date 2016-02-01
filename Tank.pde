@@ -61,6 +61,7 @@ class Tank extends Unit
     else
     {
       damage = round(this.stats.att*dmgMultiplier - ((this.stats.att*dmgMultiplier)*unit.defend()));
+      lastDamageValue = damage;
       unit.stats.hp -= damage;
       
       if(damage > 0)

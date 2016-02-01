@@ -47,6 +47,7 @@ class Assassin extends Unit
     if(dice <= this.stats.crit)
     {
       damage = round((this.stats.att*critMultiplier) - ((this.stats.att*critMultiplier)*unit.defend()));
+      lastDamageValue = damage;
       unit.stats.hp -= damage;
       if(damage > 0)
       {
