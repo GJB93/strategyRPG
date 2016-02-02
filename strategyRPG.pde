@@ -1,31 +1,67 @@
 void setup()
 {
   size(600, 600);
-  game = new Game();
-  game.randomTeams();
-  game.initialBoard();
-  menu = new Menu(width, height, 0, 0, color(50));
-  menu.addOption("Hello");
-  menu.addOption("How");
-  menu.addOption("Are");
-  menu.addOption("You");
+  gameStart = false;
+  
+  menu = new Menu(width, height, 0, 0, color(200), "Strategy RPG");
+  menu.addOption("Start Game");
+  menu.addOption("Tutorial");
+  menu.addOption("Exit");
+  menuOptionClicked = -1;
+  
   //game.createListOfChoices(3);
 }
 
 Game game;
 Menu menu;
+boolean gameStart;
+int menuOptionClicked;
+int elapsed = 0;
 
 void draw()
 {
   background(200);
   //game.offerChoices();
-  game.render();
-  menu.render();
+  if(!gameStart)
+  {
+    menu.render();
+    if(menuOptionClicked == 0)
+    {
+      game = new Game();
+      game.randomTeams();
+      game.initialBoard();
+      gameStart = true;
+    }
+    
+    menuOptionClicked = -1;
+  }
+  else
+  {
+    game.render();
+    if(game.gameOver)
+    {
+      if(elapsed != 120)
+      {
+        elapsed++;
+      }
+      else
+      {
+        gameStart = false;
+      }
+    }
+  }
 }
 
 void mouseClicked()
 {
-  game.takeTurn();
+  if(gameStart)
+  {
+    game.takeTurn();
+  }
+  else
+  {
+    menuOptionClicked = menu.checkClick();
+  }
 }
 
 void keyPressed()

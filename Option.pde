@@ -69,8 +69,7 @@ class Option
     {
       currentColor = staticColor;
     }
-    fill(currentColor);
-    rect(position.x, position.y, optionWidth, optionHeight);
+    
     if(red(currentColor)+green(currentColor)+blue(currentColor) > (256*0.5f)*3)
     {
       textColor = color(0);
@@ -79,6 +78,18 @@ class Option
     {
       textColor = color(255);
     }
+    
+    if(mouseHover)
+    {
+      noStroke();
+    }
+    else
+    {
+      stroke(textColor);
+    }
+    
+    fill(currentColor);
+    rect(position.x, position.y, optionWidth, optionHeight);
     fill(textColor);
     textAlign(CENTER, CENTER);
     textSize(10);
@@ -94,6 +105,18 @@ class Option
     else
     {
       mouseHover = false;
+    }
+  }
+  
+  boolean checkMouseClick()
+  {
+    if(pmouseX > position.x && pmouseX < position.x+optionWidth && pmouseY > position.y && pmouseY < position.y+optionHeight)
+    {
+      return true;
+    }
+    else
+    {
+      return false;
     }
   }
 }
