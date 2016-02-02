@@ -28,7 +28,7 @@ class Board
     cells = new ArrayList<ArrayList<Cell>>();
     playerOneTurn = true;
     gameOver = false;
-    statcardXPos = 100;
+    statcardXPos = width*0.2f;
     for(int row=0; row<rows; row++)
     {
       ArrayList<Cell> temp = new ArrayList<Cell>();
@@ -56,7 +56,13 @@ class Board
     displayStatusMessage();
     if(hasSelected)
     {
-      if(selectedCell.cellNumber.y*cellWidth+statcardXPos+selectedCell.unit.statcardWidth < width)
+      showStatcard();
+    }
+  }
+  
+  void showStatcard()
+  {
+    if(selectedCell.cellNumber.y*cellWidth+statcardXPos+selectedCell.unit.statcardWidth < width)
       {
         selectedCell.unit.statCard(selectedCell.cellNumber.y*cellWidth+statcardXPos,selectedCell.cellNumber.x*cellHeight);
       }
@@ -64,7 +70,6 @@ class Board
       {
         selectedCell.unit.statCard(selectedCell.cellNumber.y*cellWidth-statcardXPos,selectedCell.cellNumber.x*cellHeight);
       }
-    }
   }
   
   void checkMouse()
@@ -345,8 +350,6 @@ class Board
         }
       }
     }
-    
-    
   }
   
   void checkUnitsRemaining(boolean playerTurn)

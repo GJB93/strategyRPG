@@ -40,7 +40,7 @@ class Cell
     float x = cellNumber.y * cellW;
     float cellMx = cellW * 0.5f;
     float cellMy = cellH * 0.5f;
-    float unitToCellRatio = 0.5f;
+    float unitToCellRatio = 0.4f;
     float unitHighlightOffset = 10;
     
     stroke(255);
@@ -91,7 +91,7 @@ class Cell
       textSize(7);
       fill(0);
       textAlign(CENTER);
-      text(unit.stats.hp, borderX+x+cellMx, borderY+y+cellMy+15);
+      text(unit.stats.hp, borderX+x+cellMx, borderY+y+cellH);
     }
     else
     {
@@ -106,18 +106,6 @@ class Cell
       rect(borderX+x, borderY+y, cellW, cellH);
       //image(cellImage, border+x+cellM, border+y+cellM);
     }
-  }
-  
-  void displayUnitDetails()
-  {
-    fill(0);
-    textSize(11);
-    textAlign(LEFT);
-    text(unit.fname + " " + unit.sname, 10, 10);
-    text(unit.type, 10, 20);
-    text("STR: " + unit.stats.str, 10, 30);
-    text("DEX: " + unit.stats.dex, 10, 40);
-    text("MAG: " + unit.stats.mag, 10, 50);
   }
   
   void unitSelected()

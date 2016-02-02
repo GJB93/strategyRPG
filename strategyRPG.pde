@@ -1,6 +1,6 @@
 void setup()
 {
-  size(500, 500);
+  size(600, 600);
   game = new Game();
   game.randomTeams();
   game.initialBoard();

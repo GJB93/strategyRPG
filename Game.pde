@@ -98,81 +98,40 @@ class Game
   
   void initialBoard()
   {
-    if(playerOneFirst)
+    for(Unit unit: playerOneUnits)
     {
-      for(Unit unit: playerOneUnits)
+      boolean assignedSpace = false;
+      
+      while(!assignedSpace)
       {
-        boolean assignedSpace = false;
-        board.setPlayerTurn();
-        while(!assignedSpace)
+        int row = int(random(board.rows));
+        int col = int(random(2));
+        boolean isSet = board.get(row, col);
+        if(!isSet)
         {
-          int row = int(random(board.rows));
-          int col = int(random(2));
-          boolean isSet = board.get(row, col);
-          if(!isSet)
-          {
-            board.set(row, col, unit, true);
-            assignedSpace = true;
-          }//end if
-        }//end while
-      }//end for
-        
-      for(Unit unit: playerTwoUnits)
-      {
-        boolean assignedSpace = false;
-        
-        while(!assignedSpace)
-        {
-          int row = int(random(board.rows));
-          int col = int(random(board.cols-2, board.cols));
-          boolean isSet = board.get(row, col);
-          if(!isSet)
-          {
-            board.set(row, col, unit, false);
-            assignedSpace = true;
-          }//end if
-        }//end while
-      }//end for
-      board.checkPlayerUnits(playerOneFirst);
-    }
-    else
-    {
-      for(Unit unit: playerTwoUnits)
-      {
-        boolean assignedSpace = false;
-        
-        while(!assignedSpace)
-        {
-          int row = int(random(board.rows));
-          int col = int(random(2));
-          boolean isSet = board.get(row, col);
-          if(!isSet)
-          {
-            board.set(row, col, unit, false);
-            assignedSpace = true;
-          }//end if
-        }//end while
-      }//end for
-        
-      for(Unit unit: playerOneUnits)
-      {
-        boolean assignedSpace = false;
-        
-        while(!assignedSpace)
-        {
-          int row = int(random(board.rows));
-          int col = int(random(board.cols-2, board.cols));
-          boolean isSet = board.get(row, col);
-          if(!isSet)
-          {
-            board.set(row, col, unit, true);
-            assignedSpace = true;
-          }//end if
-        }//end while
-      }//end for
-      board.setPlayerTurn();
-    }
+          board.set(row, col, unit, true);
+          assignedSpace = true;
+        }//end if
+      }//end while
+    }//end for
     
+    for(Unit unit: playerTwoUnits)
+    {
+      boolean assignedSpace = false;
+      
+      while(!assignedSpace)
+      {
+        int row = int(random(board.rows));
+        int col = int(random(board.cols-2, board.cols));
+        boolean isSet = board.get(row, col);
+        if(!isSet)
+        {
+          board.set(row, col, unit, false);
+          assignedSpace = true;
+        }//end if
+      }//end while
+    }//end for
+    board.resetUnits(playerOneFirst);
     gameStart = true;
   }
   

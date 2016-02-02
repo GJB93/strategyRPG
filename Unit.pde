@@ -60,8 +60,8 @@ abstract class Unit
     }//end switch
     
     this.stats = stats;
-    statcardWidth = 120;
-    statcardHeight = 100;
+    statcardWidth = width*0.25f;
+    statcardHeight = width*0.15f;
   }
   
   Unit(String fname, String sname, char gender, int str, int dex, int mag)
