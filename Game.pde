@@ -57,8 +57,16 @@ class Game
   {
     background(0);
     textAlign(CENTER, CENTER);
+    textSize(32);
     fill(255);
-    text("GAME OVER \n Press space to start again", width*0.5f, height*0.5f);
+    if(board.winningPlayer)
+    {
+      text("GAME OVER \n Player One wins!", width*0.5f, height*0.5f);
+    }
+    else
+    {
+      text("GAME OVER \n Player Two wins!", width*0.5f, height*0.5f);
+    }
   }
   
   void createRandomTeam(ArrayList<Unit> units)

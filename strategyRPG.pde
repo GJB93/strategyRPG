@@ -24,6 +24,7 @@ void draw()
   //game.offerChoices();
   if(!gameStart)
   {
+    elapsed = 0;
     menu.render();
     if(menuOptionClicked == 0)
     {
@@ -31,6 +32,10 @@ void draw()
       game.randomTeams();
       game.initialBoard();
       gameStart = true;
+    }
+    if(menuOptionClicked == 2)
+    {
+      exit();
     }
     
     menuOptionClicked = -1;

@@ -14,6 +14,7 @@ class Board
   boolean hasSelected;
   boolean playerOneTurn;
   boolean gameOver;
+  boolean winningPlayer;
   String statusMessage;
   
   Board()
@@ -371,6 +372,7 @@ class Board
     
     if(unitsLeft < 1)
     {
+      winningPlayer = !playerTurn;
       gameOver = gameOver();
     }
   }
