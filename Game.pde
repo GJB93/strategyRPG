@@ -42,9 +42,9 @@ class Game
       textAlign(LEFT, CENTER);
       textSize(16);
       fill(255);
-      text("Player One", board.border, width*0.05f);
+      text("Player One", board.borderX, height*0.05f);
       textAlign(RIGHT, CENTER);
-      text("Player Two", width-board.border, width*0.05f);
+      text("Player Two", width-board.borderX, height*0.05f);
     }
     else
     {

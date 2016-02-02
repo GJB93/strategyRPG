@@ -5,10 +5,12 @@ class Board
   int elapsed;
   ArrayList<ArrayList<Cell>> cells;
   Cell selectedCell;
-  float border;
+  float borderX;
+  float borderY;
   float cellWidth;
   float cellHeight;
   float cellMiddle;
+  float statcardXPos;
   boolean hasSelected;
   boolean playerOneTurn;
   boolean gameOver;
@@ -18,19 +20,21 @@ class Board
   {
     this.rows = 10;
     this.cols = 10;
-    border = width*0.1f;
+    borderX = width*0.1f;
+    borderY = height*0.1f;
     elapsed = 120;
-    cellWidth = (width-(border*2))/cols;
-    cellHeight = (height-(border*2))/rows;
+    cellWidth = (width-(borderX*2))/cols;
+    cellHeight = (height-(borderY*2))/rows;
     cells = new ArrayList<ArrayList<Cell>>();
     playerOneTurn = true;
     gameOver = false;
+    statcardXPos = 100;
     for(int row=0; row<rows; row++)
     {
       ArrayList<Cell> temp = new ArrayList<Cell>();
       for(int col=0; col<cols; col++)
       {
-        Cell cell = new Cell(row, col, cellWidth, cellHeight, border);
+        Cell cell = new Cell(row, col, cellWidth, cellHeight, borderX, borderY);
         temp.add(cell);
       }
       cells.add(temp);
@@ -52,23 +56,23 @@ class Board
     displayStatusMessage();
     if(hasSelected)
     {
-      if(selectedCell.cellNumber.y*cellWidth+100+120 < width)
+      if(selectedCell.cellNumber.y*cellWidth+statcardXPos+selectedCell.unit.statcardWidth < width)
       {
-        selectedCell.unit.statCard(selectedCell.cellNumber.y*cellWidth+100,selectedCell.cellNumber.x*cellHeight);
+        selectedCell.unit.statCard(selectedCell.cellNumber.y*cellWidth+statcardXPos,selectedCell.cellNumber.x*cellHeight);
       }
       else
       {
-        selectedCell.unit.statCard(selectedCell.cellNumber.y*cellWidth-100,selectedCell.cellNumber.x*cellHeight);
+        selectedCell.unit.statCard(selectedCell.cellNumber.y*cellWidth-statcardXPos,selectedCell.cellNumber.x*cellHeight);
       }
     }
   }
   
   void checkMouse()
   {
-    if(pmouseX > border && pmouseX < width-border && pmouseY > border && pmouseY < height-border)
+    if(pmouseX > borderX && pmouseX < width-borderX && pmouseY > borderY && pmouseY < height-borderY)
     {
-      int row = int(map(mouseY, border, height-border, 0, rows));
-      int col = int(map(mouseX, border, width-border, 0, cols));
+      int row = int(map(mouseY, borderY, height-borderY, 0, rows));
+      int col = int(map(mouseX, borderX, width-borderX, 0, cols));
       
       if(mouseButton == LEFT)
       {
@@ -132,7 +136,7 @@ class Board
             }
           }
           
-          if(cells.get(row).get(col).playerUnit == !playerTurn)
+          if(cells.get(row).get(col).playerUnit != playerTurn)
           {
             if(inAttackRange(cells.get(row).get(col), selectedCell))
             {
@@ -202,9 +206,9 @@ class Board
     if(elapsed != 120)
     {
       fill(255);
-      textAlign(LEFT, CENTER);
-      textSize(11);
-      text(statusMessage, width*0.20, height-(height*0.05));
+      textAlign(CENTER, CENTER);
+      textSize(14);
+      text(statusMessage, width*0.50, height-(height*0.05));
       elapsed++;
     }
   }
@@ -372,16 +376,17 @@ class Board
   {
     if(checkMove(cells.get(row).get(col), cell))
     {
-      println("Valid move");
       cells.get(row).get(col).set(cell.unit, playerTurn);
       cells.get(row).get(col).unit.unitMoved();
       cells.get(row).get(col).unitUnselected();
+      //elapsed = 0;
+      //statusMessage = cell.unit.fname + " " + cell.unit.sname + " moved to space " + row + ", " + col;
       //cells.get(int(cell.cellNumber.x)).get(int(cell.cellNumber.y)).unset();
       cell.unset();
     }
     else
     {
-      println("Invalid move");
+      //println("Invalid move");
       elapsed = 0;
       statusMessage = "You cannot move there!";
       cell.unitUnselected();

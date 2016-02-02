@@ -4,7 +4,8 @@ class Cell
   PImage cellImage;
   float cellW;
   float cellH;
-  float border;
+  float borderX;
+  float borderY;
   boolean isOccupied;
   boolean playerUnit;
   boolean isSelected;
@@ -20,23 +21,25 @@ class Cell
     unit = null;
   }
   
-  Cell(int row, int col, float w, float h, float b)
+  Cell(int row, int col, float w, float h, float bx, float by)
   {
     cellNumber = new PVector(row, col);
     //cellImage = loadImage("grass.png");
     cellW = w;
     cellH = h;
     //cellImage.resize(ceil(w), ceil(h));
-    border = b;
+    borderX = bx;
+    borderY = by;
     isOccupied = false;
     unit = null;
   }
   
   void drawCell()
   {
-    float y = cellNumber.x * cellW;
-    float x = cellNumber.y * cellH;
-    float cellM = cellW * 0.5f;
+    float y = cellNumber.x * cellH;
+    float x = cellNumber.y * cellW;
+    float cellMx = cellW * 0.5f;
+    float cellMy = cellH * 0.5f;
     
     stroke(255);
     rectMode(CORNER);
@@ -63,30 +66,30 @@ class Cell
         }
       }
       //image(cellImage, border+x+cellM, border+y+cellM);
-      rect(border+x, border+y, cellW, cellH);
+      rect(borderX+x, borderY+y, cellW, cellH);
       if(!unit.hasMoved)
       {
         fill(255);
         if(playerUnit)
         {
           rectMode(CENTER);
-          rect(border+x+cellM, border+y+cellM, 15, 15);
+          rect(borderX+x+cellMx, borderY+y+cellMy, 15, 15);
         }
         else
         {
           ellipseMode(CENTER);
-          ellipse(border+x+cellM, border+y+cellM, 15, 15);
+          ellipse(borderX+x+cellMx, borderY+y+cellMy, 15, 15);
         }
         
       }
       
       
-      unit.drawUnit(border+x+cellM, border+y+cellM, playerUnit);
+      unit.drawUnit(borderX+x+cellMx, borderY+y+cellMy, playerUnit);
       //image(unit.sprite, border+x+cellM, border+y+cellM);
       textSize(7);
       fill(0);
       textAlign(CENTER);
-      text(unit.stats.hp, border+x+cellM, border+y+cellM+15);
+      text(unit.stats.hp, borderX+x+cellMx, borderY+y+cellMy+15);
     }
     else
     {
@@ -98,7 +101,7 @@ class Cell
       {
         fill(200);
       }
-      rect(border+x, border+y, cellW, cellH);
+      rect(borderX+x, borderY+y, cellW, cellH);
       //image(cellImage, border+x+cellM, border+y+cellM);
     }
   }

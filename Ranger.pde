@@ -5,7 +5,7 @@ class Ranger extends Unit
   Ranger()
   {
     super();
-    this.range = 3;
+    this.range = 10;
     this.moveRange = 3;
     this.type = "Ranger";
     sprite = loadImage("ranger.png");
