@@ -23,10 +23,13 @@ void mouseClicked()
 
 void keyPressed()
 {
-  if(game.gameOver)
+  if(key == ' ')
   {
-    game = new Game();
-    game.randomTeams();
-    game.initialBoard();
+    if(game.gameOver)
+    {
+      game = new Game();
+      game.randomTeams();
+      game.initialBoard();
+    }
   }
 }

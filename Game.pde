@@ -58,7 +58,7 @@ class Game
     background(0);
     textAlign(CENTER, CENTER);
     fill(255);
-    text("GAME OVER \n Press any key to start again", width*0.5f, height*0.5f);
+    text("GAME OVER \n Press space to start again", width*0.5f, height*0.5f);
   }
   
   void createRandomTeam(ArrayList<Unit> units)
