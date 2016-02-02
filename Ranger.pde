@@ -5,6 +5,7 @@ class Ranger extends Unit
   Ranger()
   {
     super();
+    this.c = color(0, 255, 0);
     this.range = 10;
     this.moveRange = 3;
     this.type = "Ranger";
@@ -14,27 +15,16 @@ class Ranger extends Unit
   Ranger(Stats stats)
   {
     super(stats);
+    this.c = color(0, 255, 0);
     this.range = 3;
     this.moveRange = 3;
     this.type = "Ranger";
     sprite = loadImage("ranger.png");
   }
   
-  void drawUnit(float x, float y, boolean playerSide)
+  void drawUnit(float x, float y, float w, float h, boolean playerSide)
   {
-    color c = color(0, 255, 0);
-    fill(c);
-    noStroke();
-    if(playerSide)
-    {
-      rectMode(CENTER);
-      rect(x, y, 10, 10);
-    }
-    else
-    {
-      ellipseMode(CENTER);
-      ellipse(x, y, 10, 10);
-    }
+    super.drawUnit(x, y, w, h, playerSide, c);
   }
   
   void attack(Unit unit)

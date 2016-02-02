@@ -40,6 +40,8 @@ class Cell
     float x = cellNumber.y * cellW;
     float cellMx = cellW * 0.5f;
     float cellMy = cellH * 0.5f;
+    float unitToCellRatio = 0.5f;
+    float unitHighlightOffset = 10;
     
     stroke(255);
     rectMode(CORNER);
@@ -73,18 +75,18 @@ class Cell
         if(playerUnit)
         {
           rectMode(CENTER);
-          rect(borderX+x+cellMx, borderY+y+cellMy, 15, 15);
+          rect(borderX+x+cellMx, borderY+y+cellMy, (cellW*unitToCellRatio)+unitHighlightOffset, (cellH*unitToCellRatio)+unitHighlightOffset);
         }
         else
         {
           ellipseMode(CENTER);
-          ellipse(borderX+x+cellMx, borderY+y+cellMy, 15, 15);
+          ellipse(borderX+x+cellMx, borderY+y+cellMy, (cellW*unitToCellRatio)+unitHighlightOffset, (cellH*unitToCellRatio)+unitHighlightOffset);
         }
         
       }
       
       
-      unit.drawUnit(borderX+x+cellMx, borderY+y+cellMy, playerUnit);
+      unit.drawUnit(borderX+x+cellMx, borderY+y+cellMy, cellW*unitToCellRatio, cellH*unitToCellRatio, playerUnit);
       //image(unit.sprite, border+x+cellM, border+y+cellM);
       textSize(7);
       fill(0);

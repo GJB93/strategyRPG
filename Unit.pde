@@ -4,7 +4,7 @@ abstract class Unit
   ArrayList<String> maleNames;
   ArrayList<String> femaleNames;
   ArrayList<String> surnames;
-  
+  color c;
   String fname;
   String sname;
   String type;
@@ -74,8 +74,25 @@ abstract class Unit
     this.stats = new Stats(str, dex, mag);
   }
   
-  void drawUnit(float x, float y, boolean side)
+  void drawUnit(float x, float y, float w, float h, boolean side)
   {
+    //this.drawUnit(x, y, w, h, side, color(0));
+  }
+  
+  void drawUnit(float x, float y, float w, float h, boolean side, color c)
+  {
+    fill(c);
+    noStroke();
+    if(side)
+    {
+      rectMode(CENTER);
+      rect(x, y, w, h);
+    }
+    else
+    {
+      ellipseMode(CENTER);
+      ellipse(x, y, w, h);
+    }
   }
   
   void loadMaleNames()

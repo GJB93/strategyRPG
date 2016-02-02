@@ -5,6 +5,7 @@ class Assassin extends Unit
   Assassin()
   {
     super();
+    this.c = color(0, 255, 255);
     this.range = 1;
     this.moveRange = 3;
     this.type = "Assassin";
@@ -14,27 +15,16 @@ class Assassin extends Unit
   Assassin(Stats stats)
   {
     super(stats);
+    this.c = color(0, 255, 255);
     this.range = 1;
     this.moveRange = 3;
     this.type = "Assassin";
     sprite = loadImage("assassin.png");
   }
   
-  void drawUnit(float x, float y, boolean playerSide)
+  void drawUnit(float x, float y, float w, float h, boolean playerSide)
   {
-    color c = color(0, 255, 255);
-    fill(c);
-    noStroke();
-    if(playerSide)
-    {
-      rectMode(CENTER);
-      rect(x, y, 10, 10);
-    }
-    else
-    {
-      ellipseMode(CENTER);
-      ellipse(x, y, 10, 10);
-    }
+    super.drawUnit(x, y, w, h, playerSide, c);
   }
   
   void attack(Unit unit)
