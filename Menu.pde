@@ -54,7 +54,7 @@ class Menu
       textColor = color(255);
     }
     textAlign(CENTER, CENTER);
-    textSize(14);
+    textSize(22);
     fill(textColor);
     text(gameTitle, position.x+(menuWidth*0.5f), position.y+(menuHeight*0.05f));
   }

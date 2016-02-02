@@ -92,7 +92,7 @@ class Option
     rect(position.x, position.y, optionWidth, optionHeight);
     fill(textColor);
     textAlign(CENTER, CENTER);
-    textSize(10);
+    textSize(20);
     text(optionText, position.x+(optionWidth*0.5f), position.y+(optionHeight*0.5f));
   }
   
