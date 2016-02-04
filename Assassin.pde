@@ -24,15 +24,11 @@ class Assassin extends Unit
     this.critInc = 10;
   }
 
-  /*
-    Method used to draw the unit in its assigned color
-   */
   void drawUnit(float x, float y, float w, float h, boolean playerSide)
   {
     super.drawUnit(x, y, w, h, playerSide, c);
   }
 
-  
   void attack(Unit unit)
   {
     int dice = int(random(1, 100));

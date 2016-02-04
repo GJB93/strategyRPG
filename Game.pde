@@ -1,3 +1,9 @@
+/*
+  The game class controls the state of the game. It creates the
+  board and teams that will be used, and controls whether the
+  game board will be shown.
+*/
+
 class Game
 {
   Board board;
@@ -12,6 +18,10 @@ class Game
   float middleX;
   float middleY;
 
+  /*
+    Main constructor for the Game class. Sets the number of units per team,
+    creates the game board, and randomly chooses which player will go first.
+  */
   Game()
   {
     middleX = width*0.5f;
@@ -40,6 +50,9 @@ class Game
     }
   }
 
+  /*
+    Draws the game according to the current game state
+  */
   void render()
   {
     if (!board.gameOver)
@@ -61,6 +74,9 @@ class Game
     }
   }
 
+  /*
+    Method to display the game over screen
+  */
   void gameOverScreen()
   {
     background(0);
@@ -76,6 +92,9 @@ class Game
     }
   }
 
+  /*
+    Creates a specified number of random units and adds them to a given ArrayList
+  */
   void createRandomTeam(ArrayList<Unit> units)
   {
     for (int i=0; i<numberOfUnitsPerTeam; i++)
@@ -84,6 +103,9 @@ class Game
     }
   }
 
+  /*
+    Creates a list of units for players to choose from.
+  */
   void createListOfChoices(int numberOfChoices)
   {
     playerChoices = new ArrayList<Unit>();
@@ -93,6 +115,9 @@ class Game
     }
   }
 
+  /*
+    Shows the player the units they can pick.
+  */
   void offerChoices()
   {
     float w = width/ (float)playerChoices.size();
@@ -104,6 +129,9 @@ class Game
     }
   }
 
+  /*
+    Creates random teams for player one and player two
+  */
   void randomTeams()
   {
     createRandomTeam(playerOneUnits);
@@ -111,6 +139,10 @@ class Game
     teamSetup = true;
   }
 
+  /*
+    Sets the initial position of each player's units. Units cannot
+    occupy the same space as one another.
+  */
   void initialBoard()
   {
     int numberOfPossCols = 2;
@@ -151,6 +183,10 @@ class Game
     gameStart = true;
   }
 
+  /*
+    Called in the main program, calls the checkMouse method
+    found in the Board class
+  */
   void takeTurn()
   {
     board.checkMouse();
@@ -161,6 +197,9 @@ class Game
     teamSetup = true;
   }
 
+  /*
+    Method to create each unit dependant of the difference between each stat.
+  */
   Unit createUnit()
   {
     Stats stats = new Stats();

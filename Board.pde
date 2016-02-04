@@ -1,3 +1,10 @@
+/*
+  Board is used to create and control the grid for the game
+  The board has a number of rows and columns, which consist
+  of a number of rectangular cells. These cells are maniplulated
+  by various methods in the Board class.
+*/
+
 class Board
 {
   int rows;
@@ -16,7 +23,11 @@ class Board
   boolean gameOver;
   boolean winningPlayer;
   String statusMessage;
-
+  
+  /*
+    Main constructor, sets each variable according to the
+    screen width and creates each cell used in the grid.
+  */
   Board()
   {
     this.rows = 10;
@@ -44,6 +55,9 @@ class Board
     selectedCell = null;
   }
 
+  /*
+    Draws the board in its current state
+  */
   void render()
   {
     highlightCells(playerOneTurn);
@@ -61,6 +75,10 @@ class Board
     }
   }
 
+  /*
+    If a cell containing a unit is selected, a statcard is shown beside
+    the selected cell
+  */
   void showStatcard()
   {
     if (selectedCell.cellNumber.y*cellWidth+statcardXPos+selectedCell.unit.statcardWidth < width)
@@ -72,6 +90,10 @@ class Board
     }
   }
 
+  /*
+    Called by the mouseClicked method in the main program. Checks which cell
+    was clicked and passes it to the playerMoves method
+  */
   void checkMouse()
   {
     if (pmouseX > borderX && pmouseX < width-borderX && pmouseY > borderY && pmouseY < height-borderY)
@@ -91,6 +113,15 @@ class Board
     }
   }
 
+  /*
+    All the control code is found in this method. If the left mouse is pressed,
+    it checks if the cell is occupied, then selects the unit if it belongs to
+    the player and hasn't been moved yet. If a unit has been selected already,
+    it checks the cell to see if a move, attack or heal is possible for the selected
+    unit.
+    
+    If the right mouse is pressed on the selected unit, then the unit is deselected.
+  */
   void playerMoves(int row, int col, boolean leftMouse, boolean playerTurn)
   {
 
@@ -197,6 +228,10 @@ class Board
     checkPlayerUnits(playerOneTurn);
   }
 
+  /*
+    Method displays a status message based on what is occuring at
+    each action in the game. Message disappears after two seconds.
+  */
   void displayStatusMessage()
   {
     if (elapsed != 120)
@@ -211,6 +246,10 @@ class Board
     }
   }
 
+  /*
+    Method checks to see if a player has moved all their units,
+    and switches control to the next player upon every unit being moved
+  */
   boolean checkPlayerUnits(boolean playerTurn)
   {
     int numberOfUnitsMoved = 0;
@@ -244,6 +283,9 @@ class Board
     }
   }
 
+  /*
+    Checks if the unit targeted is in range of the currently selected unit
+  */
   boolean inAttackRange(Cell target, Cell source)
   {
     if (target.cellNumber.y >= source.cellNumber.y-source.unit.range && 
@@ -258,6 +300,9 @@ class Board
     }
   }
 
+  /*
+    Checks if the cell targeted is in movement range of the currently selected unit
+  */
   boolean checkMove(Cell target, Cell source)
   {
     if (target.cellNumber.y >= source.cellNumber.y-source.unit.moveRange && 
@@ -272,11 +317,18 @@ class Board
     }
   }
 
+  /*
+    Toggles the player turn
+  */
   void setPlayerTurn()
   {
     playerOneTurn = !playerOneTurn;
   }
 
+  /*
+    Highlights each cell surrounding the selected cell based on
+    what is contained within the surrounding cell.
+  */
   void highlightCells(boolean playerTurn)
   {
     if (selectedCell != null && selectedCell.isSelected)
@@ -320,7 +372,10 @@ class Board
       }
     }
   }
-
+  
+  /*
+    Reset the move state of each unit belonging to a specified player
+  */
   void resetUnits(boolean playerTurn)
   {
     for (ArrayList<Cell> listCells : cells)
@@ -338,6 +393,9 @@ class Board
     }
   }
 
+  /*
+    Checks how many units remain for a specified player
+  */
   void checkUnitsRemaining(boolean playerTurn)
   {
     int unitsLeft = 0;
@@ -361,7 +419,11 @@ class Board
       gameOver = gameOver();
     }
   }
-
+  
+  /*
+    Checks a cell to see if it is empty, and if so, moves the
+    unit into the target cell
+  */
   void moveUnit(Cell cell, int row, int col, boolean playerTurn)
   {
     if (checkMove(cells.get(row).get(col), cell))
@@ -378,11 +440,15 @@ class Board
     }
   }
 
+  //Sets the game to be over
   boolean gameOver()
   {
     return true;
   }
 
+  /*
+    Sets a chosen cell to contain a unit for a specific player
+  */
   void set(int row, int col, Unit unit, boolean playerUnit)
   {
     if (row >= 0 && row < rows && col >= 0 && col < cols)
@@ -391,6 +457,7 @@ class Board
     }
   }
 
+  //Checks if the cell at a chosen row and col is occupied
   boolean get(int row, int col)
   {
     if (row >= 0 && row < rows && col >= 0 && col < cols)

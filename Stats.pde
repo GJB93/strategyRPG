@@ -1,3 +1,10 @@
+/*
+  Stats class calculates and allocates stat numbers
+  for each unit. These stats are then used to calculate
+  a number of implicit stats such as attack power, ability
+  power and health
+*/
+
 class Stats
 {
   int str;
@@ -14,6 +21,11 @@ class Stats
   int crit;
   int abl;
 
+  /*
+    Main constructor for the Stats class. It takes a base value for each stat (strength, dexterity and magic),
+    then takes another value containing the number of points to be divided out to each stat. Once the all the
+    stat points have been divided out, the implicit stats are calculated.
+  */
   Stats()
   {
     int statSplit = 20;

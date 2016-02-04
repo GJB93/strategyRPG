@@ -1,3 +1,10 @@
+/*
+  Creates a clickable option button that returns a boolean
+  value when it has been clicked. Changes colour when the 
+  mouse is hovered over the button. Text colour changes from
+  black to white depending on how light or dark the colour is.
+*/
+
 class Option
 {
   float optionWidth;

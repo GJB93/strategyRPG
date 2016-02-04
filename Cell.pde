@@ -1,3 +1,11 @@
+/*
+  Each cell has the same height, width and border values
+  Whether they are highlighted in certain colours depends
+  on the board state, and which cell is selected. Each cell
+  can be occupied, and the unit that occupies the cell is held
+  as an object.
+*/
+
 class Cell
 {
   PVector cellNumber;
@@ -32,6 +40,11 @@ class Cell
     unit = null;
   }
 
+  /*
+    Method draws the cell according to the specified width and height,
+    and also highlights the cell if is to be highlighted. It also draws
+    the unit that the cell contains if one exists
+  */
   void drawCell()
   {
     float y = cellNumber.x * cellH;
