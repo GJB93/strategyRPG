@@ -117,7 +117,18 @@ abstract class Unit
   
   float defend()
   {
-    return 0;
+    int dice = int(random(1,100));
+    println(this.stats.eva);
+    println(this.stats.def);
+    if(dice <= this.stats.eva)
+    {
+      return 1.0f;
+    }
+    else
+    {
+      float ratio = map(this.stats.def, 0, 100, 0, 1);
+      return ratio;
+    }
   }
   
   void ability(Unit unit)

@@ -69,21 +69,6 @@ class Templar extends Unit
     }
   }
   
-  float defend()
-  {
-    int dice = int(random(1,100));
-    
-    if(dice <= this.stats.eva)
-    {
-      return 1.0f;
-    }
-    else
-    {
-      float ratio = map(this.stats.def, 0, 100, 0, 1);
-      return ratio;
-    }
-  }
-  
   void ability(Unit unit)
   {
     if((unit.stats.hp+healValue)>unit.stats.maxHp)

@@ -2,7 +2,13 @@
 
 class Assassin extends Unit
 {
+  //Assassin has an ability to increase critical strike chance
   int critInc;
+  
+  /*
+    Base constructor for assassin, calls the Unit constructor
+    in order to set stats and details about the unit
+  */
   Assassin()
   {
     super();
@@ -14,6 +20,10 @@ class Assassin extends Unit
     sprite = loadImage("assassin.png");
   }
   
+  /*
+    Parameterised constructor for assassin, calls the Unit constructor
+    with pre-set stats, then sets class specific stats
+  */
   Assassin(Stats stats)
   {
     super(stats);
@@ -25,11 +35,20 @@ class Assassin extends Unit
     sprite = loadImage("assassin.png");
   }
   
+  /*
+    Method used to draw the unit in its assigned color
+  */
   void drawUnit(float x, float y, float w, float h, boolean playerSide)
   {
     super.drawUnit(x, y, w, h, playerSide, c);
   }
   
+  /*
+    Attack method calculates the amount of HP to be taken
+    from a targeted unit, given a defense value. There is
+    also a chance for the attack to 'critically strike'
+    which increases damage dealt
+  */
   void attack(Unit unit)
   {
     int dice = int(random(1, 100));
@@ -66,21 +85,6 @@ class Assassin extends Unit
       {
         println("Unit dodged the attack!");
       }
-    }
-  }
-  
-  float defend()
-  {
-    int dice = int(random(1,100));
-    
-    if(dice <= this.stats.eva)
-    {
-      return 1.0f;
-    }
-    else
-    {
-      float ratio = map(this.stats.def, 0, 100, 0, 1);
-      return ratio;
     }
   }
   

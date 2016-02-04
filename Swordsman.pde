@@ -66,21 +66,6 @@ class Swordsman extends Unit
     }
   }
   
-  float defend()
-  {
-    int dice = int(random(1,100));
-    
-    if(dice <= this.stats.eva)
-    {
-      return 1.0f;
-    }
-    else
-    {
-      float ratio = map(this.stats.def, 0, 100, 0, 1);
-      return ratio;
-    }
-  }
-  
   void ability(Unit unit)
   {
     this.goAgain = true;
