@@ -16,7 +16,7 @@ class Board
   boolean gameOver;
   boolean winningPlayer;
   String statusMessage;
-  
+
   Board()
   {
     this.rows = 10;
@@ -30,10 +30,10 @@ class Board
     playerOneTurn = true;
     gameOver = false;
     statcardXPos = width*0.2f;
-    for(int row=0; row<rows; row++)
+    for (int row=0; row<rows; row++)
     {
       ArrayList<Cell> temp = new ArrayList<Cell>();
-      for(int col=0; col<cols; col++)
+      for (int col=0; col<cols; col++)
       {
         Cell cell = new Cell(row, col, cellWidth, cellHeight, borderX, borderY);
         temp.add(cell);
@@ -43,161 +43,151 @@ class Board
     hasSelected = false;
     selectedCell = null;
   }
-  
+
   void render()
   {
     highlightCells(playerOneTurn);
-    for(ArrayList<Cell> listCells: cells)
+    for (ArrayList<Cell> listCells : cells)
     {
-      for(Cell cell: listCells)
+      for (Cell cell : listCells)
       {
         cell.drawCell();
       }
     }
     displayStatusMessage();
-    if(hasSelected)
+    if (hasSelected)
     {
       showStatcard();
     }
   }
-  
+
   void showStatcard()
   {
-    if(selectedCell.cellNumber.y*cellWidth+statcardXPos+selectedCell.unit.statcardWidth < width)
-      {
-        selectedCell.unit.statCard(selectedCell.cellNumber.y*cellWidth+statcardXPos,selectedCell.cellNumber.x*cellHeight);
-      }
-      else
-      {
-        selectedCell.unit.statCard(selectedCell.cellNumber.y*cellWidth-statcardXPos,selectedCell.cellNumber.x*cellHeight);
-      }
+    if (selectedCell.cellNumber.y*cellWidth+statcardXPos+selectedCell.unit.statcardWidth < width)
+    {
+      selectedCell.unit.statCard(selectedCell.cellNumber.y*cellWidth+statcardXPos, selectedCell.cellNumber.x*cellHeight);
+    } else
+    {
+      selectedCell.unit.statCard(selectedCell.cellNumber.y*cellWidth-statcardXPos, selectedCell.cellNumber.x*cellHeight);
+    }
   }
-  
+
   void checkMouse()
   {
-    if(pmouseX > borderX && pmouseX < width-borderX && pmouseY > borderY && pmouseY < height-borderY)
+    if (pmouseX > borderX && pmouseX < width-borderX && pmouseY > borderY && pmouseY < height-borderY)
     {
       int row = int(map(mouseY, borderY, height-borderY, 0, rows));
       int col = int(map(mouseX, borderX, width-borderX, 0, cols));
-      
-      if(mouseButton == LEFT)
+
+      if (mouseButton == LEFT)
       {
         playerMoves(row, col, true, playerOneTurn);
       }
-      
-      if(mouseButton == RIGHT)
+
+      if (mouseButton == RIGHT)
       {
         playerMoves(row, col, false, playerOneTurn);
       }
     }
   }
-  
+
   void playerMoves(int row, int col, boolean leftMouse, boolean playerTurn)
   {
-    
-    if(leftMouse)
+
+    if (leftMouse)
     {
-      if(cells.get(row).get(col).isOccupied)
+      if (cells.get(row).get(col).isOccupied)
       {
-        if(!hasSelected && !cells.get(row).get(col).unit.hasMoved)
+        if (!hasSelected && !cells.get(row).get(col).unit.hasMoved)
         {
-          if(cells.get(row).get(col).playerUnit == playerTurn)
+          if (cells.get(row).get(col).playerUnit == playerTurn)
           {
             cells.get(row).get(col).unitSelected();
             selectedCell = cells.get(row).get(col);
             hasSelected = true;
           }
-        }
-        else if(hasSelected)
+        } else if (hasSelected)
         {
           elapsed = 0;
-          if(cells.get(row).get(col).playerUnit == playerTurn)
+          if (cells.get(row).get(col).playerUnit == playerTurn)
           {
-            if(selectedCell.unit instanceof Templar)
+            if (selectedCell.unit instanceof Templar)
             {
-              if(inAttackRange(cells.get(row).get(col), selectedCell))
+              if (inAttackRange(cells.get(row).get(col), selectedCell))
               {
-                if(cells.get(row).get(col).unit.stats.hp < cells.get(row).get(col).unit.stats.maxHp)
+                if (cells.get(row).get(col).unit.stats.hp < cells.get(row).get(col).unit.stats.maxHp)
                 {
                   selectedCell.unit.ability(cells.get(row).get(col).unit);
                   selectedCell.unit.unitMoved();
-                }
-                else
+                } else
                 {
                   statusMessage = "Unit is already fully healed";
                 }
-              }
-              else
+              } else
               {
                 statusMessage = "Unit is not in range";
               }
               selectedCell.unitUnselected();
               hasSelected = false;
-            }
-            else
+            } else
             {
               statusMessage = "Space already occupied by a friendly unit";
               selectedCell.unitUnselected();
               hasSelected = false;
             }
           }
-          
-          if(cells.get(row).get(col).playerUnit != playerTurn)
+
+          if (cells.get(row).get(col).playerUnit != playerTurn)
           {
-            if(inAttackRange(cells.get(row).get(col), selectedCell))
+            if (inAttackRange(cells.get(row).get(col), selectedCell))
             {
               selectedCell.unit.attack(cells.get(row).get(col).unit);
-              if(selectedCell.unit.lastDamageValue > 0)
+              if (selectedCell.unit.lastDamageValue > 0)
               {
-                if(selectedCell.unit.criticallyHit)
+                if (selectedCell.unit.criticallyHit)
                 {
                   statusMessage = selectedCell.unit.fname + " " + selectedCell.unit.sname + " critically hit " + 
-                                  cells.get(row).get(col).unit.fname + " " + cells.get(row).get(col).unit.sname + 
-                                    " for " + selectedCell.unit.lastDamageValue + " damage!";
-                }
-                else
+                    cells.get(row).get(col).unit.fname + " " + cells.get(row).get(col).unit.sname + 
+                    " for " + selectedCell.unit.lastDamageValue + " damage!";
+                } else
                 {
                   statusMessage = selectedCell.unit.fname + " " + selectedCell.unit.sname + " attacked " + 
-                                  cells.get(row).get(col).unit.fname + " " + cells.get(row).get(col).unit.sname + 
-                                    " for " + selectedCell.unit.lastDamageValue + " damage";
+                    cells.get(row).get(col).unit.fname + " " + cells.get(row).get(col).unit.sname + 
+                    " for " + selectedCell.unit.lastDamageValue + " damage";
                 }
-              }
-              else
+              } else
               {
                 statusMessage = cells.get(row).get(col).unit.fname + " " + cells.get(row).get(col).unit.sname + " dodged the attack!";
               }
-              
-              
-              if(cells.get(row).get(col).unit.stats.hp < 1)
+
+
+              if (cells.get(row).get(col).unit.stats.hp < 1)
               {
                 cells.get(row).get(col).unset();
                 checkUnitsRemaining(!playerTurn);
               }
               selectedCell.unit.unitMoved();
-            }
-            else
+            } else
             {
-               statusMessage = "Unit is not in range";
+              statusMessage = "Unit is not in range";
             }
             selectedCell.unitUnselected();
             hasSelected = false;
           }
         }
-      }
-      else
+      } else
       {
-        if(hasSelected)
+        if (hasSelected)
         {
           moveUnit(selectedCell, row, col, playerOneTurn);
           hasSelected = false;
         }
       }
-    }
-    else
+    } else
     {
-      if(cells.get(row).get(col).isOccupied)
+      if (cells.get(row).get(col).isOccupied)
       {
-        if(cells.get(row).get(col).playerUnit == playerTurn && hasSelected)
+        if (cells.get(row).get(col).playerUnit == playerTurn && hasSelected)
         {
           selectedCell.unitUnselected();
           hasSelected = false;
@@ -206,10 +196,10 @@ class Board
     }
     checkPlayerUnits(playerOneTurn);
   }
-  
+
   void displayStatusMessage()
   {
-    if(elapsed != 120)
+    if (elapsed != 120)
     {
       float middleX = width*0.50;
       float yPos = height-(height*0.05);
@@ -220,133 +210,126 @@ class Board
       elapsed++;
     }
   }
-  
+
   boolean checkPlayerUnits(boolean playerTurn)
   {
     int numberOfUnitsMoved = 0;
     int numberOfUnits = 0;
-    for(ArrayList<Cell> listCells: cells)
+    for (ArrayList<Cell> listCells : cells)
     {
-      for(Cell cell: listCells)
+      for (Cell cell : listCells)
       {
-        if(cell.isOccupied)
+        if (cell.isOccupied)
         {
-          if(cell.playerUnit == playerTurn)
+          if (cell.playerUnit == playerTurn)
           {
             numberOfUnits++;
           }
-          if(cell.unit.hasMoved && (cell.playerUnit == playerTurn))
+          if (cell.unit.hasMoved && (cell.playerUnit == playerTurn))
           {
             numberOfUnitsMoved++;
           }
-          
         }
       }
     }
-    
-    if(numberOfUnitsMoved == numberOfUnits)
+
+    if (numberOfUnitsMoved == numberOfUnits)
     {
       setPlayerTurn();
       resetUnits(playerOneTurn);
       return false;
-    }
-    else
+    } else
     {
       return true;
     }
   }
-  
+
   boolean inAttackRange(Cell target, Cell source)
   {
-    if(target.cellNumber.y >= source.cellNumber.y-source.unit.range && 
-        target.cellNumber.y <= source.cellNumber.y+source.unit.range && 
-          target.cellNumber.x >= source.cellNumber.x-source.unit.range && 
-            target.cellNumber.x <= source.cellNumber.x+source.unit.range)
+    if (target.cellNumber.y >= source.cellNumber.y-source.unit.range && 
+      target.cellNumber.y <= source.cellNumber.y+source.unit.range && 
+      target.cellNumber.x >= source.cellNumber.x-source.unit.range && 
+      target.cellNumber.x <= source.cellNumber.x+source.unit.range)
     {
       return true;
-    }
-    else
+    } else
     {
       return false;
     }
   }
-  
+
   boolean checkMove(Cell target, Cell source)
   {
-    if(target.cellNumber.y >= source.cellNumber.y-source.unit.moveRange && 
-        target.cellNumber.y <= source.cellNumber.y+source.unit.moveRange && 
-          target.cellNumber.x >= source.cellNumber.x-source.unit.moveRange && 
-            target.cellNumber.x <= source.cellNumber.x+source.unit.moveRange)
+    if (target.cellNumber.y >= source.cellNumber.y-source.unit.moveRange && 
+      target.cellNumber.y <= source.cellNumber.y+source.unit.moveRange && 
+      target.cellNumber.x >= source.cellNumber.x-source.unit.moveRange && 
+      target.cellNumber.x <= source.cellNumber.x+source.unit.moveRange)
     {
       return true;
-    }
-    else
+    } else
     {
       return false;
     }
   }
-  
+
   void setPlayerTurn()
   {
     playerOneTurn = !playerOneTurn;
   }
-  
+
   void highlightCells(boolean playerTurn)
   {
     if (selectedCell != null && selectedCell.isSelected)
     {
-      for(ArrayList<Cell> listCells: cells)
+      for (ArrayList<Cell> listCells : cells)
       {
-        for(Cell cell: listCells)
+        for (Cell cell : listCells)
         {
-          if(cell.cellNumber.y >= selectedCell.cellNumber.y-selectedCell.unit.moveRange && 
-              cell.cellNumber.y <= selectedCell.cellNumber.y+selectedCell.unit.moveRange && 
-                cell.cellNumber.x >= selectedCell.cellNumber.x-selectedCell.unit.moveRange && 
-                  cell.cellNumber.x <= selectedCell.cellNumber.x+selectedCell.unit.moveRange)
+          if (cell.cellNumber.y >= selectedCell.cellNumber.y-selectedCell.unit.moveRange && 
+            cell.cellNumber.y <= selectedCell.cellNumber.y+selectedCell.unit.moveRange && 
+            cell.cellNumber.x >= selectedCell.cellNumber.x-selectedCell.unit.moveRange && 
+            cell.cellNumber.x <= selectedCell.cellNumber.x+selectedCell.unit.moveRange)
           {
-            if(cell.isOccupied && inAttackRange(cell, selectedCell))
+            if (cell.isOccupied && inAttackRange(cell, selectedCell))
             {
-              if(cell.playerUnit == playerTurn)
+              if (cell.playerUnit == playerTurn)
               {
-                if(selectedCell.unit instanceof Templar)
+                if (selectedCell.unit instanceof Templar)
                 {
                   cell.allyHighlight();
                 }
-              }
-              else
+              } else
               {
                 cell.enemyHighlight();
               }
-            }
-            else
+            } else
             {
               cell.moveHighlight();
             }
           }
         }
       }
-    }
-    else
+    } else
     {
-      for(ArrayList<Cell> listCells: cells)
+      for (ArrayList<Cell> listCells : cells)
       {
-        for(Cell cell: listCells)
+        for (Cell cell : listCells)
         {
           cell.undoAllHighlights();
         }
       }
     }
   }
-  
+
   void resetUnits(boolean playerTurn)
   {
-    for(ArrayList<Cell> listCells: cells)
+    for (ArrayList<Cell> listCells : cells)
     {
-      for(Cell cell: listCells)
+      for (Cell cell : listCells)
       {
-        if(cell.isOccupied)
+        if (cell.isOccupied)
         {
-          if(cell.playerUnit == playerTurn)
+          if (cell.playerUnit == playerTurn)
           {
             cell.unit.resetMoveState();
           }
@@ -354,74 +337,68 @@ class Board
       }
     }
   }
-  
+
   void checkUnitsRemaining(boolean playerTurn)
   {
     int unitsLeft = 0;
-    for(ArrayList<Cell> listCells: cells)
+    for (ArrayList<Cell> listCells : cells)
     {
-      for(Cell cell: listCells)
+      for (Cell cell : listCells)
       {
-        if(cell.isOccupied)
+        if (cell.isOccupied)
         {
-          if(cell.playerUnit == playerTurn)
+          if (cell.playerUnit == playerTurn)
           {
             unitsLeft++;
           }
         }
       }
     }
-    
-    if(unitsLeft < 1)
+
+    if (unitsLeft < 1)
     {
       winningPlayer = !playerTurn;
       gameOver = gameOver();
     }
   }
-  
+
   void moveUnit(Cell cell, int row, int col, boolean playerTurn)
   {
-    if(checkMove(cells.get(row).get(col), cell))
+    if (checkMove(cells.get(row).get(col), cell))
     {
       cells.get(row).get(col).set(cell.unit, playerTurn);
       cells.get(row).get(col).unit.unitMoved();
       cells.get(row).get(col).unitUnselected();
-      //elapsed = 0;
-      //statusMessage = cell.unit.fname + " " + cell.unit.sname + " moved to space " + row + ", " + col;
-      //cells.get(int(cell.cellNumber.x)).get(int(cell.cellNumber.y)).unset();
       cell.unset();
-    }
-    else
+    } else
     {
-      //println("Invalid move");
       elapsed = 0;
       statusMessage = "You cannot move there!";
       cell.unitUnselected();
     }
   }
-  
+
   boolean gameOver()
   {
     return true;
   }
-  
+
   void set(int row, int col, Unit unit, boolean playerUnit)
   {
-    if(row >= 0 && row < rows && col >= 0 && col < cols)
+    if (row >= 0 && row < rows && col >= 0 && col < cols)
     {
       cells.get(row).get(col).set(unit, playerUnit);
     }
   }
-  
+
   boolean get(int row, int col)
   {
     if (row >= 0 && row < rows && col >= 0 && col < cols)
     {
       return cells.get(row).get(col).isOccupied;
-    }
-    else
+    } else
     {
       return false;
     }
-  } 
+  }
 }

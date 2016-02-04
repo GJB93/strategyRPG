@@ -13,27 +13,25 @@ class Cell
   boolean allyHighlight;
   boolean enemyHighlight;
   Unit unit;
-  
+
   Cell()
   {
     cellNumber = null;
     isOccupied = false;
     unit = null;
   }
-  
+
   Cell(int row, int col, float w, float h, float bx, float by)
   {
     cellNumber = new PVector(row, col);
-    //cellImage = loadImage("grass.png");
     cellW = w;
     cellH = h;
-    //cellImage.resize(ceil(w), ceil(h));
     borderX = bx;
     borderY = by;
     isOccupied = false;
     unit = null;
   }
-  
+
   void drawCell()
   {
     float y = cellNumber.x * cellH;
@@ -42,104 +40,94 @@ class Cell
     float cellMy = cellH * 0.5f;
     float unitToCellRatio = 0.4f;
     float unitHighlightOffset = 10;
-    
+
     stroke(255);
     rectMode(CORNER);
     imageMode(CENTER);
-    if(isOccupied)
+    if (isOccupied)
     {
-      if(isSelected)
+      if (isSelected)
       {
         fill(0, 255, 255, 20);
-      }
-      else
+      } else
       {
-        if(allyHighlight)
+        if (allyHighlight)
         {
           fill(0, 255, 0, 50);
-        }
-        else if(enemyHighlight)
+        } else if (enemyHighlight)
         {
           fill(255, 0, 0, 50);
-        }
-        else
+        } else
         {
           fill(200, 200, 200, 50);
         }
       }
-      //image(cellImage, border+x+cellM, border+y+cellM);
       rect(borderX+x, borderY+y, cellW, cellH);
-      if(!unit.hasMoved)
+      if (!unit.hasMoved)
       {
         fill(255);
-        if(playerUnit)
+        if (playerUnit)
         {
           rectMode(CENTER);
           rect(borderX+x+cellMx, borderY+y+cellMy, (cellW*unitToCellRatio)+unitHighlightOffset, (cellH*unitToCellRatio)+unitHighlightOffset);
-        }
-        else
+        } else
         {
           ellipseMode(CENTER);
           ellipse(borderX+x+cellMx, borderY+y+cellMy, (cellW*unitToCellRatio)+unitHighlightOffset, (cellH*unitToCellRatio)+unitHighlightOffset);
         }
-        
       }
-      
-      
+
+
       unit.drawUnit(borderX+x+cellMx, borderY+y+cellMy, cellW*unitToCellRatio, cellH*unitToCellRatio, playerUnit);
-      //image(unit.sprite, border+x+cellM, border+y+cellM);
       textSize(7);
       fill(0);
       textAlign(CENTER);
       text(unit.stats.hp, borderX+x+cellMx, borderY+y+cellH);
-    }
-    else
+    } else
     {
-      if(moveHighlight)
+      if (moveHighlight)
       {
         fill(0, 0, 255, 50);
-      }
-      else
+      } else
       {
         fill(200);
       }
       rect(borderX+x, borderY+y, cellW, cellH);
-      //image(cellImage, border+x+cellM, border+y+cellM);
     }
   }
-  
+
   void unitSelected()
   {
     this.isSelected = true;
   }
-  
+
   void unitUnselected()
   {
     this.isSelected = false;
   }
-  
+
   void moveHighlight()
   {
     moveHighlight = true;
   }
-  
+
   void allyHighlight()
   {
     allyHighlight = true;
   }
-  
+
   void enemyHighlight()
   {
     enemyHighlight = true;
   }
-  
+
   void undoAllHighlights()
   {
     moveHighlight = false;
     allyHighlight = false;
     enemyHighlight = false;
   }
-  
+
   void set(Unit unit, boolean playerUnit)
   {
     isOccupied = true;
@@ -147,12 +135,12 @@ class Cell
     this.isSelected = false;
     this.playerUnit = playerUnit;
   }
-  
+
   Cell get()
   {
     return this;
   }
-  
+
   void unset()
   {
     isOccupied = false;

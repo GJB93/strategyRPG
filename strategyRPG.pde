@@ -11,7 +11,7 @@ void setup()
   menu.addOption("Tutorial");
   menu.addOption("Exit");
   menuOptionClicked = -1;
-  
+
   //game.createListOfChoices(3);
 }
 
@@ -30,11 +30,11 @@ void draw()
 {
   background(200);
   //game.offerChoices();
-  if(!gameStart)
+  if (!gameStart)
   {
     elapsed = 0;
     menu.render();
-    if(menuOptionClicked == 0)
+    if (menuOptionClicked == 0)
     {
       game = new Game();
       game.randomTeams();
@@ -42,29 +42,27 @@ void draw()
       startMenu = false;
       gameStart = true;
     }
-    if(menuOptionClicked == 1)
+    if (menuOptionClicked == 1)
     {
       page = 0;
       startMenu = false;
       showTutorial();
     }
-    if(menuOptionClicked == 2)
+    if (menuOptionClicked == 2)
     {
       exit();
     }
-  }
-  else
+  } else
   {
     game.render();
     exitButton.render();
     boolean check = exitButton.checkMouseClick();
-    if(game.gameOver)
+    if (game.gameOver)
     {
-      if(elapsed != 120)
+      if (elapsed != 120)
       {
         elapsed++;
-      }
-      else
+      } else
       {
         gameStart = false;
         startMenu = true;
@@ -76,17 +74,16 @@ void draw()
 
 void mouseClicked()
 {
-  if(gameStart)
+  if (gameStart)
   {
     game.takeTurn();
-    if(exitButton.checkMouseClick())
+    if (exitButton.checkMouseClick())
     {
       startMenu = true;
       gameStart = false;
       menuOptionClicked = -1;
     }
-  }
-  else if(startMenu)
+  } else if (startMenu)
   {
     menuOptionClicked = menu.checkClick();
   }
@@ -94,9 +91,9 @@ void mouseClicked()
 
 void keyPressed()
 {
-  if(key == ' ')
+  if (key == ' ')
   {
-    if(game.gameOver)
+    if (game.gameOver)
     {
       game = new Game();
       game.randomTeams();
@@ -110,7 +107,7 @@ void showTutorial()
   background(200);
   switch(page)
   {
-    case 0:
+  case 0:
     {
       textSize(20);
       textAlign(CENTER, CENTER);
@@ -128,7 +125,7 @@ void showTutorial()
   nextButton.render();
   exitButton.render();
   backButton.render();
-  if(exitButton.checkMouseClick())
+  if (exitButton.checkMouseClick())
   {
     startMenu = true;
   }

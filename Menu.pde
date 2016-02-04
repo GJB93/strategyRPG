@@ -13,12 +13,12 @@ class Menu
   float middleColorValue;
   int lightenValue;
   String gameTitle;
-  
+
   Menu()
   {
     this(0, 0, 0, 0, color(0), "");
   }
-  
+
   Menu(float w, float h, float x, float y, color c, String title)
   {
     lightenValue = 50;
@@ -38,24 +38,23 @@ class Menu
     position = new PVector(x, y);
     options = new ArrayList<Option>();
   }
-  
+
   void render()
   {
     noStroke();
     fill(menuColor);
     rect(position.x, position.y, menuWidth, menuHeight);
     setOptionDimensions();
-    for(Option option: options)
+    for (Option option : options)
     {
       option.render();
     }
-    
+
     color textColor;
-    if(red(menuColor)+green(menuColor)+blue(menuColor) > middleColorValue)
+    if (red(menuColor)+green(menuColor)+blue(menuColor) > middleColorValue)
     {
       textColor = color(0);
-    }
-    else
+    } else
     {
       textColor = color(255);
     }
@@ -64,35 +63,35 @@ class Menu
     fill(textColor);
     text(gameTitle, position.x+middleX, position.y+yPos);
   }
-  
+
   void addOption(String optionText)
   {
     options.add(new Option(optionText, optionColor));
   }
-  
+
   void setOptionDimensions()
   {
     float optionWidth = menuWidth - (borderX*2);
     float optionHeight = (menuHeight - (borderY*2))/ (float) options.size();
-    for(int i=0; i<options.size(); i++)
+    for (int i=0; i<options.size(); i++)
     {
       options.get(i).setOptionWidth(optionWidth);
       options.get(i).setOptionHeight(optionHeight);
       options.get(i).setOptionPosition(position.x+borderX, position.y+borderY+(optionHeight*i));
     }
   }
-  
+
   int checkClick()
   {
     int returnValue = -1;
-    for(int i=0; i<options.size(); i++)
+    for (int i=0; i<options.size(); i++)
     {
-      if(options.get(i).checkMouseClick())
+      if (options.get(i).checkMouseClick())
       {
         returnValue = i;
       }
     }
-    
+
     return returnValue;
   }
 }

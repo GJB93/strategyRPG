@@ -11,12 +11,12 @@ class Option
   color hoverColor;
   float lightenValue;
   float middleColorValue;
-  
+
   Option()
   {
     this(0, 0, 0, 0, "", color(0));
   }
-  
+
   Option(String optionText, color c)
   {
     lightenValue = 50;
@@ -29,7 +29,7 @@ class Option
     float blueValue = blue(c)+lightenValue;
     hoverColor = color(redValue%256, greenValue%256, blueValue%256);
   }
-  
+
   Option(float w, float h, float x, float y, String optionText, color c)
   {
     lightenValue = 50;
@@ -47,91 +47,85 @@ class Option
     float blueValue = blue(c)+lightenValue;
     hoverColor = color(redValue%256, greenValue%256, blueValue%256);
   }
-  
+
   void setOptionWidth(float w)
   {
     this.optionWidth = w;
     this.middleX = optionWidth*0.5f;
   }
-  
+
   void setOptionHeight(float h)
   {
     this.optionHeight = h;
     this.middleY = optionHeight*0.5f;
   }
-  
+
   void setOptionPosition(float x, float y)
   {
-    this.position = new PVector(x,y);
+    this.position = new PVector(x, y);
   }
-  
+
   void render()
   {
     checkMouseHover();
     color currentColor;
     color textColor;
-    if(mouseHover)
+    if (mouseHover)
     {
       currentColor = hoverColor;
-    }
-    else
+    } else
     {
       currentColor = staticColor;
     }
-    
-    if(red(currentColor)+green(currentColor)+blue(currentColor) > middleColorValue)
+
+    if (red(currentColor)+green(currentColor)+blue(currentColor) > middleColorValue)
     {
       textColor = color(0);
-    }
-    else
+    } else
     {
       textColor = color(255);
     }
-    
-    if(mouseHover)
+
+    if (mouseHover)
     {
       noStroke();
-    }
-    else
+    } else
     {
       stroke(textColor);
     }
-    
+
     fill(currentColor);
     rect(position.x, position.y, optionWidth, optionHeight);
     fill(textColor);
     textAlign(CENTER, CENTER);
-    
-    if(optionWidth > 100)
+
+    if (optionWidth > 100)
     {
       textSize(20);
-    }
-    else
+    } else
     {
       textSize(10);
     }
     text(optionText, position.x+middleX, position.y+middleY);
   }
-  
+
   void checkMouseHover()
   {
-    if(mouseX > position.x && mouseX < position.x+optionWidth && mouseY > position.y && mouseY < position.y+optionHeight)
+    if (mouseX > position.x && mouseX < position.x+optionWidth && mouseY > position.y && mouseY < position.y+optionHeight)
     {
       mouseHover = true;
-    }
-    else
+    } else
     {
       mouseHover = false;
     }
   }
-  
+
   boolean checkMouseClick()
   {
-    if(pmouseX > position.x && pmouseX < position.x+optionWidth && pmouseY > position.y && pmouseY < position.y+optionHeight)
+    if (pmouseX > position.x && pmouseX < position.x+optionWidth && pmouseY > position.y && pmouseY < position.y+optionHeight)
     {
       return true;
-    }
-    else
+    } else
     {
       return false;
     }
