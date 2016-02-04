@@ -14,6 +14,8 @@ abstract class Unit
   int lastDamageValue;
   float statcardWidth;
   float statcardHeight;
+  float statcardYinc;
+  float statcardXinc;
   boolean goAgain;
   boolean hasMoved;
   boolean criticallyHit;
@@ -62,6 +64,8 @@ abstract class Unit
     this.stats = stats;
     statcardWidth = width*0.25f;
     statcardHeight = width*0.15f;
+    statcardYinc = 12;
+    statcardXinc = 12;
   }
   
   Unit(String fname, String sname, char gender, int str, int dex, int mag)
@@ -164,10 +168,10 @@ abstract class Unit
     fill(255, 100);
     rect(x, y, statcardWidth, statcardHeight);
     fill(0);
-    text(fname + " " + sname, x+10, y+10);
-    text(gender, x+10, y+20);
-    text("STR: " + stats.str, x+10, y+30);
-    text("DEX: " + stats.dex, x+10, y+40);
-    text("MAG: " + stats.mag, x+10, y+50);
+    text(fname + " " + sname, x+statcardXinc, y+statcardYinc*1);
+    text(gender, x+statcardXinc, y+statcardYinc*2);
+    text("STR: " + stats.str, x+statcardXinc, y+statcardYinc*3);
+    text("DEX: " + stats.dex, x+statcardXinc, y+statcardYinc*4);
+    text("MAG: " + stats.mag, x+statcardXinc, y+statcardYinc*5);
   }
 }

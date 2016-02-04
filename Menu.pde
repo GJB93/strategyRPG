@@ -4,10 +4,13 @@ class Menu
   float menuHeight;
   float borderX;
   float borderY;
+  float middleX;
+  float yPos;
   PVector position;
   ArrayList<Option> options;
   color menuColor;
   color optionColor;
+  float middleColorValue;
   int lightenValue;
   String gameTitle;
   
@@ -21,6 +24,9 @@ class Menu
     lightenValue = 50;
     menuWidth = w;
     menuHeight = h;
+    middleX = menuWidth*0.5f;
+    yPos = menuHeight*0.05f;
+    middleColorValue = (256*0.5f)*3;
     menuColor = c;
     gameTitle = title;
     float redValue = red(c)+lightenValue;
@@ -45,7 +51,7 @@ class Menu
     }
     
     color textColor;
-    if(red(menuColor)+green(menuColor)+blue(menuColor) > (256*0.5f)*3)
+    if(red(menuColor)+green(menuColor)+blue(menuColor) > middleColorValue)
     {
       textColor = color(0);
     }
@@ -56,7 +62,7 @@ class Menu
     textAlign(CENTER, CENTER);
     textSize(22);
     fill(textColor);
-    text(gameTitle, position.x+(menuWidth*0.5f), position.y+(menuHeight*0.05f));
+    text(gameTitle, position.x+middleX, position.y+yPos);
   }
   
   void addOption(String optionText)

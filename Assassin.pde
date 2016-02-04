@@ -2,6 +2,7 @@
 
 class Assassin extends Unit
 {
+  int critInc;
   Assassin()
   {
     super();
@@ -9,6 +10,7 @@ class Assassin extends Unit
     this.range = 1;
     this.moveRange = 3;
     this.type = "Assassin";
+    this.critInc = 10;
     sprite = loadImage("assassin.png");
   }
   
@@ -19,6 +21,7 @@ class Assassin extends Unit
     this.range = 1;
     this.moveRange = 3;
     this.type = "Assassin";
+    this.critInc = 10;
     sprite = loadImage("assassin.png");
   }
   
@@ -83,12 +86,12 @@ class Assassin extends Unit
   
   void ability(Unit unit)
   {
-    this.stats.crit += 10;
+    this.stats.crit += critInc;
   }
   
   void statCard(float x, float y)
   {
     super.statCard(x, y);
-    text("Type: " + type, x+10, y+60);
+    text("Type: " + type, x+statcardXinc, y+statcardYinc*6);
   }
 }

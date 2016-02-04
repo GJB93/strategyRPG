@@ -211,10 +211,12 @@ class Board
   {
     if(elapsed != 120)
     {
+      float middleX = width*0.50;
+      float yPos = height-(height*0.05);
       fill(255);
       textAlign(CENTER, CENTER);
       textSize(14);
-      text(statusMessage, width*0.50, height-(height*0.05));
+      text(statusMessage, middleX, yPos);
       elapsed++;
     }
   }

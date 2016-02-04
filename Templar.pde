@@ -2,6 +2,7 @@
 
 class Templar extends Unit
 {
+  int healValue;
   Templar()
   {
     super();
@@ -9,6 +10,7 @@ class Templar extends Unit
     this.range = 1;
     this.moveRange = 2;
     this.type = "Templar";
+    this.healValue = 10;
     sprite = loadImage("templar.png");
   }
   
@@ -19,6 +21,7 @@ class Templar extends Unit
     this.range = 1;
     this.moveRange = 2;
     this.type = "Templar";
+    this.healValue = 10;
     sprite = loadImage("templar.png");
   }
   
@@ -83,7 +86,7 @@ class Templar extends Unit
   
   void ability(Unit unit)
   {
-    if((unit.stats.hp+10)>unit.stats.maxHp)
+    if((unit.stats.hp+healValue)>unit.stats.maxHp)
     {
       println("Unit healed for " + (unit.stats.maxHp - unit.stats.hp));
       unit.stats.hp = unit.stats.maxHp;
@@ -91,13 +94,13 @@ class Templar extends Unit
     else
     {
       println("Unit healed for 10");
-      unit.stats.hp += 10;
+      unit.stats.hp += healValue;
     }
   }
   
   void statCard(float x, float y)
   {
     super.statCard(x, y);
-    text("Type: " + type, x+10, y+60);
+    text("Type: " + type, x+statcardXinc, y+statcardYinc*6);
   }
 }

@@ -2,6 +2,7 @@
 
 class Tank extends Unit
 {
+  int defValue;
   Tank()
   {
     super();
@@ -9,6 +10,7 @@ class Tank extends Unit
     this.range = 1;
     this.moveRange = 2;
     this.type = "Tank";
+    this.defValue = 10;
     sprite = loadImage("tank.png");
   }
   
@@ -19,6 +21,7 @@ class Tank extends Unit
     this.range = 1;
     this.moveRange = 2;
     this.type = "Tank";
+    this.defValue = 10;
     sprite = loadImage("tank.png");
   }
   
@@ -83,12 +86,12 @@ class Tank extends Unit
   
   void ability(Unit unit)
   {
-    unit.stats.def += 10;
+    unit.stats.def += defValue;
   }
   
   void statCard(float x, float y)
   {
     super.statCard(x, y);
-    text("Type: " + type, x+10, y+60);
+    text("Type: " + type, x+statcardXinc, y+statcardYinc*6);
   }
 }

@@ -72,15 +72,24 @@ class Stats
   
   void calculateImplicitStats()
   {
-    this.hp = this.str * 3;
+    float hpMultiplier = 3;
+    float spMultiplier = 1.8;
+    float attMultiplier = 1;
+    float defMultiplier = 1.2;
+    float evaMultiplier = 1.1;
+    float spdMultiplier = 0.1;
+    float ablMultiplier = 1.2;
+    float critMultiplier = 2.0;
+    
+    this.hp = int(this.str * hpMultiplier);
     this.maxHp = this.hp;
-    this.sp = int(this.mag * 1.8f);
+    this.sp = int(this.mag * spMultiplier);
     this.maxSp = this.sp;
-    this.att = int(this.str);
-    this.def = int(this.str * 1.2f);
-    this.eva = int(this.dex * 1.1f);
-    this.spd = this.dex * 0.1f;
-    this.abl = int(this.mag * 1.2f);
-    this.crit = int(this.mag * 2.0f);
+    this.att = int(this.str * attMultiplier);
+    this.def = int(this.str * defMultiplier);
+    this.eva = int(this.dex * evaMultiplier);
+    this.spd = this.dex * spdMultiplier;
+    this.abl = int(this.mag * ablMultiplier);
+    this.crit = int(this.mag * critMultiplier);
   }
 }//end class

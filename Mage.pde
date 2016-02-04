@@ -89,6 +89,6 @@ class Mage extends Unit
   void statCard(float x, float y)
   {
     super.statCard(x, y);
-    text("Type: " + type, x+10, y+60);
+    text("Type: " + type, x+statcardXinc, y+statcardYinc*6);
   }
 }

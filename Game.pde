@@ -8,9 +8,15 @@ class Game
   boolean gameStart;
   boolean teamSetup;
   boolean gameOver;
+  int numberOfUnitsPerTeam;
+  float middleX;
+  float middleY;
   
   Game()
   {
+    middleX = width*0.5f;
+    middleY = height*0.5f;
+    numberOfUnitsPerTeam = 6;
     gameStart = false;
     teamSetup = false;
     gameOver = false;
@@ -38,13 +44,16 @@ class Game
   {
     if(!board.gameOver)
     {
+      float playerOneXpos = board.borderX;
+      float playerTwoXpos = width - board.borderX;
+      float yPos = height*0.05f;
       board.render();
       textAlign(LEFT, CENTER);
       textSize(16);
       fill(255);
-      text("Player One", board.borderX, height*0.05f);
+      text("Player One", playerOneXpos, yPos);
       textAlign(RIGHT, CENTER);
-      text("Player Two", width-board.borderX, height*0.05f);
+      text("Player Two", playerTwoXpos, yPos);
     }
     else
     {
@@ -61,17 +70,17 @@ class Game
     fill(255);
     if(board.winningPlayer)
     {
-      text("GAME OVER \n Player One wins!", width*0.5f, height*0.5f);
+      text("GAME OVER \n Player One wins!", middleX, middleY);
     }
     else
     {
-      text("GAME OVER \n Player Two wins!", width*0.5f, height*0.5f);
+      text("GAME OVER \n Player Two wins!", middleX, middleY);
     }
   }
   
   void createRandomTeam(ArrayList<Unit> units)
   {
-    for(int i=0; i<6; i++)
+    for(int i=0; i<numberOfUnitsPerTeam; i++)
     {
       units.add(createUnit());
     }
@@ -106,6 +115,7 @@ class Game
   
   void initialBoard()
   {
+    int numberOfPossCols = 2;
     for(Unit unit: playerOneUnits)
     {
       boolean assignedSpace = false;
@@ -113,7 +123,7 @@ class Game
       while(!assignedSpace)
       {
         int row = int(random(board.rows));
-        int col = int(random(2));
+        int col = int(random(numberOfPossCols));
         boolean isSet = board.get(row, col);
         if(!isSet)
         {
@@ -130,7 +140,7 @@ class Game
       while(!assignedSpace)
       {
         int row = int(random(board.rows));
-        int col = int(random(board.cols-2, board.cols));
+        int col = int(random(board.cols-numberOfPossCols, board.cols));
         boolean isSet = board.get(row, col);
         if(!isSet)
         {
@@ -159,15 +169,15 @@ class Game
     int strDexDiff = abs(stats.str - stats.dex);
     int strMagDiff = abs(stats.str - stats.mag);
     int dexMagDiff = abs(stats.dex - stats.mag);
-    
+    int diffValue = 5;
     
     if(stats.str > stats.dex && stats.str > stats.mag)
     {
-      if(strDexDiff < 5 && strDexDiff < strMagDiff)
+      if(strDexDiff < diffValue && strDexDiff < strMagDiff)
       {
         return new Swordsman(stats);
       }
-      else if(strMagDiff < 5)
+      else if(strMagDiff < diffValue)
       {
         return new Templar(stats);
       }
@@ -178,11 +188,11 @@ class Game
     }
     else if(stats.dex > stats.mag)
     {
-      if(dexMagDiff < 5 && dexMagDiff < strDexDiff)
+      if(dexMagDiff < diffValue && dexMagDiff < strDexDiff)
       {
         return new Assassin(stats);
       }
-      else if(strDexDiff < 5)
+      else if(strDexDiff < diffValue)
       {
         return new Swordsman(stats);
       }
@@ -193,11 +203,11 @@ class Game
     }
     else
     {
-      if(dexMagDiff < 5 && dexMagDiff < strMagDiff)
+      if(dexMagDiff < diffValue && dexMagDiff < strMagDiff)
       {
         return new Assassin(stats);
       }
-      else if(strMagDiff < 5)
+      else if(strMagDiff < diffValue)
       {
         return new Templar(stats);
       }
