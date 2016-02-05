@@ -112,6 +112,10 @@ class Menu
       if (options.get(i).checkMouseClick())
       {
         returnValue = i;
+        for(Option option:options)
+        {
+          option.unsetActive();
+        }
       }
     }
 

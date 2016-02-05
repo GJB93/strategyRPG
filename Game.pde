@@ -10,6 +10,7 @@ class Game
   ArrayList<Unit> playerOneUnits;
   ArrayList<Unit> playerTwoUnits;
   ArrayList<Unit> playerChoices;
+  ArrayList<Option> unitSelect;
   boolean playerOneFirst;
   boolean gameStart;
   boolean teamSetup;
@@ -109,9 +110,11 @@ class Game
   void createListOfChoices(int numberOfChoices)
   {
     playerChoices = new ArrayList<Unit>();
+    unitSelect = new ArrayList<Option>();
     for (int i=0; i<numberOfChoices; i++)
     {
       playerChoices.add(createUnit());
+      unitSelect.add(new Option("Add to team", color(127)));
     }
   }
 
@@ -121,11 +124,16 @@ class Game
   void offerChoices()
   {
     float w = width/ (float)playerChoices.size();
-    float h = height *0.8f;
+    float h = height *0.4f;
     float topBorder = height*0.1f;
+    float sideBorder = width*0.1f;
     for (int choice=0; choice<playerChoices.size(); choice++)
     {
       playerChoices.get(choice).statCard(w*choice, topBorder);
+      unitSelect.get(choice).setOptionWidth(100);
+      unitSelect.get(choice).setOptionHeight(120);
+      unitSelect.get(choice).setOptionPosition(w*choice, h);
+      unitSelect.get(choice).render();
     }
   }
 

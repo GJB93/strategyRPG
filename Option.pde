@@ -14,6 +14,7 @@ class Option
   String optionText;
   PVector position;
   boolean mouseHover;
+  boolean isActive;
   color staticColor;
   color hoverColor;
   float lightenValue;
@@ -28,6 +29,7 @@ class Option
   {
     lightenValue = 50;
     mouseHover = false;
+    isActive = false;
     middleColorValue = (256*0.5f)*3;
     this.optionText = optionText;
     staticColor = c;
@@ -46,6 +48,7 @@ class Option
     this.middleY = optionHeight*0.5f;
     this.optionText = optionText;
     mouseHover = false;
+    isActive = false;
     middleColorValue = (256*0.5f)*3;
     position = new PVector(x, y);
     staticColor = c;
@@ -74,6 +77,7 @@ class Option
 
   void render()
   {
+    isActive = true;
     checkMouseHover();
     color currentColor;
     color textColor;
@@ -115,6 +119,11 @@ class Option
     }
     text(optionText, position.x+middleX, position.y+middleY);
   }
+  
+  void unsetActive()
+  {
+    isActive = false;
+  }
 
   void checkMouseHover()
   {
@@ -129,10 +138,17 @@ class Option
 
   boolean checkMouseClick()
   {
-    if (pmouseX > position.x && pmouseX < position.x+optionWidth && pmouseY > position.y && pmouseY < position.y+optionHeight)
+    if(isActive)
     {
-      return true;
-    } else
+      if (pmouseX > position.x && pmouseX < position.x+optionWidth && pmouseY > position.y && pmouseY < position.y+optionHeight)
+      {
+        return true;
+      } else
+      {
+        return false;
+      }
+    }
+    else
     {
       return false;
     }
