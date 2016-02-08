@@ -12,6 +12,7 @@ void setup()
   menu.addOption("Exit");
   menuOptionClicked = -1;
 
+  //game = new Game();
   //game.createListOfChoices(3);
 }
 
@@ -30,6 +31,7 @@ void draw()
 {
   background(200);
   //game.offerChoices();
+  
   if (!gameStart)
   {
     elapsed = 0;
@@ -70,6 +72,7 @@ void draw()
       }
     }
   }
+  
 }
 
 void mouseClicked()
@@ -122,9 +125,7 @@ void showTutorial()
       break;
     }
   }
-  nextButton.render();
   exitButton.render();
-  backButton.render();
   if (exitButton.checkMouseClick())
   {
     startMenu = true;

@@ -68,7 +68,7 @@ abstract class Unit
 
     this.stats = stats;
     statcardWidth = width*0.25f;
-    statcardHeight = width*0.15f;
+    statcardHeight = height*0.15f;
     statcardYinc = 12;
     statcardXinc = 12;
   }
