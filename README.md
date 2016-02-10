@@ -52,6 +52,23 @@ The Board class will then have control over each cell, and will check for player
 
 Each of these classes come together in the Game class, which controls team creation and board rendering, as well as the game state.
 
-## Issues
+## How to play
 
-I have found that the implementation I have for drawing the units is poor. Each unit is overly dependant on the cell it is attached to, which makes it difficult to access the fields and methods available to the active units. This made it difficult to implement features such as the statcard, as I had to make sure that it wasn't drawn under the cells after the one that the unit was currently occupying.
+* Left-click a unit that has a white highlight in order to select it
+* Left-click any of the blue-highlighted cells to move your selected unit to that cell
+* Left-click any unit in a red-highlighted cell in order to attack that unit
+* Right-click any selected unit to deselect the unit without spending a turn
+* The next player moves their units once the current player has moved all of their units
+* A unit dies once its HP reaches zero.
+* The game ends once a player has lost all their units
+
+## Screenshots
+
+### Initial board
+![Initial Board](https://github.com/GJB93/strategyRPG/blob/master/readmeImages/initialBoard.PNG?raw=true)
+
+### Moving a unit
+![Moving](https://github.com/GJB93/strategyRPG/blob/master/readmeImages/move.PNG?raw=true)
+
+### Attack move available
+![Attack Move](https://github.com/GJB93/strategyRPG/blob/master/readmeImages/attack.PNG?raw=true)
