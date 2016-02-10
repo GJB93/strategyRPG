@@ -3,7 +3,6 @@
 ## Introduction
 
 The aim for this assignment was to create a game. Around the time that this assignment was set, I had an interest in games such as XCOM and Fire Emblem, so I decided that I would try to make something similar. The key features of these games are:
-
 	* Each side has a limited number of units
 	* Each side takes a turn to move their units
 	* These units have restricted movement and attack ranges
@@ -18,19 +17,16 @@ At first, I had planned to add an AI player, but I found that it would probably 
 
 My plan is to have a number of different unit types that will be determined by the stats that have been allocated to that unit.
 The stats will comprise of the following:
-
 	* A strength stat, which will determine attack strength, defense, and hit points
 	* A dexterity stat, which will determine evasiveness, speed and movement ranges
 	* A magic stat, which will determine spell strength and critical strike chance
-	
-Each of these stats have an associated colour, which will mix together to create the hybrid unit types. The colours chosen are:
 
+Each of these stats have an associated colour, which will mix together to create the hybrid unit types. The colours chosen are:
 	* Red for strength
 	* Green for dexterity
 	* Blue for magic
 	
 The unit types will be as follows:
-
 	* Tank, a pure strength unit
 	* Ranger, a pure dexterity unit
 	* Mage, a pure magic unit

@@ -3,8 +3,6 @@ void setup()
   size(600, 600);
   gameStart = false;
   startMenu = true;
-  nextButton = new Option(50, 50, width-(width*0.33f), height-(height*0.1f), "Next", color(50));
-  backButton = new Option(50, 50, width*0.33f, height-(height*0.1f), "Back", color(50));
   exitButton = new Option(50, 50, width*0.05f, height-(height*0.09f), "Exit to\nmenu", color(50));
   menu = new Menu(width, height, 0, 0, color(200), "Strategy RPG");
   menu.addOption("Start Game");

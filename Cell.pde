@@ -92,10 +92,6 @@ class Cell
 
 
       unit.drawUnit(borderX+x+cellMx, borderY+y+cellMy, cellW*unitToCellRatio, cellH*unitToCellRatio, playerUnit);
-      textSize(7);
-      fill(0);
-      textAlign(CENTER);
-      text(unit.stats.hp, borderX+x+cellMx, borderY+y+cellH);
     } else
     {
       if (moveHighlight)

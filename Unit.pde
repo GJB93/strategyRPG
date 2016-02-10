@@ -99,6 +99,7 @@ abstract class Unit
    */
   void drawUnit(float x, float y, float w, float h, boolean side, color c)
   {
+    float middleColorValue = (256*0.5f)*3;
     fill(c);
     noStroke();
     if (side)
@@ -110,6 +111,16 @@ abstract class Unit
       ellipseMode(CENTER);
       ellipse(x, y, w, h);
     }
+    textSize(9);
+    if (red(c)+green(c)+blue(c) > middleColorValue)
+    {
+      fill(0);
+    } else
+    {
+      fill(255);
+    }
+    textAlign(CENTER, CENTER);
+    text(this.stats.hp, x, y);
   }
 
   /*
