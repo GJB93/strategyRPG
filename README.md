@@ -52,6 +52,16 @@ The Board class will then have control over each cell, and will check for player
 
 Each of these classes come together in the Game class, which controls team creation and board rendering, as well as the game state.
 
+## How to play
+
+* Left-click a unit that has a white highlight in order to select it
+* Left-click any of the blue-highlighted cells to move your selected unit to that cell
+* Left-click any unit in a red-highlighted cell in order to attack that unit
+* Right-click any selected unit to deselect the unit without spending a turn
+* The next player moves their units once the current player has moved all of their units
+* A unit dies once its HP reaches zero.
+* The game ends once a player has lost all their units
+
 ## Screenshots
 
 ### Initial board
