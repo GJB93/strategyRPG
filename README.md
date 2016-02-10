@@ -52,6 +52,13 @@ The Board class will then have control over each cell, and will check for player
 
 Each of these classes come together in the Game class, which controls team creation and board rendering, as well as the game state.
 
-## Issues
+## Screenshots
 
-I have found that the implementation I have for drawing the units is poor. Each unit is overly dependant on the cell it is attached to, which makes it difficult to access the fields and methods available to the active units. This made it difficult to implement features such as the statcard, as I had to make sure that it wasn't drawn under the cells after the one that the unit was currently occupying.
+### Initial board
+![Initial Board](https://github.com/GJB93/strategyRPG/blob/master/readmeImages/initialBoard.PNG?raw=true)
+
+### Moving a unit
+![Moving](https://github.com/GJB93/strategyRPG/blob/master/readmeImages/move.PNG?raw=true)
+
+### Attack move available
+![Attack Move](https://github.com/GJB93/strategyRPG/blob/master/readmeImages/attack.PNG?raw=true)
