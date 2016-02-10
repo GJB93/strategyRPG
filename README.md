@@ -44,8 +44,14 @@ The game board will consist of a number of cells that will create a grid. This g
 
 ## Implementation
 
-This game is dependant on the concepts of encapsulation and polymorphism. I have tried to contain each aspect of the game in its own class. For example, the Unit abstract class is extended by multiple subclasses, each of which will contain an implementation for each of the different unit types I have in mind for the game. The unit types are determined by their stat affinity. This means that a unit that has a high strength stat will be different from a unit that has a high dexterity stat.
+This game is dependant on the concepts of encapsulation and polymorphism. I have tried to contain each aspect of the game in its own class. For example, the Unit abstract class is extended by multiple subclasses, each of which will contain an implementation for each of the different unit types.
 
+Each cell on the board will also have its own class, which will contain information on the unit it might contain, its position on the board, and its current state.
 
-  
-  
+The Board class will then have control over each cell, and will check for player input and change the board state accordingly, or display a message if the move wasn't possible.
+
+Each of these classes come together in the Game class, which controls team creation and board rendering, as well as the game state.
+
+## Issues
+
+I have found that the implementation I have for drawing the units is poor. Each unit is overly dependant on the cell it is attached to, which makes it difficult to access the fields and methods available to the active units. This made it difficult to implement features such as the statcard, as I had to make sure that it wasn't drawn under the cells after the one that the unit was currently occupying.
