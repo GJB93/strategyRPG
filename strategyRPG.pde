@@ -114,12 +114,13 @@ void showTutorial()
       textAlign(CENTER, CENTER);
       fill(0);
       text("This is a turn based game", width*0.5f, height*0.1f);
-      text("Players must move each of their six units each turn", width*0.5f, height*0.2f);
+      text("Players must move each of their units each turn", width*0.5f, height*0.2f);
       text("The mouse is used to control units in this game", width*0.5f, height*0.3f);
       text("Units highlighted in white can be selected by clicking them", width*0.5f, height*0.4f);
       text("You can move a selected unit to a blue highlighted cell", width*0.5f, height*0.5f);
       text("You can attack a unit that is highlighted in red", width*0.5f, height*0.6f);
-      text("The game is over once one team has no remaining units", width*0.5f, height*0.7f);
+      text("A unit dies and is removed from the game when its HP is zero", width*0.5f, height*0.7f);
+      text("The game is over once one team has no remaining units", width*0.5f, height*0.8f);
       break;
     }
   }
